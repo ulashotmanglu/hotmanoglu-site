@@ -1,3 +1,20 @@
+// ═══ MOBILE MENU ═══
+const menuBtn = document.getElementById('menuBtn');
+const navCenter = document.querySelector('.nav-center');
+if (menuBtn && navCenter) {
+  menuBtn.addEventListener('click', () => {
+    navCenter.classList.toggle('mobile-open');
+    menuBtn.classList.toggle('active');
+  });
+  // Close menu when a link is clicked
+  navCenter.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navCenter.classList.remove('mobile-open');
+      menuBtn.classList.remove('active');
+    });
+  });
+}
+
 // ═══ NAV SCROLL ═══
 const nav = document.getElementById('nav');
 if (nav) {
