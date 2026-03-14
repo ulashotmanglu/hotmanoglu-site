@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hotmanoglu — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F3;
+    --bg-white: #FFFFFF;
+    --text: #1A1A1A;
+    --text-2: #4A4A4A;
+    --text-3: #8A8A8A;
+    --accent: #C0392B;
+    --accent-light: rgba(192,57,43,0.08);
+    --border: #E5E2DC;
+    --green: #27ae60;
+    --green-light: rgba(39,174,96,0.08);
+    --serif: 'Bricolage Grotesque', sans-serif;
+    --sans: 'Source Sans 3', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* LOGIN */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .login-box {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 48px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: var(--shadow);
+  }
+  .login-box h1 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .login-box p {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  /* LAYOUT */
+  .app { display: none; }
+  .app.active { display: flex; min-height: 100vh; }
+  .sidebar {
+    width: 260px;
+    background: var(--bg-white);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-brand {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .sidebar-brand h2 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .sidebar-brand span {
+    font-size: 11px;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .sidebar-nav { flex: 1; }
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+  }
+  .sidebar-link:hover { background: var(--bg); color: var(--text); }
+  .sidebar-link.active {
+    color: var(--accent);
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  .sidebar-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+  }
+  .sidebar-footer a {
+    font-size: 12px;
+    color: var(--text-3);
+    text-decoration: none;
+  }
+  .sidebar-footer a:hover { color: var(--accent); }
+
+  .main-content {
+    flex: 1;
+    padding: 32px 40px;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+
+  /* HEADER */
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .page-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 800;
+  }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-primary:hover {
+    background: #a93226;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(192,57,43,0.25);
+  }
+  .btn-secondary {
+    background: var(--bg);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--text-2); }
+  .btn-success {
+    background: var(--green);
+    color: white;
+  }
+  .btn-success:hover { background: #219a52; }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
+
+  /* FORM */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    margin-bottom: 6px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--text);
+    background: var(--bg-white);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--accent);
+  }
+  .form-textarea {
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.7;
+    resize: vertical;
+    min-height: 400px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-hint {
+    font-size: 12px;
+    color: var(--text-3);
+    margin-top: 4px;
+  }
+
+  /* POST LIST */
+  .post-list {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .post-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .post-item:last-child { border-bottom: none; }
+  .post-item:hover { background: var(--bg); }
+  .post-item-title {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .post-item-meta {
+    font-size: 12px;
+    color: var(--text-3);
+    font-family: var(--mono);
+    display: flex;
+    gap: 12px;
+  }
+  .post-item-cat {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--accent-light);
+    color: var(--accent);
+  }
+  .post-item-actions { display: flex; gap: 8px; }
+
+  /* IMAGE UPLOAD */
+  .img-upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg);
+  }
+  .img-upload-area:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+  }
+  .img-upload-area p { font-size: 14px; color: var(--text-3); }
+  .img-upload-area input { display: none; }
+  .img-preview {
+    margin-top: 12px;
+    border-radius: 8px;
+    max-width: 300px;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    z-index: 9999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast.success { background: var(--green); }
+  .toast.error { background: var(--accent); }
+
+  /* LOADING */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 4px;
+    width: fit-content;
+  }
+  .tab {
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-2);
+    transition: all 0.2s;
+    border: none;
+    background: none;
+    font-family: var(--sans);
+  }
+  .tab.active { background: var(--bg-white); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+
+  /* STATUS */
+  .status-bar {
+    background: var(--green-light);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 13px;
+    color: var(--green);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main-content { padding: 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-box">
+    <h1>Hotmanoglu Admin</h1>
+    <p>GitHub Personal Access Token ile giriş yap. Token'ın repo:contents write yetkisine sahip olmalı.</p>
+    <div class="form-group">
+      <label class="form-label">GitHub Token</label>
+      <input class="form-input" id="tokenInput" type="password" placeholder="github_pat_... veya ghp_...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Repo (otomatik doldurulmuş)</label>
+      <input class="form-input" id="repoInput" value="ulashotmanglu/hotmanoglu-site">
+    </div>
+    <button class="btn btn-primary" onclick="login()" style="width:100%">Giriş Yap</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <h2>Hotmanoglu</h2>
+      <span>Admin Panel</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-link active" onclick="showPage('posts')">📄 Yazılar</div>
+      <div class="sidebar-link" onclick="showPage('new')">✍️ Yeni Yazı</div>
+      <div class="sidebar-link" onclick="showPage('images')">🖼️ Görseller</div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="https://www.hotmanoglu.com" target="_blank">→ Siteyi Görüntüle</a>
+    </div>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- POSTS PAGE -->
+    <div id="page-posts">
+      <div class="page-header">
+        <h1 class="page-title">Yazılar</h1>
+        <button class="btn btn-primary" onclick="showPage('new')">+ Yeni Yazı</button>
+      </div>
+      <div class="post-list" id="postList">
+        <div style="padding:40px;text-align:center;color:var(--text-3)">Yükleniyor...</div>
+      </div>
+    </div>
+
+    <!-- NEW POST PAGE -->
+    <div id="page-new" style="display:none">
+      <div class="page-header">
+        <h1 class="page-title" id="editorTitle">Yeni Yazı</h1>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-secondary" onclick="showPage('posts')">İptal</button>
+          <button class="btn btn-success" id="publishBtn" onclick="publishPost()">Yayınla</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Başlık</label>
+        <input class="form-input" id="postTitle" placeholder="Yazı başlığı">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Kategori</label>
+          <select class="form-select" id="postCategory">
+            <option value="Vaka Analizi">Vaka Analizi</option>
+            <option value="AML/CFT">AML/CFT</option>
+            <option value="Yaptırım">Yaptırım</option>
+            <option value="Düzenleme">Düzenleme</option>
+            <option value="Fraud">Fraud</option>
+            <option value="Analiz">Analiz</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tarih</label>
+          <input class="form-input" id="postDate" type="date">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Etiketler (virgülle ayır)</label>
+        <input class="form-input" id="postTags" placeholder="OFAC, Yaptırım, Kripto">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Açıklama (SEO)</label>
+        <input class="form-input" id="postDesc" placeholder="Kısa açıklama...">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Kapak Görseli</label>
+        <div class="img-upload-area" onclick="document.getElementById('coverImgInput').click()">
+          <p id="coverImgText">Görsel seçmek için tıkla veya sürükle</p>
+          <input type="file" id="coverImgInput" accept="image/*" onchange="handleCoverImg(event)">
+          <img id="coverImgPreview" class="img-preview" style="display:none">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">İçerik (Markdown)</label>
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('write')">Yaz</button>
+          <button class="tab" onclick="switchTab('preview')">Önizleme</button>
+        </div>
+        <textarea class="form-textarea" id="postContent" placeholder="Markdown ile yazın...
+
+## Alt Başlık
+
+Paragraf metni, **kalın**, *italik*.
+
+- Liste item 1
+- Liste item 2"></textarea>
+        <div id="previewArea" style="display:none;background:white;border:1.5px solid var(--border);border-radius:8px;padding:24px;min-height:400px;font-size:15px;line-height:1.8"></div>
+      </div>
+    </div>
+
+    <!-- IMAGES PAGE -->
+    <div id="page-images" style="display:none">
+      <div class="page-header">
+        <h1 class="page-title">Görseller</h1>
+      </div>
+      <div class="img-upload-area" onclick="document.getElementById('multiImgInput').click()" style="margin-bottom:24px">
+        <p>Görsel yüklemek için tıkla — otomatik static/img/posts/ altına kaydedilir</p>
+        <input type="file" id="multiImgInput" accept="image/*" multiple onchange="uploadImages(event)">
+      </div>
+      <div id="imageList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+        <div style="padding:40px;text-align:center;color:var(--text-3);grid-column:1/-1">Yükleniyor...</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://api.github.com';
+let TOKEN = '';
+let REPO = '';
+let editingFile = null;
+let coverImgData = null;
+let coverImgName = null;
+
+// ===== AUTH =====
+function login() {
+  TOKEN = document.getElementById('tokenInput').value.trim();
+  REPO = document.getElementById('repoInput').value.trim();
+  if (!TOKEN || !REPO) return toast('Token ve repo gerekli', 'error');
+
+  // Save to localStorage
+  localStorage.setItem('hm_token', TOKEN);
+  localStorage.setItem('hm_repo', REPO);
+
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').classList.add('active');
+  loadPosts();
+}
+
+// Auto-login
+window.addEventListener('DOMContentLoaded', () => {
+  const t = localStorage.getItem('hm_token');
+  const r = localStorage.getItem('hm_repo');
+  if (t && r) {
+    TOKEN = t;
+    REPO = r;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('app').classList.add('active');
+    loadPosts();
+  }
+  // Set today's date
+  document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+});
+
+// ===== NAVIGATION =====
+function showPage(page) {
+  document.querySelectorAll('[id^="page-"]').forEach(p => p.style.display = 'none');
+  document.getElementById('page-' + page).style.display = 'block';
+  document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.sidebar-link')[page === 'posts' ? 0 : page === 'new' ? 1 : 2].classList.add('active');
+
+  if (page === 'posts') loadPosts();
+  if (page === 'images') loadImages();
+  if (page === 'new' && !editingFile) resetForm();
+}
+
+// ===== GITHUB API =====
+async function ghFetch(path, opts = {}) {
+  const res = await fetch(`${API}/repos/${REPO}${path}`, {
+    headers: {
+      'Authorization': `Bearer ${TOKEN}`,
+      'Accept': 'application/vnd.github+json',
+      ...opts.headers
+    },
+    ...opts
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || res.statusText);
+  }
+  return res.json();
+}
+
+// ===== POSTS =====
+async function loadPosts() {
+  try {
+    const files = await ghFetch('/contents/content/posts');
+    const posts = files.filter(f => f.name.endsWith('.md')).reverse();
+
+    const listEl = document.getElementById('postList');
+    if (posts.length === 0) {
+      listEl.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-3)">Henüz yazı yok</div>';
+      return;
+    }
+
+    listEl.innerHTML = posts.map(p => {
+      const name = p.name.replace('.md', '').replace(/-/g, ' ');
+      return `
+        <div class="post-item" onclick="editPost('${p.path}')">
+          <div>
+            <div class="post-item-title">${name}</div>
+            <div class="post-item-meta">
+              <span>${p.name}</span>
+            </div>
+          </div>
+          <div class="post-item-actions">
+            <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();editPost('${p.path}')">Düzenle</button>
+            <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();deletePost('${p.path}','${p.sha}')" style="color:var(--accent)">Sil</button>
+          </div>
+        </div>`;
+    }).join('');
+  } catch (err) {
+    toast('Yazılar yüklenemedi: ' + err.message, 'error');
+  }
+}
+
+async function editPost(path) {
+  try {
+    const file = await ghFetch('/contents/' + path);
+    const content = atob(file.content.replace(/\n/g, ''));
+
+    // Parse front matter
+    const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    if (match) {
+      const fm = match[1];
+      const body = match[2];
+
+      const titleMatch = fm.match(/title:\s*"(.+?)"/);
+      const dateMatch = fm.match(/date:\s*(\S+)/);
+      const catMatch = fm.match(/categories:\s*\["(.+?)"\]/);
+      const tagsMatch = fm.match(/tags:\s*\[(.+?)\]/);
+      const descMatch = fm.match(/description:\s*"(.+?)"/);
+
+      document.getElementById('postTitle').value = titleMatch ? titleMatch[1] : '';
+      document.getElementById('postDate').value = dateMatch ? dateMatch[1] : '';
+      document.getElementById('postCategory').value = catMatch ? catMatch[1] : 'Vaka Analizi';
+      document.getElementById('postTags').value = tagsMatch ? tagsMatch[1].replace(/"/g, '') : '';
+      document.getElementById('postDesc').value = descMatch ? descMatch[1] : '';
+      document.getElementById('postContent').value = body.trim();
+    }
+
+    editingFile = { path, sha: file.sha };
+    document.getElementById('editorTitle').textContent = 'Yazıyı Düzenle';
+    document.getElementById('publishBtn').textContent = 'Güncelle';
+    showPage('new');
+  } catch (err) {
+    toast('Dosya açılamadı: ' + err.message, 'error');
+  }
+}
+
+async function deletePost(path, sha) {
+  if (!confirm('Bu yazıyı silmek istediğine emin misin?')) return;
+  try {
+    await fetch(`${API}/repos/${REPO}/contents/${path}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${TOKEN}`,
+        'Accept': 'application/vnd.github+json'
+      },
+      body: JSON.stringify({ message: `Silindi: ${path}`, sha })
+    });
+    toast('Yazı silindi', 'success');
+    loadPosts();
+  } catch (err) {
+    toast('Silinemedi: ' + err.message, 'error');
+  }
+}
+
+// ===== PUBLISH =====
+async function publishPost() {
+  const title = document.getElementById('postTitle').value.trim();
+  const date = document.getElementById('postDate').value;
+  const category = document.getElementById('postCategory').value;
+  const tags = document.getElementById('postTags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const desc = document.getElementById('postDesc').value.trim();
+  const content = document.getElementById('postContent').value.trim();
+
+  if (!title || !content) return toast('Başlık ve içerik gerekli', 'error');
+
+  const btn = document.getElementById('publishBtn');
+  btn.innerHTML = '<span class="spinner"></span> Yayınlanıyor...';
+  btn.disabled = true;
+
+  try {
+    // Upload cover image first if exists
+    let imagePath = '';
+    if (coverImgData && coverImgName) {
+      const imgSlug = slugify(title);
+      const ext = coverImgName.split('.').pop();
+      const imgPath = `static/img/posts/${imgSlug}.${ext}`;
+
+      await fetch(`${API}/repos/${REPO}/contents/${imgPath}`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${TOKEN}`,
+          'Accept': 'application/vnd.github+json'
+        },
+        body: JSON.stringify({
+          message: `Görsel: ${imgSlug}.${ext}`,
+          content: coverImgData
+        })
+      });
+      imagePath = `/img/posts/${imgSlug}.${ext}`;
+    }
+
+    // Build markdown
+    const safeTitle = title.replace(/"/g, '\\"');
+    const tagsStr = tags.map(t => `"${t}"`).join(', ');
+    const md = `---
+title: "${safeTitle}"
+date: ${date}
+draft: false
+categories: ["${category}"]
+tags: [${tagsStr}]
+description: "${desc}"
+image: "${imagePath}"
+---
+
+${content}
+`;
+
+    const slug = slugify(title);
+    const filePath = editingFile ? editingFile.path : `content/posts/${slug}.md`;
+
+    const body = {
+      message: editingFile ? `Güncellendi: ${title}` : `Yeni yazı: ${title}`,
+      content: btoa(unescape(encodeURIComponent(md)))
+    };
+    if (editingFile) body.sha = editingFile.sha;
+
+    await fetch(`${API}/repos/${REPO}/contents/${filePath}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${TOKEN}`,
+        'Accept': 'application/vnd.github+json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    toast(editingFile ? 'Yazı güncellendi!' : 'Yazı yayınlandı!', 'success');
+    editingFile = null;
+    resetForm();
+    showPage('posts');
+  } catch (err) {
+    toast('Hata: ' + err.message, 'error');
+  } finally {
+    btn.innerHTML = editingFile ? 'Güncelle' : 'Yayınla';
+    btn.disabled = false;
+  }
+}
+
+// ===== IMAGES =====
+async function loadImages() {
+  try {
+    const files = await ghFetch('/contents/static/img/posts');
+    const images = files.filter(f => /\.(jpg|jpeg|png|gif|webp)$/i.test(f.name));
+
+    const el = document.getElementById('imageList');
+    if (images.length === 0) {
+      el.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-3);grid-column:1/-1">Henüz görsel yok</div>';
+      return;
+    }
+
+    el.innerHTML = images.map(img => `
+      <div style="background:white;border:1px solid var(--border);border-radius:8px;overflow:hidden">
+        <img src="${img.download_url}" style="width:100%;height:140px;object-fit:cover">
+        <div style="padding:10px">
+          <div style="font-size:11px;font-family:var(--mono);color:var(--text-3);word-break:break-all">${img.name}</div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:4px;cursor:pointer" onclick="copyText('/img/posts/${img.name}')">📋 Yolu kopyala</div>
+        </div>
+      </div>
+    `).join('');
+  } catch (err) {
+    toast('Görseller yüklenemedi: ' + err.message, 'error');
+  }
+}
+
+async function uploadImages(event) {
+  const files = event.target.files;
+  for (const file of files) {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const base64 = e.target.result.split(',')[1];
+      const name = file.name.replace(/\s+/g, '-').toLowerCase();
+      try {
+        await fetch(`${API}/repos/${REPO}/contents/static/img/posts/${name}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${TOKEN}`,
+            'Accept': 'application/vnd.github+json'
+          },
+          body: JSON.stringify({
+            message: `Görsel: ${name}`,
+            content: base64
+          })
+        });
+        toast(`${name} yüklendi`, 'success');
+        loadImages();
+      } catch (err) {
+        toast(`${name} yüklenemedi: ${err.message}`, 'error');
+      }
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+// ===== COVER IMAGE =====
+function handleCoverImg(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  coverImgName = file.name;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    coverImgData = e.target.result.split(',')[1];
+    const preview = document.getElementById('coverImgPreview');
+    preview.src = e.target.result;
+    preview.style.display = 'block';
+    document.getElementById('coverImgText').textContent = file.name;
+  };
+  reader.readAsDataURL(file);
+}
+
+// ===== HELPERS =====
+function slugify(text) {
+  const tr = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
+  return text.toLowerCase().replace(/[çğıöşüÇĞİÖŞÜ]/g, c => tr[c] || c)
+    .replace(/[^\w\s-]/g, '').replace(/[\s-]+/g, '-').trim().substring(0, 80);
+}
+
+function resetForm() {
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('postCategory').value = 'Vaka Analizi';
+  document.getElementById('postTags').value = '';
+  document.getElementById('postDesc').value = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('coverImgPreview').style.display = 'none';
+  document.getElementById('coverImgText').textContent = 'Görsel seçmek için tıkla veya sürükle';
+  coverImgData = null;
+  coverImgName = null;
+  editingFile = null;
+  document.getElementById('editorTitle').textContent = 'Yeni Yazı';
+  document.getElementById('publishBtn').textContent = 'Yayınla';
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'write') {
+    document.querySelector('.form-textarea').style.display = 'block';
+    document.getElementById('previewArea').style.display = 'none';
+    document.querySelectorAll('.tab')[0].classList.add('active');
+  } else {
+    document.querySelector('.form-textarea').style.display = 'none';
+    const preview = document.getElementById('previewArea');
+    preview.style.display = 'block';
+    preview.innerHTML = simpleMarkdown(document.getElementById('postContent').value);
+    document.querySelectorAll('.tab')[1].classList.add('active');
+  }
+}
+
+function simpleMarkdown(md) {
+  return md
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^/, '<p>').replace(/$/, '</p>');
+}
+
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type} show`;
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text);
+  toast('Kopyalandı: ' + text, 'success');
+}
+</script>
+</body>
+</html>
