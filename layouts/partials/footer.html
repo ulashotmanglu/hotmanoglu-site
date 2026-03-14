@@ -1,0 +1,48 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand-section">
+      <h4>Hotmanoglu</h4>
+      <p>{{ .Site.Params.description }}</p>
+      <div class="footer-socials">
+        {{ with .Site.Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener" class="footer-social-btn" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>{{ end }}
+        {{ with .Site.Params.twitter }}<a href="{{ . }}" target="_blank" rel="noopener" class="footer-social-btn" title="X">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>{{ end }}
+        {{ with .Site.Params.email }}<a href="mailto:{{ . }}" class="footer-social-btn" title="E-posta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>{{ end }}
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Kategoriler</h5>
+      <ul>
+        {{ range .Site.Taxonomies.categories }}
+        <li><a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="/">Ana Sayfa</a></li>
+        <li><a href="/posts/">Blog</a></li>
+        <li><a href="/hakkimda/">Hakkımda</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Kaynaklar</h5>
+      <ul>
+        <li><a href="https://sanctionssearch.ofac.treas.gov/" target="_blank" rel="noopener">OFAC SDN Listesi</a></li>
+        <li><a href="https://www.fatf-gafi.org/" target="_blank" rel="noopener">FATF Raporları</a></li>
+        <li><a href="https://www.fincen.gov/" target="_blank" rel="noopener">FinCEN</a></li>
+        <li><a href="https://masak.hmb.gov.tr/" target="_blank" rel="noopener">MASAK</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; {{ now.Year }} Hotmanoglu. Tüm hakları saklıdır.</span>
+    <span class="footer-made">İstanbul'dan <span class="heart">♥</span> ile</span>
+  </div>
+</footer>

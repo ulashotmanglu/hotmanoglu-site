@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<div class="list-header">
+  <div class="list-header-inner">
+    <h1 class="list-title">{{ if .IsSection }}Blog{{ else }}{{ .Title }}{{ end }}</h1>
+    <p class="list-desc">{{ if .IsSection }}Tüm yazılar — vaka analizleri, düzenleme haberleri ve sektör yorumları.{{ else }}{{ .Description }}{{ end }}</p>
+  </div>
+</div>
+
+{{ if .IsSection }}
+<div class="filter-section reveal">
+  <div class="filters">
+    <span class="filter-label">Filtrele</span>
+    <a href="/posts/" class="filter-btn{{ if .IsSection }} active{{ end }}"><span>Tümü<span class="filter-count">{{ len .Site.RegularPages }}</span></span></a>
+    {{ range .Site.Taxonomies.categories }}
+    <a href="{{ .Page.Permalink }}" class="filter-btn"><span>{{ .Page.Title }}<span class="filter-count">{{ .Count }}</span></span></a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}
+
+<div class="articles-grid reveal">
+  {{ range .Paginator.Pages }}
+    {{ partial "article-card.html" . }}
+  {{ end }}
+</div>
+
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}
+<nav class="pagination">
+  {{ if $paginator.HasPrev }}
+  <a href="{{ $paginator.Prev.URL }}" class="page-btn">← Önceki</a>
+  {{ end }}
+  <span class="page-info">Sayfa {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+  {{ if $paginator.HasNext }}
+  <a href="{{ $paginator.Next.URL }}" class="page-btn">Sonraki →</a>
+  {{ end }}
+</nav>
+{{ end }}
+
+{{ end }}

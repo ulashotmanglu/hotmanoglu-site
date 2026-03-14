@@ -1,0 +1,29 @@
+baseURL = "https://www.hotmanoglu.com/"
+languageCode = "tr"
+title = "HOTMANOGLU"
+paginate = 12
+enableRobotsTXT = true
+
+[params]
+  description = "AML/CFT uyum, yaptırım rejimleri ve fraud incelemeleri üzerine Türkçe içerik platformu."
+  author = "Ulaş Hotmanoğlu"
+  tagline = "Etik · Uyum · Denetim"
+  linkedin = "https://www.linkedin.com/in/hotmanoglu"
+  twitter = ""
+  email = ""
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5

@@ -1,0 +1,39 @@
+<a class="article-card reveal" href="{{ .Permalink }}">
+  <div class="article-img">
+    <div class="article-img-pattern"></div>
+    {{ with .Params.image }}
+    <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+    {{ else }}
+    <span class="article-img-letter">h</span>
+    {{ end }}
+    {{ with .Params.categories }}
+    {{ $cat := index . 0 }}
+    {{ $class := "cat-vaka" }}
+    {{ if eq $cat "AML/CFT" }}{{ $class = "cat-aml" }}
+    {{ else if eq $cat "Yaptırım" }}{{ $class = "cat-yapt" }}
+    {{ else if eq $cat "Düzenleme" }}{{ $class = "cat-duz" }}
+    {{ else if eq $cat "Fraud" }}{{ $class = "cat-fraud" }}
+    {{ end }}
+    <span class="article-cat-badge {{ $class }}">{{ $cat }}</span>
+    {{ end }}
+  </div>
+  <div class="article-body">
+    <div class="article-date">
+      {{ .Date.Format "2 Jan 2006" }}
+      <span class="article-reading">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        {{ .ReadingTime }} dk
+      </span>
+    </div>
+    <h3 class="article-title">{{ .Title }}</h3>
+    <p class="article-excerpt">{{ .Summary | plainify | truncate 150 }}</p>
+    <div class="article-footer">
+      <span class="article-read-more">
+        Devamını Oku
+        <span class="article-arrow">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </span>
+      </span>
+    </div>
+  </div>
+</a>
