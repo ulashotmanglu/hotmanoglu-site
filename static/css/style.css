@@ -103,6 +103,19 @@
     box-shadow: 0 1px 12px rgba(0,0,0,0.06);
   }
 
+  .nav-dark {
+    background: var(--bg-dark) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-dark .nav-brand { color: white !important; }
+  .nav-dark .nav-link { color: rgba(255,255,255,0.6) !important; }
+  .nav-dark .nav-link:hover { color: white !important; background: rgba(255,255,255,0.08); }
+  .nav-dark .nav-link.active { color: white !important; background: rgba(255,255,255,0.1); }
+  .nav-dark .nav-social-link { color: rgba(255,255,255,0.45) !important; }
+  .nav-dark .nav-social-link:hover { color: white !important; background: rgba(255,255,255,0.08); }
+  .nav-dark .nav-menu-btn { color: white; }
+
   .nav-inner {
     max-width: 1280px;
     margin: 0 auto;
