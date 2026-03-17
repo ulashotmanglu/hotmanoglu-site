@@ -709,7 +709,7 @@ ${content}
 
     const body = {
       message: editingFile ? `Güncellendi: ${title}` : `Yeni yazı: ${title}`,
-      content: btoa(unescape(encodeURIComponent(md)))
+      content: utf8ToBase64(md)
     };
     if (editingFile) body.sha = editingFile.sha;
 
@@ -806,6 +806,16 @@ function handleCoverImg(event) {
 }
 
 // ===== HELPERS =====
+
+  function utf8ToBase64(str) {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}  
 function slugify(text) {
   const tr = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
   return text.toLowerCase().replace(/[çğıöşüÇĞİÖŞÜ]/g, c => tr[c] || c)
