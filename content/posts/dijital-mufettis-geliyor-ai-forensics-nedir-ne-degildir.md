@@ -1,5 +1,5 @@
 ---
-title: "Dijital Analist Geliyor: AI Forensics Nedir, Ne DeÄildir?"
+title: "Dijital Müfettiş Geliyor: AI Forensics Nedir, Ne Değildir?"
 date: 2026-03-21
 draft: false
 categories: ["Analiz"]
