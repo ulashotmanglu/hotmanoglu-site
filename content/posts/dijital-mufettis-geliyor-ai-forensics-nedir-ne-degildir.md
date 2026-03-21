@@ -5,7 +5,7 @@ draft: false
 categories: ["Analiz"]
 tags: ["Yapay Zeka", "AML", "Fraud", "Compliance", "Teknoloji"]
 description: "Compliance ekiplerinin kronik sorunu alert yığılması. AI Forensics bu soruna farklı bir yerden yaklaşıyor: tespit değil, soruşturma."
-image: ""
+image: "/img/posts/dijital-mufettis-geliyor-ai-forensics-nedir-ne-degildir.png"
 ---
 
 Compliance'ta herkesin bildiği ama kimsenin çözemediği bir sorun var: alert yığılması.
