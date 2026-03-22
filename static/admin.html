@@ -391,6 +391,7 @@
       <div class="sidebar-link active" onclick="showPage('posts')">📄 Yazılar</div>
       <div class="sidebar-link" onclick="showPage('new')">✍️ Yeni Yazı</div>
       <div class="sidebar-link" onclick="showPage('images')">🖼️ Görseller</div>
+      <a class="sidebar-link" href="https://analytics.google.com" target="_blank" style="text-decoration:none">📊 Analytics</a>
     </nav>
     <div class="sidebar-footer">
       <a href="https://www.hotmanoglu.com" target="_blank">→ Siteyi Görüntüle</a>
@@ -402,8 +403,15 @@
     <!-- POSTS PAGE -->
     <div id="page-posts">
       <div class="page-header">
-        <h1 class="page-title">Yazılar</h1>
-        <button class="btn btn-primary" onclick="showPage('new')">+ Yeni Yazı</button>
+        <div>
+          <h1 class="page-title">Yazılar</h1>
+          <span id="postCount" style="font-size:13px;color:var(--text-3);font-family:var(--mono)"></span>
+        </div>
+        <div style="display:flex;gap:10px">
+          <a href="https://analytics.google.com/analytics/web/#/p/reportingOverview?params=_u..nav%3Dmaui" target="_blank" class="btn btn-secondary" style="text-decoration:none">📊 Analytics</a>
+          <a href="https://www.hotmanoglu.com" target="_blank" class="btn btn-secondary" style="text-decoration:none">🌐 Siteyi Gör</a>
+          <button class="btn btn-primary" onclick="showPage('new')">+ Yeni Yazı</button>
+        </div>
       </div>
       <div class="post-list" id="postList">
         <div style="padding:40px;text-align:center;color:var(--text-3)">Yükleniyor...</div>
@@ -568,24 +576,81 @@ async function ghFetch(path, opts = {}) {
 
 // ===== POSTS =====
 async function loadPosts() {
+  const listEl = document.getElementById('postList');
+  listEl.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-3)">Yazılar yükleniyor...</div>';
+
   try {
     const files = await ghFetch('/contents/content/posts');
-    const posts = files.filter(f => f.name.endsWith('.md')).reverse();
+    const mdFiles = files.filter(f => f.name.endsWith('.md'));
 
-    const listEl = document.getElementById('postList');
-    if (posts.length === 0) {
+    if (mdFiles.length === 0) {
       listEl.innerHTML = '<div style="padding:40px;text-align:center;color:var(--text-3)">Henüz yazı yok</div>';
       return;
     }
 
-    listEl.innerHTML = posts.map(p => {
-      const name = p.name.replace('.md', '').replace(/-/g, ' ');
+    // Fetch content of each post to get front matter
+    const postData = await Promise.all(mdFiles.map(async (f) => {
+      try {
+        const file = await ghFetch('/contents/' + f.path);
+        const raw = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
+        const fmMatch = raw.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+        let title = f.name.replace('.md', '').replace(/-/g, ' ');
+        let date = '';
+        let category = '';
+        let wordCount = 0;
+
+        if (fmMatch) {
+          const fm = fmMatch[1];
+          const body = fmMatch[2];
+          const t = fm.match(/title:\s*"(.+?)"/);
+          const d = fm.match(/date:\s*(\S+)/);
+          const c = fm.match(/categories:\s*\["(.+?)"\]/);
+          if (t) title = t[1];
+          if (d) date = d[1];
+          if (c) category = c[1];
+          wordCount = body.trim().split(/\s+/).length;
+        }
+
+        return { title, date, category, wordCount, path: f.path, sha: file.sha, name: f.name };
+      } catch (e) {
+        return { title: f.name.replace('.md','').replace(/-/g,' '), date: '', category: '', wordCount: 0, path: f.path, sha: f.sha, name: f.name };
+      }
+    }));
+
+    // Sort by date descending (newest first)
+    postData.sort((a, b) => {
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return b.date.localeCompare(a.date);
+    });
+
+    // Update post count in header
+    const countEl = document.getElementById('postCount');
+    if (countEl) countEl.textContent = postData.length + ' yazı';
+
+    listEl.innerHTML = postData.map((p, i) => {
+      const catColors = {
+        'Vaka Analizi': '#C0392B',
+        'AML/CFT': '#2962A8',
+        'Yaptırım': '#8E44AD',
+        'Düzenleme': '#27824E',
+        'Fraud': '#C0642B',
+        'Analiz': '#5B6B7A'
+      };
+      const catColor = catColors[p.category] || '#5B6B7A';
+
       return `
         <div class="post-item" onclick="editPost('${p.path}')">
-          <div>
-            <div class="post-item-title">${name}</div>
-            <div class="post-item-meta">
-              <span>${p.name}</span>
+          <div style="display:flex;align-items:center;gap:16px;flex:1;min-width:0">
+            <div style="width:32px;height:32px;border-radius:8px;background:#F0EEEB;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--text-3);flex-shrink:0">${i + 1}</div>
+            <div style="min-width:0;flex:1">
+              <div class="post-item-title">${p.title}</div>
+              <div class="post-item-meta">
+                ${p.date ? '<span>' + p.date + '</span>' : ''}
+                ${p.category ? '<span style="color:' + catColor + ';font-weight:600">' + p.category + '</span>' : ''}
+                ${p.wordCount ? '<span>' + p.wordCount + ' kelime</span>' : ''}
+              </div>
             </div>
           </div>
           <div class="post-item-actions">
@@ -602,7 +667,7 @@ async function loadPosts() {
 async function editPost(path) {
   try {
     const file = await ghFetch('/contents/' + path);
-    const content = atob(file.content.replace(/\n/g, ''));
+    const content = decodeURIComponent(escape(atob(file.content.replace(/\n/g, ''))));
 
     // Parse front matter
     const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
@@ -806,8 +871,12 @@ function handleCoverImg(event) {
 }
 
 // ===== HELPERS =====
+<<<<<<< Updated upstream
 
   function utf8ToBase64(str) {
+=======
+function utf8ToBase64(str) {
+>>>>>>> Stashed changes
   const encoder = new TextEncoder();
   const bytes = encoder.encode(str);
   let binary = '';
@@ -815,7 +884,12 @@ function handleCoverImg(event) {
     binary += String.fromCharCode(bytes[i]);
   }
   return btoa(binary);
+<<<<<<< Updated upstream
 }  
+=======
+}
+
+>>>>>>> Stashed changes
 function slugify(text) {
   const tr = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
   return text.toLowerCase().replace(/[çğıöşüÇĞİÖŞÜ]/g, c => tr[c] || c)
