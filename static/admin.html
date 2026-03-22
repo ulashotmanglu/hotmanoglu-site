@@ -871,12 +871,7 @@ function handleCoverImg(event) {
 }
 
 // ===== HELPERS =====
-<<<<<<< Updated upstream
-
-  function utf8ToBase64(str) {
-=======
 function utf8ToBase64(str) {
->>>>>>> Stashed changes
   const encoder = new TextEncoder();
   const bytes = encoder.encode(str);
   let binary = '';
@@ -884,12 +879,8 @@ function utf8ToBase64(str) {
     binary += String.fromCharCode(bytes[i]);
   }
   return btoa(binary);
-<<<<<<< Updated upstream
-}  
-=======
 }
 
->>>>>>> Stashed changes
 function slugify(text) {
   const tr = {'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'C','Ğ':'G','İ':'I','Ö':'O','Ş':'S','Ü':'U'};
   return text.toLowerCase().replace(/[çğıöşüÇĞİÖŞÜ]/g, c => tr[c] || c)
