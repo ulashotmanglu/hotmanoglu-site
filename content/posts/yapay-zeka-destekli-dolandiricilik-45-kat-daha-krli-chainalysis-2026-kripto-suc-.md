@@ -1,11 +1,11 @@
 ---
 title: "Yapay Zeka Destekli Dolandırıcılık 4.5 Kat Daha Kârlı: Chainalysis 2026 Kripto Suç Raporu"
-date: 2026-04-17
+date: 2026-04-16
 draft: false
 categories: ["Analiz"]
 tags: ["Kripto", "Yapay Zeka", "Fraud", "Dolandırıcılık", "Chainalysis", "Pig Butchering"]
 description: "Chainalysis'in 2026 Crypto Crime Report'una göre 2025'te kripto dolandırıcılığına en az 17 milyar dolar gitti. AI destekli scam'ler geleneksel olanlara göre 4.5 kat daha kârlı. Kimlik taklidi dolandırıcılığında yüzde 1400 artış."
-image: "/img/posts/yapay-zeka-destekli-dolandiricilik-45-kat-daha-krli-chainalysis-2026-kripto-suc-.png"
+image: ""
 ---
 
 Chainalysis her yıl kripto suç raporu yayınlıyor. 2026 raporu Ocak'ta çıktı ama detayları hâlâ gündemde çünkü rakamlar her güncellemeyle büyüyor. Raporun ana başlığı net: 2025'te kripto dolandırıcılığına tahminen 17 milyar dolar gitti. Ve yapay zeka destekli dolandırıcılıklar geleneksel olanlara göre 4.5 kat daha kârlı.
