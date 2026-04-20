@@ -1,11 +1,11 @@
 ---
-title: "Artık Yapay Zeka da Phishing'e Düşüyor: Google DeepMind'ın \"AI Agent Traps\" Araştırması"
+title: "Artık Yapay Zeka da Phishing'e Düşüyor:  Google DeepMind'ın \"AI Agent Traps\" Araştırması"
 date: 2026-04-20
 draft: false
 categories: ["Analiz"]
 tags: ["Yapay Zeka", "Siber Güvenlik", "Google DeepMind", "AI Agent", "Fraud"]
 description: "Google DeepMind, otonom AI ajanlarını hedef alan 6 saldırı kategorisi belirledi. HTML'e gizlenen komutlar yüzde 86 başarı oranıyla ajanları ele geçiriyor. Tek bir manipüle edilmiş e-posta Microsoft Copilot'un tüm gizli verisini sızdırdı."
-image: "/img/posts/artik-yapay-zeka-da-phishinge-dusuyor-google-deepmindin-ai-agent-traps-arastirma.png"
+image: ""
 ---
 
 Yapay zeka ajanları artık sadece sorulara cevap vermiyor. İnternette geziyor, e-postaları okuyor, alışveriş yapıyor, API'lerle etkileşiyor, işlem onaylıyor. Bu otonom yetenekler yapay zekayı güçlü kılıyor. Ama aynı yetenekler onu savunmasız da yapıyor.
