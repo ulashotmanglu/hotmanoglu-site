@@ -4,7 +4,7 @@ date: 2026-04-21
 draft: false
 categories: ["Vaka Analizi"]
 tags: ["Deepfake", "Fraud", "Dolandırıcılık", "Yapay Zeka", "Hindistan", "Siber Suç"]
-description: "Sahte polisler video görüşmeyle arıyor, deepfake üniformayla sahte karakol kuruyor ve kurbanları günlerce evde tutuyor. Hindistan'da bir çift 16 günde 15 milyon TL kaybetti. Hindistan Yüce Mahkemesi buna "dijital eşkıyalık" dedi. Ve bu dolandırıcılık türü Türkiye'ye de geliyor."
+description: "Sahte polisler video görüşmeyle arıyor, deepfake üniformayla sahte karakol kuruyor ve kurbanları günlerce evde tutuyor. Hindistan'da bir çift 16 günde 15 milyon TL kaybetti. Hindistan Yüce Mahkemesi buna dijital eşkıyalık dedi. Ve bu dolandırıcılık türü Türkiye'ye de geliyor."
 image: "/img/posts/video-gorusmede-tutuklama-17-gun-evden-cikamayan-kurbanlar-ve-dijital-tutuklama-.jpg"
 ---
 
