@@ -2,7 +2,7 @@
 title: "T"
 date: 2026-07-23
 draft: false
-categories: ["Haber"]
+categories: ["Analiz"]
 tags: ["A"]
 description: d
 image: "/img/posts/t.png"
