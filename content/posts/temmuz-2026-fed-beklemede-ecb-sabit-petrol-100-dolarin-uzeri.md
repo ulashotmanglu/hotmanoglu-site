@@ -4,7 +4,7 @@ date: 2026-07-24
 draft: false
 categories: ["Haber"]
 tags: ["Merkez Bankası", "Enflasyon", "Petrol Fiyatları", "Fed", "ECB"]
-description: Temmuz 2026 ekonomik gelişmeleri: Fed faiz kararı, ECB politikası, petrol fiyatlarındaki sıçrama ve küresel ticaret gerilimlerinin özeti.
+description: "Temmuz 2026 ekonomik gelişmeleri: Fed faiz kararı, ECB politikası, petrol fiyatlarındaki sıçrama ve küresel ticaret gerilimlerinin özeti."
 image: "/img/posts/temmuz-2026-fed-beklemede-ecb-sabit-petrol-100-dolarin-uzeri.png"
 ---
 

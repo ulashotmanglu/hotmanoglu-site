@@ -4,7 +4,7 @@ date: 2026-07-24
 draft: false
 categories: ["Haber"]
 tags: ["Yapay Zeka", "AI", "Teknoloji", "Çin", "Japonya"]
-description: Temmuz 2026'da yapay zeka alanında yaşanan gelişmeler: Şangay Dünya YZ Konferansı, Japonya'nın fiziksel AI stratejisi ve sektörün ölçüm krizi.
+description: "Temmuz 2026'da yapay zeka alanında yaşanan gelişmeler: Şangay Dünya YZ Konferansı, Japonya'nın fiziksel AI stratejisi ve sektörün ölçüm krizi."
 image: "/img/posts/temmuz-2026-sangay-dan-tokyo-ya-yapay-zeka-yarisi-hiz-kazand.png"
 ---
 
