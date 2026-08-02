@@ -928,3 +928,35 @@ main>section:first-child{padding-top:var(--s7)}
   .ft-col:last-of-type ul{columns:2;column-gap:var(--s5)}
   .ft-bottom{margin-top:var(--s5);padding-block:var(--s3)}
 }
+
+/* ==========================================================================
+   MAKALE GÖVDESİ — İKİ YANA YASLAMA
+   Yalnızca yazı sayfasındaki ana metin paragrafları (.art-body içindeki
+   .prose'un DOĞRUDAN p çocukları). Kapsam dışında kalanlar:
+   başlıklar (h1/h2/h3), .art-d description, .art-meta künye/tarih,
+   figcaption görsel açıklaması, blockquote ve dipnot paragrafları
+   (doğrudan çocuk olmadıkları için), .nextread kartları ve
+   Hakkında/politika sayfalarındaki .prose (bunlarda .art-body yok).
+   Türkçe heceleme <html lang="tr"> üzerinden çalışır.
+   ========================================================================== */
+.art-body .prose > p{
+  text-align:justify;
+  text-justify:inter-word;
+  hyphens:auto;
+  -webkit-hyphens:auto;
+  overflow-wrap:break-word;
+  text-wrap:wrap;            /* justify ile öngörülebilir satır kırma */
+}
+
+/* Mobilde yaslama kapalı: 358px sütunda kısa satırlar aşırı kelime boşluğu
+   üretiyordu (ölçüm: ortalama 2,08× normal boşluk, en kötü satır 9,63×).
+   Font boyutu ve satır yüksekliği değişmez. */
+@media (max-width: 620px) {
+  .art-body .prose > p {
+    text-align: left;
+    text-justify: auto;
+    word-spacing: normal;
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+}
