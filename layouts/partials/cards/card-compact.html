@@ -1,0 +1,21 @@
+{{/* Kompakt kart — küçük görsel + başlık. Bölüm ikincil içerikleri için. */}}
+{{ $p := . }}
+<article class="card card-compact">
+  <div class="card-media-link">
+    {{ partial "bits/card-image.html" (dict "page" $p "ratio" "4x3" "sizes" "120px") }}
+  </div>
+  <div class="card-body">
+    <div class="card-kicker-row">
+      {{ partial "bits/kicker.html" (dict "page" $p) }}
+      {{ partial "bits/origin-badge.html" (dict "page" $p "style" "short") }}
+    </div>
+    <h3 class="card-title card-title-sm">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h3>
+    <div class="card-meta">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time>
+      <span class="meta-sep" aria-hidden="true">·</span>
+      <span>{{ $p.ReadingTime }} dk</span>
+    </div>
+  </div>
+</article>

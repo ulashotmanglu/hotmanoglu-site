@@ -1,0 +1,16 @@
+{{/*
+  Kategori etiketi. Kategori taxonomy sayfası varsa ona bağlanır
+  (mevcut /categories/... URL'leri korunur), yoksa düz metin basar.
+  Kategori yoksa hiçbir şey basmaz.
+*/}}
+{{ $p := .page }}
+{{ $cats := $p.Params.categories | default slice }}
+{{ if not (reflect.IsSlice $cats) }}{{ $cats = slice $cats }}{{ end }}
+{{ $cat := "" }}
+{{ range first 1 $cats }}{{ if . }}{{ $cat = . }}{{ end }}{{ end }}
+
+{{ if $cat }}
+  {{ $href := "" }}
+  {{ with site.GetPage (printf "/categories/%s" (urlize $cat)) }}{{ $href = .RelPermalink }}{{ end }}
+  {{ if $href }}<a class="kicker" href="{{ $href }}">{{ $cat }}</a>{{ else }}<span class="kicker">{{ $cat }}</span>{{ end }}
+{{ end }}

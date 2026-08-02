@@ -1,0 +1,15 @@
+{{- $items := slice -}}
+{{- range where site.RegularPages "Section" "posts" -}}
+  {{- $cat := "" -}}
+  {{- with .Params.categories -}}{{- range first 1 . -}}{{- $cat = . -}}{{- end -}}{{- end -}}
+  {{- $items = $items | append (dict
+      "t" .Title
+      "u" .RelPermalink
+      "d" (.Params.description | default "" | plainify | truncate 160)
+      "c" $cat
+      "g" (delimit (.Params.tags | default slice) " ")
+      "y" (.Date.Format "2006")
+      "r" .ReadingTime
+  ) -}}
+{{- end -}}
+{{- $items | jsonify -}}

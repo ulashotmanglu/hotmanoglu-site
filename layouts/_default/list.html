@@ -1,41 +1,102 @@
 {{ define "main" }}
 
-<div class="list-header">
-  <div class="list-header-inner">
-    <h1 class="list-title">{{ if .IsSection }}Blog{{ else }}{{ .Title }}{{ end }}</h1>
-    <p class="list-desc">{{ if .IsSection }}Tüm yazılar — vaka analizleri, düzenleme haberleri ve sektör yorumları.{{ else }}{{ .Description }}{{ end }}</p>
-  </div>
-</div>
+{{/* ── TAXONOMY KÖK SAYFALARI (/categories/, /tags/) ─────────── */}}
+{{ if eq .Kind "taxonomy" }}
 
-{{ if .IsSection }}
-<div class="filter-section reveal">
-  <div class="filters">
-    <span class="filter-label">Filtrele</span>
-    <a href="/posts/" class="filter-btn{{ if .IsSection }} active{{ end }}"><span>Tümü<span class="filter-count">{{ len .Site.RegularPages }}</span></span></a>
-    {{ range .Site.Taxonomies.categories }}
-    <a href="{{ .Page.Permalink }}" class="filter-btn"><span>{{ .Page.Title }}<span class="filter-count">{{ .Count }}</span></span></a>
+  {{ $isCat := eq .Data.Singular "category" }}
+  <header class="page-hero wrap">
+    <p class="page-hero-eyebrow">Dizin</p>
+    <h1 class="page-hero-title">{{ if $isCat }}Kategoriler{{ else }}Etiketler{{ end }}</h1>
+    <p class="page-hero-desc">
+      {{ if $isCat }}İçeriklerin yayımlandığı kategoriler.{{ else }}Konu etiketleri — daha dar kesitler için.{{ end }}
+      Konu bazlı okumak için <a href="/gundem/">bölümleri</a> de kullanabilirsiniz.
+    </p>
+  </header>
+
+  <div class="wrap term-index">
+    {{ if .Data.Terms }}
+      <ul class="term-list">
+        {{ range .Data.Terms.Alphabetical }}
+        <li>
+          <a class="term-chip" href="{{ .Page.RelPermalink }}">
+            <span class="term-chip-name">{{ .Page.Title }}</span>
+            <span class="term-chip-count">{{ .Count }}</span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <div class="empty-state empty-state-lg"><p class="empty-title">Henüz kayıt yok.</p></div>
     {{ end }}
   </div>
-</div>
-{{ end }}
 
-<div class="articles-grid reveal">
-  {{ range .Paginator.Pages }}
-    {{ partial "article-card.html" . }}
-  {{ end }}
-</div>
+{{/* ── TERİM VE BÖLÜM LİSTELERİ ──────────────────────────────── */}}
+{{ else }}
 
-{{ $paginator := .Paginator }}
-{{ if gt $paginator.TotalPages 1 }}
-<nav class="pagination">
-  {{ if $paginator.HasPrev }}
-  <a href="{{ $paginator.Prev.URL }}" class="page-btn">← Önceki</a>
+  {{ $isTerm := eq .Kind "term" }}
+  {{ $isPosts := and (eq .Kind "section") (eq .Section "posts") }}
+
+  {{/* Başlık ve açıklama */}}
+  {{ $eyebrow := "Liste" }}
+  {{ $title := .Title }}
+  {{ $desc := .Description | default "" }}
+
+  {{ if $isPosts }}
+    {{ $eyebrow = "Arşiv" }}
+    {{ $title = "Tüm Yazılar" }}
+    {{ if not $desc }}{{ $desc = "Platformda yayımlanmış bütün içerikler, en yeniden eskiye." }}{{ end }}
+  {{ else if $isTerm }}
+    {{ $eyebrow = cond (eq .Data.Singular "category") "Kategori" "Etiket" }}
+    {{ if and (not $desc) (eq .Data.Singular "category") }}
+      {{ with site.Data.taxonomy }}{{ with .categories }}
+        {{ with index . $title }}{{ $desc = . }}{{ end }}
+      {{ end }}{{ end }}
+    {{ end }}
+    {{ if not $desc }}
+      {{ $desc = printf "“%s” başlığı altındaki bütün içerikler." $title }}
+    {{ end }}
   {{ end }}
-  <span class="page-info">Sayfa {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
-  {{ if $paginator.HasNext }}
-  <a href="{{ $paginator.Next.URL }}" class="page-btn">Sonraki →</a>
+
+  <header class="page-hero wrap">
+    <p class="page-hero-eyebrow">{{ $eyebrow }}</p>
+    <h1 class="page-hero-title">{{ $title }}</h1>
+    {{ with $desc }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
+    <p class="page-hero-count">{{ len .Pages }} içerik</p>
+  </header>
+
+  {{ if .Pages }}
+    {{/* Tüm liste sayfalanır — böylece mevcut .../page/N/ URL'leri korunur.
+         İlk sayfada ilk içerik manşet kartı olarak gösterilir. */}}
+    {{ $paginator := .Paginate .Pages.ByDate.Reverse }}
+    {{ $onFirst := eq $paginator.PageNumber 1 }}
+    {{ $items := $paginator.Pages }}
+
+    {{ if $onFirst }}
+      <section class="hub-featured wrap" aria-label="Öne çıkan">
+        {{ partial "cards/card-hero.html" (index $items 0) }}
+      </section>
+      {{ $items = after 1 $items }}
+    {{ end }}
+
+    {{ if or $items (gt $paginator.TotalPages 1) }}
+    <section class="hub-list wrap" aria-label="İçerikler">
+      {{ if $items }}
+      <div class="card-grid">
+        {{ range $items }}{{ partial "cards/card-standard.html" . }}{{ end }}
+      </div>
+      {{ end }}
+      {{ partial "bits/pagination.html" $paginator }}
+    </section>
+    {{ end }}
+  {{ else }}
+    <div class="wrap">
+      <div class="empty-state empty-state-lg">
+        <p class="empty-title">Burada henüz içerik yok.</p>
+        <p class="empty-text">Yeni yazılar yayımlandıkça bu sayfada listelenecek. <a href="/gundem/">Gündem</a> akışına göz atabilirsiniz.</p>
+      </div>
+    </div>
   {{ end }}
-</nav>
+
 {{ end }}
 
 {{ end }}

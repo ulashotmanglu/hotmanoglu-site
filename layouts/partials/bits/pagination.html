@@ -1,0 +1,17 @@
+{{/* Sayfalama. Tek sayfa varsa hiçbir şey basmaz. */}}
+{{ $p := . }}
+{{ if gt $p.TotalPages 1 }}
+<nav class="pagination" aria-label="Sayfalama">
+  {{ if $p.HasPrev }}
+    <a class="page-btn" href="{{ $p.Prev.URL }}" rel="prev"><span aria-hidden="true">←</span> Önceki</a>
+  {{ else }}
+    <span class="page-btn is-disabled" aria-disabled="true"><span aria-hidden="true">←</span> Önceki</span>
+  {{ end }}
+  <span class="page-info">Sayfa {{ $p.PageNumber }} / {{ $p.TotalPages }}</span>
+  {{ if $p.HasNext }}
+    <a class="page-btn" href="{{ $p.Next.URL }}" rel="next">Sonraki <span aria-hidden="true">→</span></a>
+  {{ else }}
+    <span class="page-btn is-disabled" aria-disabled="true">Sonraki <span aria-hidden="true">→</span></span>
+  {{ end }}
+</nav>
+{{ end }}

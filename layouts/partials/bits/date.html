@@ -1,0 +1,15 @@
+{{/*
+  Türkçe tarih dizesi döndürür: "2 Ağustos 2026"
+  Yerel ayarlardan bağımsız çalışır.
+  Kullanım: {{ partial "bits/date.html" (dict "date" .Date) }}
+*/}}
+{{ $months := slice "Ocak" "Şubat" "Mart" "Nisan" "Mayıs" "Haziran" "Temmuz" "Ağustos" "Eylül" "Ekim" "Kasım" "Aralık" }}
+{{ $d := .date }}
+{{ $out := "" }}
+{{ if $d }}
+  {{ $i := sub (int $d.Month) 1 }}
+  {{ if and (ge $i 0) (lt $i 12) }}
+    {{ $out = printf "%d %s %d" $d.Day (index $months $i) $d.Year }}
+  {{ end }}
+{{ end }}
+{{ return $out }}

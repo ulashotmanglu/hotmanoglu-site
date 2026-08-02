@@ -1,131 +1,233 @@
 {{ define "main" }}
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid-lines"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-orb hero-orb-1"></div>
-  <div class="hero-orb hero-orb-2"></div>
-  <div class="hero-orb hero-orb-3"></div>
-  <div class="hero-content">
-    <div class="hero-label">
-      <span class="hero-label-line"></span>
-      Bağımsız Analiz Platformu
-    </div>
-    <h1 class="hero-title">Her Temas<br><em>İz Bırakır.</em></h1>
-    <p class="hero-desc">Finansal suç, uyum ve denetim üzerine vaka analizleri, düzenleme takibi ve sektör yorumları.</p>
-    <div class="hero-bottom">
-      <a href="/posts/" class="hero-cta">
-        <span>Yazıları Keşfet</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </a>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-count="{{ len .Site.RegularPages }}">0</div>
-          <div class="hero-stat-label">Makale</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num" data-count="{{ len .Site.Taxonomies.categories }}">0</div>
-          <div class="hero-stat-label">Kategori</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Aşağı Kaydır
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $hp := site.Data.homepage | default dict }}
+
+{{/* ── B) MANŞET SEÇİMİ ──────────────────────────────────────
+     data/homepage.yaml'dan gelir; eksikse en yeni yazılarla doldurulur. */}}
+{{ $lead := false }}
+{{ $secondary := slice }}
+{{ with $hp.hero }}
+  {{ with .lead }}{{ with site.GetPage . }}{{ $lead = . }}{{ end }}{{ end }}
+  {{ $secondary = partial "query/resolve-pages.html" (dict "paths" .secondary) }}
+{{ end }}
+{{ if not $lead }}{{ with first 1 $posts }}{{ $lead = index . 0 }}{{ end }}{{ end }}
+
+{{/* Manşette kullanılanları topla — alt akışta tekrar etmemek için. */}}
+{{ $used := slice }}
+{{ if $lead }}{{ $used = $used | append $lead }}{{ end }}
+{{ range $secondary }}{{ $used = $used | append . }}{{ end }}
+
+{{ if lt (len $secondary) 2 }}
+  {{ range $posts }}
+    {{ if and (lt (len $secondary) 2) (not (in $used .)) }}
+      {{ $secondary = $secondary | append . }}
+      {{ $used = $used | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+
+<!-- ══ A) PLATFORM TANIMI ═══════════════════════════════════ -->
+<section class="home-intro">
+  <div class="wrap">
+    <h1 class="home-intro-line">
+      Yapay zekâ, ekonomi, teknoloji ve finansal suçların kesişiminden
+      <em>bağımsız içerikler.</em>
+    </h1>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee">
-    {{ range $i := seq 2 }}
-    <span class="marquee-item"><span class="marquee-dot"></span>OFAC Yaptırımları</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>FATF Güncellemeleri</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>FinCEN Kararları</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Fraud İncelemeleri</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Kara Para Aklama</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Kripto Düzenlemeleri</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>İç Tehdit Analizi</span>
-    <span class="marquee-item"><span class="marquee-dot"></span>Yolsuzluk Davaları</span>
+
+<!-- ══ B) MANŞET ════════════════════════════════════════════ -->
+{{ if $lead }}
+<section class="home-lead wrap" aria-label="Öne çıkanlar">
+  <div class="lead-main">
+    {{ partial "cards/card-hero.html" $lead }}
+  </div>
+  {{ if $secondary }}
+  <div class="lead-side">
+    {{ range $secondary }}
+      {{ partial "cards/card-standard.html" . }}
     {{ end }}
   </div>
-</div>
-
-<!-- FEATURED (latest post) -->
-{{ $featured := index .Site.RegularPages 0 }}
-{{ with $featured }}
-<div class="featured-section reveal">
-  <a class="featured" href="{{ .Permalink }}">
-    <div class="featured-visual">
-      <div class="featured-visual-pattern"></div>
-      <div class="featured-visual-orb"></div>
-      {{ with .Params.image }}
-      <img src="{{ . }}" alt="{{ $.Title }}" class="featured-visual-img">
-      {{ else }}
-      <div class="featured-visual-icon">h</div>
-      {{ end }}
-      <div class="featured-badge-wrap">
-        <span class="featured-badge badge-new">Yeni</span>
-        {{ with .Params.categories }}
-        <span class="featured-badge badge-cat">{{ index . 0 }}</span>
-        {{ end }}
-      </div>
-    </div>
-    <div class="featured-body">
-      <div class="featured-meta">
-        {{ with .Params.categories }}<span class="featured-cat">{{ index . 0 }}</span>{{ end }}
-        <span class="featured-date">{{ .Date.Format "2 Jan 2006" }}</span>
-      </div>
-      <h2 class="featured-title">{{ .Title }}</h2>
-      <p class="featured-excerpt">{{ .Summary | plainify | truncate 200 }}</p>
-      <span class="featured-cta">
-        Devamını Oku
-        <span class="featured-cta-line"></span>
-      </span>
-    </div>
-  </a>
-</div>
+  {{ end }}
+</section>
 {{ end }}
 
-<!-- ARTICLES GRID -->
-<div class="section-head reveal">
-  <span class="section-label">
-    <span class="section-label-icon">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    </span>
-    Son Yayınlar
-  </span>
-  <a href="/posts/" class="section-all">
-    Tüm Yazılar
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-  </a>
-</div>
 
-<div class="articles-grid">
-  {{ range after 1 (first 7 .Site.RegularPages) }}
-    {{ partial "article-card.html" . }}
+<!-- ══ C) SON GELİŞMELER ════════════════════════════════════ -->
+{{ $latest := slice }}
+{{ range $posts }}
+  {{ if and (lt (len $latest) 8) (not (in $used .)) }}{{ $latest = $latest | append . }}{{ end }}
+{{ end }}
+{{ if $latest }}
+<section class="home-latest wrap" aria-labelledby="son-gelismeler">
+  <div class="block-head block-head-tight">
+    <h2 class="block-title" id="son-gelismeler">Son Gelişmeler</h2>
+    <a class="block-all" href="/gundem/">Tüm akış <span aria-hidden="true">→</span></a>
+  </div>
+  <ul class="latest-list">
+    {{ range $latest }}{{ partial "cards/row-latest.html" . }}{{ end }}
+  </ul>
+</section>
+{{ end }}
+
+
+<!-- ══ D) BÖLÜMLER ══════════════════════════════════════════ -->
+{{/* Bölümler aynı yazıyı paylaşabildiği için ana sayfada tekrarı azaltıyoruz:
+     önce daha önce gösterilmemiş içerikler seçilir. Bir bölümde yeterli taze
+     içerik yoksa blok boş kalmasın diye kalanlarla tamamlanır. */}}
+{{ $shown := $used }}
+<div class="wrap home-blocks">
+  {{ range $key := slice "yapay-zeka" "ekonomi-finans" "fraud-regulasyon" "vaka-dosyalari" "teknoloji" }}
+    {{ $all := partial "query/section-pages.html" (dict "key" $key) }}
+    {{ $pick := slice }}
+    {{ range $all }}
+      {{ if and (lt (len $pick) 4) (not (in $shown .)) }}{{ $pick = $pick | append . }}{{ end }}
+    {{ end }}
+    {{ if lt (len $pick) 4 }}
+      {{ range $all }}
+        {{ if and (lt (len $pick) 4) (not (in $pick .)) }}{{ $pick = $pick | append . }}{{ end }}
+      {{ end }}
+    {{ end }}
+    {{ range $pick }}{{ if not (in $shown .) }}{{ $shown = $shown | append . }}{{ end }}{{ end }}
+    {{ partial "blocks/section-block.html" (dict "key" $key "pages" $pick) }}
   {{ end }}
 </div>
 
-<!-- NEWSLETTER -->
-<div class="newsletter-section reveal">
-  <div class="newsletter">
-    <div class="newsletter-bg"></div>
-    <div class="newsletter-grid-lines"></div>
-    <div class="newsletter-content">
-      <div class="newsletter-text">
-        <h3>Haftalık <em>bülten</em> ile güncel kalın</h3>
-        <p>Her hafta öne çıkan vakalar, düzenleme güncellemeleri ve sektör analizleri — doğrudan e-posta kutunuzda.</p>
+
+<!-- ══ E) ULAŞ'TAN ══════════════════════════════════════════ -->
+{{ $ulas := where $posts "Params.content_origin" "ulas" }}
+{{ if not $ulas }}
+  {{ $ulas = partial "query/resolve-pages.html" (dict "paths" $hp.ulas_picks) }}
+{{ end }}
+<section class="home-personal" aria-labelledby="ulastan">
+  <div class="wrap personal-inner">
+    <div class="personal-head">
+      <span class="personal-eyebrow">Kişisel</span>
+      <h2 class="personal-title" id="ulastan">Ulaş'tan</h2>
+      <p class="personal-desc">Denetim, fraud, kariyer, teknoloji ve değişen iş dünyası üzerine kişisel yazılar.</p>
+      <a class="personal-link" href="/ulastan/">Bölüme git <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="personal-body">
+      {{ if $ulas }}
+        <ul class="personal-list">
+          {{ range first 3 $ulas }}<li>{{ partial "cards/card-compact.html" . }}</li>{{ end }}
+        </ul>
+      {{ else }}
+        <div class="empty-state">
+          <p class="empty-title">Bu bölüm hazırlanıyor.</p>
+          <p class="empty-text">
+            Ulaş Hotmanoğlu'nun kendi kaleminden yazılar yakında burada yayımlanacak.
+            Platformun editoryal yaklaşımını bu arada
+            <a href="/hakkimda/">Hakkında</a> sayfasından okuyabilirsiniz.
+          </p>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ F) BURADAN BAŞLA ═════════════════════════════════════ -->
+{{ with $hp.collections }}
+<section class="home-start wrap" aria-labelledby="buradan-basla">
+  <div class="block-head block-head-tight">
+    <h2 class="block-title" id="buradan-basla">Buradan Başla</h2>
+    <p class="block-tagline">Platformda yeniyseniz, konuya bu seçkilerden girmek iyi bir başlangıç.</p>
+  </div>
+  <div class="start-grid">
+    {{ range . }}
+      {{ $items := partial "query/resolve-pages.html" (dict "paths" .items) }}
+      {{ if $items }}
+      <div class="start-col">
+        <h3 class="start-title">{{ .title }}</h3>
+        {{ with .description }}<p class="start-desc">{{ . }}</p>{{ end }}
+        <ol class="start-list">
+          {{ range $items }}
+          <li>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <span class="start-meta">{{ .ReadingTime }} dk</span>
+          </li>
+          {{ end }}
+        </ol>
       </div>
-      <div class="newsletter-form">
-        <input class="nl-input" type="email" placeholder="E-posta adresiniz">
-        <button class="nl-btn">Abone Ol</button>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+
+<!-- ══ G) YAYIN SÜRECİ ══════════════════════════════════════ -->
+<section class="home-process" aria-labelledby="nasil-hazirlaniyor">
+  <div class="wrap process-inner">
+    <div class="process-head">
+      <h2 class="process-title" id="nasil-hazirlaniyor">Bu yayın nasıl hazırlanıyor?</h2>
+      <p class="process-lead">
+        HOTMANOGLU, yapay zekâ destekli bir üretim hattı ile çalışır; ancak hiçbir içerik
+        insan onayından geçmeden yayımlanmaz. Süreç kısaca şöyle işler:
+      </p>
+    </div>
+    <ol class="process-steps">
+      <li>
+        <span class="process-num">01</span>
+        <h3>Araştırma</h3>
+        <p>Birincil kaynaklar taranır: düzenleyici duyuruları, mahkeme kararları, denetim raporları ve kurum açıklamaları.</p>
+      </li>
+      <li>
+        <span class="process-num">02</span>
+        <h3>Yazım</h3>
+        <p>Bulgular yapay zekâ desteğiyle taslağa dönüştürülür; anlatı, bağlam ve çerçeve editoryal olarak belirlenir.</p>
+      </li>
+      <li>
+        <span class="process-num">03</span>
+        <h3>Doğrulama</h3>
+        <p>Rakamlar, tarihler, kurum adları ve iddialar kaynağına geri götürülerek kontrol edilir.</p>
+      </li>
+      <li>
+        <span class="process-num">04</span>
+        <h3>İnsan onayı</h3>
+        <p>Her yazı yayın öncesi Ulaş Hotmanoğlu tarafından okunur ve onaylanır. Onaylanmayan içerik yayımlanmaz.</p>
+      </li>
+      <li>
+        <span class="process-num">05</span>
+        <h3>Yayın ve düzeltme</h3>
+        <p>Yayın sonrası tespit edilen hatalar düzeltilir ve düzeltme yazının içinde görünür biçimde belirtilir.</p>
+      </li>
+    </ol>
+    <p class="process-more">
+      Ayrıntılar: <a href="/ai-politikasi/">AI Kullanım Politikası</a> ·
+      <a href="/editoryal-ilkeler/">Editoryal İlkeler</a> ·
+      <a href="/duzeltme-politikasi/">Düzeltme Politikası</a>
+    </p>
+  </div>
+</section>
+
+
+<!-- ══ H) BÜLTEN ════════════════════════════════════════════ -->
+<section class="home-newsletter" aria-labelledby="bulten">
+  <div class="wrap newsletter-inner">
+    <div class="newsletter-text">
+      <span class="newsletter-eyebrow">Bülten</span>
+      <h2 class="newsletter-title" id="bulten">Haftanın İzleri</h2>
+      <p class="newsletter-desc">Haftanın önemli AI, ekonomi, teknoloji ve regülasyon gelişmeleri.</p>
+    </div>
+    <div class="newsletter-action">
+      <p class="newsletter-status">
+        Bülten altyapısı hazırlanıyor. Açıldığında duyurulacak.
+      </p>
+      <div class="newsletter-links">
+        {{ with site.Home.OutputFormats.Get "rss" }}
+        <a class="btn btn-primary" href="{{ .RelPermalink }}">RSS ile takip et</a>
+        {{ end }}
+        {{ with site.Params.linkedin }}
+        <a class="btn btn-ghost" href="{{ . }}" target="_blank" rel="noopener">LinkedIn'den takip et</a>
+        {{ end }}
       </div>
     </div>
   </div>
-</div>
+</section>
 
 {{ end }}

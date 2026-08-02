@@ -1,0 +1,69 @@
+# ─────────────────────────────────────────────────────────────
+# ANA SAYFA EDİTORYAL SEÇİMİ
+#
+# Buradaki tüm alanlar OPSİYONELDİR.
+# Bir yol bulunamazsa o öğe sessizce atlanır, build kırılmaz.
+#
+# Yol biçimi: "posts/<slug>"  (uzantısız)
+# Boş bırakılan alanlar otomatik olarak en yeni içeriklerle dolar.
+# ─────────────────────────────────────────────────────────────
+
+# A) MANŞET
+# lead      : soldaki büyük ana dosya
+# secondary : sağdaki iki içerik
+# Boş bırakılırsa en yeni 3 yazı kullanılır.
+hero:
+  lead: "posts/alarmi-kim-inceliyor-agentic-ai-artik-sorusturmayi-kendisi-yurutuyor"
+  secondary:
+    - "posts/2-agustos-opec-toplantisi-hurmuz-bogazi-nin-golgesinde-enerj"
+    - "posts/sistem-calisiyordu-esik-yanlisti-merrill-lynchin-75-milyon-dolarlik-faturasi"
+
+# E) ULAŞ'TAN
+# content_origin: "ulas" olan yazılar bu bölümde otomatik listelenir.
+# Henüz o alana sahip yazı yoksa, aşağıdan elle seçim yapılabilir.
+# Buraya bir yazı eklemek, o yazıyı "Ulaş yazdı" olarak etiketlemez —
+# yalnızca bölümde gösterir. Rozet yalnızca front matter'dan gelir.
+ulas_picks: []
+
+# F) BURADAN BAŞLA
+# Yeni okuyucular için küratörlü koleksiyonlar.
+collections:
+  - title: "Agentic AI"
+    description: "Karar veren, işlem yapan ve kendi başına soruşturma yürüten yapay zekâ ajanları."
+    items:
+      - "posts/alarmi-kim-inceliyor-agentic-ai-artik-sorusturmayi-kendisi-yurutuyor"
+      - "posts/artik-odeme-dugmesine-basan-siz-degilsiniz-imfin-otonom-ai-ajanlari-raporu-ve-ba"
+      - "posts/artik-yapay-zeka-da-phishinge-dusuyor-google-deepmindin-ai-agent-traps-arastirma"
+      - "posts/claudea-saldiri-plani-sordular-claude-uyguladi-ilk-ai-destekli-siber-casusluk-ka"
+
+  - title: "Büyük fraud vakaları"
+    description: "Milyar dolarlık şemalar, nasıl kuruldular ve hangi noktada görünür oldular."
+    items:
+      - "posts/127271-bitcoin-zorla-calistirma-ve-abd-tarihinin-en-buyuk-el-koymasi-chen-zhi-da"
+      - "posts/3-milyon-tc-kimligi-aylik-3-milyar-dolar-49-site-paymix-3-ve-turkiyenin-en-buyuk"
+      - "posts/iceriden-tehdit-banka-calisani-10-milyar-dolarlik-dolandiricilik-sebekesinin-kap"
+      - "posts/dolandiricilik-fabrikasi-ortaya-cikarildi-kambocyada-endustriyel-olcekte-fraud-o"
+
+  - title: "AML ve yaptırımlar"
+    description: "Uyum programlarının sınırları, denetim bulguları ve yaptırım rejimlerinin işleyişi."
+    items:
+      - "posts/fatftan-tarihi-uyari-stablecoinler-artik-kara-para-aklamanin-birincil-araci"
+      - "posts/broker-dealera-tarihi-ceza-fincen-canaccorda-80-milyon-dolar-kesti"
+      - "posts/kapiyi-tutan-cezayi-yer-ofacin-gatekeeperlara-yonelik-yaptirim-dalgasi"
+      - "posts/isvicrenin-gizli-bankasi-rusya-ve-iranin-kasasi-cikti-fincen-mbaeri-dolar-sistem"
+
+  - title: "Ekonomi ve piyasalar"
+    description: "Makro tablo: merkez bankaları, enerji fiyatları ve jeopolitik risk."
+    items:
+      - "posts/2-agustos-opec-toplantisi-hurmuz-bogazi-nin-golgesinde-enerj"
+      - "posts/temmuz-2026-fed-beklemede-ecb-sabit-petrol-100-dolarin-uzeri"
+      - "posts/kripto-vergi-duzenlemesi-tbmmde-uc-katmanli-bir-yapi-geliyor"
+      - "posts/definin-vahsi-bati-donemi-bitiyor-mu-abd-hazinesi-ne-diyor-ne-yapmiyor"
+
+  - title: "Editörün seçtikleri"
+    description: "Platformun ne yapmaya çalıştığını en iyi anlatan yazılar."
+    items:
+      - "posts/sistem-calisiyordu-esik-yanlisti-merrill-lynchin-75-milyon-dolarlik-faturasi"
+      - "posts/dijital-mufettis-geliyor-ai-forensics-nedir-ne-degildir"
+      - "posts/vaka-analizi-tek-adam-bes-unvan-sifir-denetim-first-national-bank-of-lindsayin-c"
+      - "posts/90-sahte-insan-sahte-uzmanlar-sahte-krlar-dolandiriciligin-yeni-adi-truman-show"

@@ -1,0 +1,24 @@
+{{/*
+  Kart görseli. Görsel yoksa kırık <img> üretmez;
+  yazı başlığından türetilen tipografik bir fallback gösterir.
+
+  Kullanım: {{ partial "bits/card-image.html" (dict "page" . "ratio" "16x9" "sizes" "...") }}
+*/}}
+{{ $p := .page }}
+{{ $ratio := .ratio | default "16x9" }}
+{{ $sizes := .sizes | default "(max-width: 700px) 100vw, 50vw" }}
+{{ $img := $p.Params.image | default "" }}
+
+<div class="card-media ratio-{{ $ratio }}">
+  {{ if $img }}
+    {{/* Görseller temsilî; başlık zaten içeriği anlatıyor, bu yüzden alt
+         varsayılan olarak boştur (dekoratif). Front matter'da image_alt
+         verilirse o kullanılır. */}}
+    <img src="{{ $img }}" alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async" sizes="{{ $sizes }}">
+  {{ else }}
+    {{/* Estetik fallback: marka harfi + ince tarama deseni */}}
+    <div class="card-media-fallback" aria-hidden="true">
+      <span class="card-media-mark">H</span>
+    </div>
+  {{ end }}
+</div>

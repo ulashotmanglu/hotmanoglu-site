@@ -1,10 +1,27 @@
 {{ define "main" }}
-<div class="page-wrap">
-  <div class="page-header">
-    <h1 class="page-title">{{ .Title }}</h1>
-  </div>
-  <div class="page-content">
+<header class="page-hero page-hero-narrow wrap">
+  {{ with .Params.eyebrow }}<p class="page-hero-eyebrow">{{ . }}</p>{{ end }}
+  <h1 class="page-hero-title">{{ .Title }}</h1>
+  {{ with .Params.description }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
+  {{ with .Params.updated }}
+  <p class="page-hero-meta">Son güncelleme: {{ partial "bits/date.html" (dict "date" (time.AsTime .)) }}</p>
+  {{ end }}
+</header>
+
+<div class="wrap">
+  <div class="prose">
     {{ .Content }}
+
+    {{ if .Params.show_contact }}
+    <div class="contact-links">
+      {{ with site.Params.linkedin }}
+      <a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn'de yaz</a>
+      {{ end }}
+      {{ with site.Params.email }}
+      <a class="btn btn-ghost" href="mailto:{{ . }}">{{ . }}</a>
+      {{ end }}
+    </div>
+    {{ end }}
   </div>
 </div>
 {{ end }}

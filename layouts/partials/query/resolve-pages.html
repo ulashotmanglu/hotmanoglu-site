@@ -1,0 +1,16 @@
+{{/*
+  data/homepage.yaml içindeki yol listesini gerçek sayfalara çevirir.
+  Bulunamayan yollar sessizce atlanır — build kırılmaz.
+
+  Kullanım:  {{ $pages := partial "query/resolve-pages.html" (dict "paths" $someList) }}
+*/}}
+{{ $out := slice }}
+{{ range (.paths | default slice) }}
+  {{ $path := . | string }}
+  {{ if $path }}
+    {{ with site.GetPage $path }}
+      {{ $out = $out | append . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $out }}

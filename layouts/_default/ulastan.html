@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $hp := site.Data.homepage | default dict }}
+
+{{/* content_origin == "ulas" olan yazılar. Yoksa data dosyasından manuel seçim. */}}
+{{ $pages := where $posts "Params.content_origin" "ulas" }}
+{{ $manual := false }}
+{{ if not $pages }}
+  {{ $pages = partial "query/resolve-pages.html" (dict "paths" $hp.ulas_picks) }}
+  {{ if $pages }}{{ $manual = true }}{{ end }}
+{{ end }}
+
+<header class="page-hero page-hero-personal wrap">
+  <p class="page-hero-eyebrow">Kişisel</p>
+  <h1 class="page-hero-title">Ulaş'tan</h1>
+  <p class="page-hero-desc">Denetim, fraud, kariyer, teknoloji ve değişen iş dünyası üzerine kişisel yazılar.</p>
+</header>
+
+<div class="wrap personal-page">
+  <div class="personal-page-aside">
+    {{ partial "cards/card-author.html" (dict "founder" true) }}
+  </div>
+
+  <div class="personal-page-main">
+    {{ if $pages }}
+      {{ if $manual }}
+      <p class="notice">
+        Bu bölümdeki içerikler editoryal olarak seçilmiştir. Bir yazının kim tarafından
+        yazıldığı yalnızca yazının kendi künyesinde belirtilir.
+      </p>
+      {{ end }}
+      <div class="card-grid card-grid-2">
+        {{ range $pages }}{{ partial "cards/card-standard.html" . }}{{ end }}
+      </div>
+    {{ else }}
+      <div class="empty-state empty-state-lg">
+        <p class="empty-title">Bu bölüm hazırlanıyor.</p>
+        <p class="empty-text">
+          Ulaş Hotmanoğlu'nun kendi kaleminden yazılar yakında burada yayımlanacak.
+          Platformun nasıl çalıştığını ve editoryal yaklaşımı
+          <a href="/hakkimda/">Hakkında</a> sayfasından okuyabilirsiniz.
+        </p>
+        <p class="empty-text">
+          Bu arada <a href="/gundem/">Gündem</a> akışındaki analizlere göz atabilirsiniz.
+        </p>
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

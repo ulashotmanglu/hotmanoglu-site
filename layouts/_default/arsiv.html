@@ -1,0 +1,47 @@
+{{ define "main" }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $sections := slice }}
+{{ with site.Data.sections }}{{ with .sections }}{{ $sections = where . "nav" true }}{{ end }}{{ end }}
+
+<header class="page-hero wrap">
+  <p class="page-hero-eyebrow">Arşiv</p>
+  <h1 class="page-hero-title">Tüm İçerikler</h1>
+  <p class="page-hero-desc">{{ len $posts }} yazı, yayın tarihine göre. Bölüm bazlı okumak için üstteki bağlantıları kullanabilirsiniz.</p>
+</header>
+
+<div class="wrap archive-filters" role="navigation" aria-label="Bölüme göre">
+  <a class="chip" href="/gundem/">Tüm akış</a>
+  {{ range $sections }}{{ if ne .key "gundem" }}<a class="chip" href="{{ .url }}">{{ .title }}</a>{{ end }}{{ end }}
+</div>
+
+<div class="wrap archive">
+  {{ if $posts }}
+    {{ range $posts.GroupByDate "2006" }}
+    <section class="archive-year" aria-labelledby="yil-{{ .Key }}">
+      <h2 class="archive-year-title" id="yil-{{ .Key }}">
+        {{ .Key }}<span class="archive-year-count">{{ len .Pages }} yazı</span>
+      </h2>
+      <ul class="archive-list">
+        {{ range .Pages }}
+        <li class="archive-row">
+          <span class="archive-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "02.01" }}</time></span>
+          <span class="archive-main">
+            <a class="archive-title" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <span class="archive-meta">
+              {{ partial "bits/kicker.html" (dict "page" .) }}
+              {{ partial "bits/origin-badge.html" (dict "page" . "style" "short") }}
+            </span>
+          </span>
+          <span class="archive-time">{{ .ReadingTime }} dk</span>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
+    {{ end }}
+  {{ else }}
+    <div class="empty-state empty-state-lg">
+      <p class="empty-title">Arşivde henüz içerik yok.</p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

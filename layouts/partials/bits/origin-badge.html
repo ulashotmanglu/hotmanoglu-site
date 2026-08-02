@@ -1,0 +1,34 @@
+{{/*
+  İçerik üretim biçimi rozeti.
+
+  Yalnızca front matter'da content_origin ALANI VARSA gösterilir.
+  Alan yoksa hiçbir şey basılmaz — eski yazılar hakkında insan/AI
+  varsayımı yapılmaz.
+
+  Kullanım: {{ partial "bits/origin-badge.html" (dict "page" . "style" "short") }}
+           style: "short" (kart) | "full" (yazı sayfası)
+*/}}
+{{ $p := .page }}
+{{ $style := .style | default "short" }}
+{{ $origin := $p.Params.content_origin | default "" | lower }}
+
+{{ if $origin }}
+  {{ $label := "" }}
+  {{ $cls := "" }}
+  {{ if eq $origin "ulas" }}
+    {{ $cls = "origin-ulas" }}
+    {{ $label = cond (eq $style "full") "Ulaş Hotmanoğlu tarafından yazıldı" "Ulaş'tan" }}
+  {{ else if eq $origin "ai" }}
+    {{ $cls = "origin-ai" }}
+    {{ $label = cond (eq $style "full") "AI destekli içerik" "AI destekli" }}
+  {{ else if eq $origin "hybrid" }}
+    {{ $cls = "origin-hybrid" }}
+    {{ $label = cond (eq $style "full") "Ulaş Hotmanoğlu ve AI ortak üretimi" "Ortak üretim" }}
+  {{ end }}
+
+  {{ if $label }}
+  <span class="origin-badge {{ $cls }} origin-{{ $style }}">
+    <span class="origin-dot" aria-hidden="true"></span>{{ $label }}
+  </span>
+  {{ end }}
+{{ end }}

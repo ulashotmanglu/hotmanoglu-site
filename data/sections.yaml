@@ -1,0 +1,136 @@
+# ─────────────────────────────────────────────────────────────
+# BÖLÜM (HUB) TANIMLARI
+#
+# Yeni ana navigasyon ile mevcut kategori/etiket yapısı arasındaki
+# güvenli eşleme katmanı. Buradaki tanımlar hiçbir yazının front
+# matter'ını değiştirmez; yalnızca okuma/gruplama sırasında kullanılır.
+#
+# Bir yazı, kategorilerinden VEYA etiketlerinden en az biri aşağıdaki
+# listelerle eşleşiyorsa o bölümde görünür. Bir yazı birden fazla
+# bölümde görünebilir (konu hub'ları birbirini dışlamaz).
+#
+# mode: all  -> tüm yazılar (kronolojik akış)
+# ─────────────────────────────────────────────────────────────
+sections:
+  - key: gundem
+    title: "Gündem"
+    url: "/gundem/"
+    nav: true
+    mode: all
+    tagline: "Tüm akış"
+    description: "Platformdaki bütün içerikler, en yeniden eskiye. Yapay zekâ, ekonomi, teknoloji ve finansal suç gündemi tek akışta."
+
+  - key: yapay-zeka
+    title: "Yapay Zekâ"
+    url: "/yapay-zeka/"
+    nav: true
+    tagline: "Modeller, ajanlar, riskler"
+    description: "Yapay zekâ sistemlerinin gerçek dünyadaki etkisi: otonom ajanlar, model güvenliği, AI destekli saldırılar ve denetim tarafındaki karşılığı."
+    categories: []
+    tags:
+      - "Yapay Zeka"
+      - "Yapay Zekâ"
+      - "AI"
+      - "AI Agent"
+      - "Agentic AI"
+      - "Claude"
+      - "Anthropic"
+      - "Google DeepMind"
+      - "OpenAI"
+      - "LLM"
+      - "Deepfake"
+      - "Makine Öğrenmesi"
+      - "Chainalysis"
+
+  - key: ekonomi-finans
+    title: "Ekonomi & Finans"
+    url: "/ekonomi-finans/"
+    nav: true
+    tagline: "Piyasalar ve para"
+    description: "Merkez bankaları, enerji ve emtia piyasaları, dijital varlık düzenlemeleri ve finansal sistemin makro resmi."
+    # NOT: "Kripto" etiketi bilerek listede değil — 20 yazıda geçiyor ve
+    # bunların çoğu piyasa değil kripto üzerinden aklama/dolandırıcılık
+    # vakası. Onların yeri Fraud & Regülasyon ya da Vaka Dosyaları.
+    categories:
+      - "Ekonomi"
+    tags:
+      - "Ekonomi"
+      - "Enflasyon"
+      - "Merkez Bankası"
+      - "Fed"
+      - "ECB"
+      - "Petrol"
+      - "Petrol Fiyatları"
+      - "Enerji Piyasaları"
+      - "OPEC"
+      - "Küresel Piyasalar"
+      - "Piyasalar"
+      - "Jeopolitik"
+      - "Stablecoin"
+      - "DeFi"
+      - "Bankacılık"
+      - "Sermaye Piyasası"
+      - "Yatırım"
+      - "Ödeme Sistemleri"
+
+  - key: fraud-regulasyon
+    title: "Fraud & Regülasyon"
+    url: "/fraud-regulasyon/"
+    nav: true
+    tagline: "Suç, uyum, yaptırım"
+    description: "Dolandırıcılık şemaları, kara para aklama, yaptırım rejimleri ve uyum düzenlemeleri. Hem vakanın kendisi hem de kurumsal kontrol tarafı."
+    categories:
+      - "Fraud"
+      - "AML/CFT"
+      - "Yaptırım"
+      - "Düzenleme"
+    # NOT: "Fraud" ve "Dolandırıcılık" ETİKETLERİ bilerek listede değil.
+    # Bu etiketler 62 yazının 31'inde bulunuyor; eklendiğinde bölüm neredeyse
+    # tüm arşivi kapsıyor ve navigasyon filtresi olmaktan çıkıyordu.
+    # Vaka niteliğindeki fraud yazıları "Vaka Dosyaları" bölümünde görünür.
+    tags:
+      - "Kara Para Aklama"
+      - "AML"
+      - "BSA"
+      - "KYC"
+      - "SAR"
+      - "OFAC"
+      - "FATF"
+      - "FinCEN"
+      - "MASAK"
+      - "FCA"
+      - "Yaptırım"
+      - "Uyum"
+      - "Compliance"
+      - "Regülasyon"
+      - "RegTech"
+      - "İşlem İzleme"
+      - "Terör Finansmanı"
+
+  - key: teknoloji
+    title: "Teknoloji"
+    url: "/teknoloji/"
+    nav: true
+    tagline: "Sistemler ve güvenlik"
+    description: "Siber güvenlik, kimlik doğrulama teknolojileri, zafiyetler ve finansal altyapıyı taşıyan sistemler."
+    categories:
+      - "Teknoloji"
+    tags:
+      - "Teknoloji"
+      - "Siber"
+      - "Siber Güvenlik"
+      - "Siber Suç"
+      - "Zero-Day"
+      - "Sosyal Mühendislik"
+      - "Biyometrik Doğrulama"
+      - "Gizlilik"
+
+  - key: vaka-dosyalari
+    title: "Vaka Dosyaları"
+    url: "/vaka-dosyalari/"
+    nav: true
+    tagline: "Ayrıntılı incelemeler"
+    description: "Tek bir olayın nasıl kurulduğunu, nerede kırıldığını ve hangi kontrolün çalışmadığını adım adım izleyen uzun formatlı vaka analizleri."
+    categories:
+      - "Vaka Analizi"
+    tags: []

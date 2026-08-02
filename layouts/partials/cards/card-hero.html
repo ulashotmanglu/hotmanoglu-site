@@ -1,0 +1,22 @@
+{{/* Manşet kartı — ana sayfa lead içeriği. */}}
+{{ $p := . }}
+<article class="card card-hero">
+  <div class="card-media-link">
+    {{ partial "bits/card-image.html" (dict "page" $p "ratio" "3x2" "sizes" "(max-width: 900px) 100vw, 62vw") }}
+  </div>
+  <div class="card-body">
+    <div class="card-kicker-row">
+      {{ partial "bits/kicker.html" (dict "page" $p) }}
+      {{ partial "bits/origin-badge.html" (dict "page" $p "style" "short") }}
+    </div>
+    <h2 class="card-title card-title-xl">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h2>
+    {{ with $p.Params.description }}<p class="card-deck">{{ . }}</p>{{ end }}
+    <div class="card-meta">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time>
+      <span class="meta-sep" aria-hidden="true">·</span>
+      <span>{{ $p.ReadingTime }} dk okuma</span>
+    </div>
+  </div>
+</article>

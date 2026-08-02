@@ -1,0 +1,41 @@
+{{/*
+  Ana sayfa kategori bloğu: bir öne çıkan + üç ikincil içerik.
+  İçerik yoksa blok hiç basılmaz (tasarım kırılmaz).
+
+  Kullanım:
+    {{ partial "blocks/section-block.html" (dict "key" "yapay-zeka" "pages" $pages) }}
+
+  "pages" verilmezse bölümün kendi sorgusu çalıştırılır.
+*/}}
+{{ $key := .key }}
+{{ $sections := slice }}
+{{ with site.Data.sections }}{{ with .sections }}{{ $sections = . }}{{ end }}{{ end }}
+{{ $sec := false }}
+{{ $m := where $sections "key" $key }}
+{{ if $m }}{{ $sec = index $m 0 }}{{ end }}
+
+{{ if $sec }}
+  {{ $pages := .pages }}
+  {{ if not $pages }}{{ $pages = partial "query/section-pages.html" (dict "key" $key) }}{{ end }}
+  {{ if $pages }}
+    {{ $lead := index $pages 0 }}
+    {{ $rest := after 1 (first 4 $pages) }}
+<section class="home-block reveal" aria-labelledby="blk-{{ $key }}">
+  <div class="block-head">
+    <h2 class="block-title" id="blk-{{ $key }}">{{ $sec.title }}</h2>
+    {{ with $sec.tagline }}<p class="block-tagline">{{ . }}</p>{{ end }}
+    <a class="block-all" href="{{ $sec.url }}">Tümünü Gör <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="block-grid">
+    <div class="block-lead">
+      {{ partial "cards/card-standard.html" $lead }}
+    </div>
+    {{ if $rest }}
+    <ul class="block-rest">
+      {{ range $rest }}<li>{{ partial "cards/card-compact.html" . }}</li>{{ end }}
+    </ul>
+    {{ end }}
+  </div>
+</section>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,41 @@
+{{/*
+  Bir bölüm (hub) anahtarına karşılık gelen yazıları döndürür.
+
+  Kullanım:  {{ $pages := partial "query/section-pages.html" (dict "key" "yapay-zeka") }}
+
+  Eşleme data/sections.yaml üzerinden yapılır; hiçbir yazının front
+  matter'ı değiştirilmez. Bölüm bulunamazsa boş slice döner (build kırılmaz).
+*/}}
+{{ $key := .key }}
+{{ $pool := where site.RegularPages "Section" "posts" }}
+
+{{ $all := slice }}
+{{ with site.Data.sections }}
+  {{ with .sections }}{{ $all = . }}{{ end }}
+{{ end }}
+
+{{ $sec := false }}
+{{ $matched := where $all "key" $key }}
+{{ if $matched }}{{ $sec = index $matched 0 }}{{ end }}
+
+{{ $result := slice }}
+
+{{ if $sec }}
+  {{ if eq $sec.mode "all" }}
+    {{ $result = $pool }}
+  {{ else }}
+    {{ $cats := $sec.categories | default slice }}
+    {{ $tags := $sec.tags | default slice }}
+    {{ range $pool }}
+      {{ $pc := .Params.categories | default slice }}
+      {{ $pt := .Params.tags | default slice }}
+      {{ if not (reflect.IsSlice $pc) }}{{ $pc = slice $pc }}{{ end }}
+      {{ if not (reflect.IsSlice $pt) }}{{ $pt = slice $pt }}{{ end }}
+      {{ if or (intersect $pc $cats) (intersect $pt $tags) }}
+        {{ $result = $result | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $result }}

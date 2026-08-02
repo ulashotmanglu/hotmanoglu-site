@@ -1,0 +1,26 @@
+{{ define "main" }}
+<header class="page-hero page-hero-narrow wrap">
+  <p class="page-hero-eyebrow">Hakkında</p>
+  <h1 class="page-hero-title">{{ .Title }}</h1>
+  {{ with .Params.description }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
+</header>
+
+<div class="wrap about-layout">
+  <div class="about-main prose">
+    {{ .Content }}
+  </div>
+
+  <aside class="about-aside">
+    {{ partial "cards/card-author.html" (dict "founder" true) }}
+    <nav class="about-links" aria-label="Editoryal belgeler">
+      <h2 class="about-links-head">Editoryal çerçeve</h2>
+      <ul>
+        <li><a href="/editoryal-ilkeler/">Editoryal İlkeler</a></li>
+        <li><a href="/ai-politikasi/">AI Kullanım Politikası</a></li>
+        <li><a href="/duzeltme-politikasi/">Düzeltme Politikası</a></li>
+        <li><a href="/iletisim/">İletişim</a></li>
+      </ul>
+    </nav>
+  </aside>
+</div>
+{{ end }}

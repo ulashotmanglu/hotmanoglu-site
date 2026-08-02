@@ -1,0 +1,20 @@
+{{/*
+  Yazar adını döndürür (string).
+
+  - author alanı varsa o kullanılır
+  - yoksa ve content_origin "ulas"/"hybrid" ise site yazarı
+  - hiçbiri yoksa nötr editoryal imza
+
+  Eski yazılara insan yazarlığı atfetmemek için varsayılan nötrdür.
+*/}}
+{{ $p := .page }}
+{{ $author := $p.Params.author | default "" }}
+{{ if not $author }}
+  {{ $o := $p.Params.content_origin | default "" | lower }}
+  {{ if or (eq $o "ulas") (eq $o "hybrid") }}
+    {{ $author = site.Params.author }}
+  {{ else }}
+    {{ $author = "HOTMANOGLU Editöryal" }}
+  {{ end }}
+{{ end }}
+{{ return $author }}

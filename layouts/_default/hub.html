@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{ $key := .Params.hub_key | default "" }}
+{{ $sections := slice }}
+{{ with site.Data.sections }}{{ with .sections }}{{ $sections = . }}{{ end }}{{ end }}
+{{ $sec := false }}
+{{ $m := where $sections "key" $key }}
+{{ if $m }}{{ $sec = index $m 0 }}{{ end }}
+
+{{ $pages := partial "query/section-pages.html" (dict "key" $key) }}
+
+<header class="page-hero wrap">
+  <p class="page-hero-eyebrow">Bölüm</p>
+  <h1 class="page-hero-title">{{ .Title }}</h1>
+  {{ $desc := .Params.description }}
+  {{ if and (not $desc) $sec }}{{ $desc = $sec.description }}{{ end }}
+  {{ with $desc }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
+  <p class="page-hero-count">{{ len $pages }} içerik</p>
+</header>
+
+{{ if $pages }}
+  {{ $paginator := .Paginate $pages }}
+  {{ $onFirst := eq $paginator.PageNumber 1 }}
+  {{ $items := $paginator.Pages }}
+
+  {{ if $onFirst }}
+    <section class="hub-featured wrap" aria-label="Bölümde öne çıkan">
+      {{ partial "cards/card-hero.html" (index $items 0) }}
+    </section>
+    {{ $items = after 1 $items }}
+  {{ end }}
+
+  {{ if or $items (gt $paginator.TotalPages 1) }}
+  <section class="hub-list wrap" aria-label="Bölüm içerikleri">
+    <div class="block-head block-head-tight">
+      <h2 class="block-title">Tüm {{ .Title }} içerikleri</h2>
+    </div>
+    {{ if $items }}
+    <div class="card-grid">
+      {{ range $items }}{{ partial "cards/card-standard.html" . }}{{ end }}
+    </div>
+    {{ end }}
+    {{ partial "bits/pagination.html" $paginator }}
+  </section>
+  {{ end }}
+{{ else }}
+  <div class="wrap">
+    <div class="empty-state empty-state-lg">
+      <p class="empty-title">Bu bölümde henüz içerik yok.</p>
+      <p class="empty-text">Yeni yazılar yayımlandıkça burada listelenecek. Bu arada <a href="/gundem/">Gündem</a> akışına göz atabilirsiniz.</p>
+    </div>
+  </div>
+{{ end }}
+
+{{ end }}

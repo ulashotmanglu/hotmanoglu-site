@@ -1,0 +1,22 @@
+{{/* Standart kart — grid listelerinin temel birimi. */}}
+{{ $p := . }}
+<article class="card card-standard">
+  <div class="card-media-link">
+    {{ partial "bits/card-image.html" (dict "page" $p "ratio" "16x9" "sizes" "(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw") }}
+  </div>
+  <div class="card-body">
+    <div class="card-kicker-row">
+      {{ partial "bits/kicker.html" (dict "page" $p) }}
+      {{ partial "bits/origin-badge.html" (dict "page" $p "style" "short") }}
+    </div>
+    <h3 class="card-title">
+      <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+    </h3>
+    {{ with $p.Params.description }}<p class="card-deck">{{ . | truncate 150 }}</p>{{ end }}
+    <div class="card-meta">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time>
+      <span class="meta-sep" aria-hidden="true">·</span>
+      <span>{{ $p.ReadingTime }} dk</span>
+    </div>
+  </div>
+</article>

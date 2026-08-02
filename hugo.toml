@@ -6,9 +6,10 @@ title = "HOTMANOGLU"
 enableRobotsTXT = true
 
 [params]
-  description = "AML/CFT uyum, yaptırım rejimleri ve fraud incelemeleri üzerine Türkçe içerik platformu."
+  description = "Yapay zekâ, ekonomi, teknoloji ve finansal suçların kesişiminden bağımsız içerikler. AI destekli üretim, insan onaylı yayın."
   author = "Ulaş Hotmanoğlu"
-  tagline = "Etik · Uyum · Denetim"
+  tagline = "Yapay zekâ · Ekonomi · Teknoloji · Finansal suç"
+  positioning = "AI destekli bağımsız içerik ve analiz platformu"
   linkedin = "https://www.linkedin.com/in/ulas-hotmanoglu-ab039b16b/"
   twitter = ""
   email = ""
@@ -21,9 +22,32 @@ enableRobotsTXT = true
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+    ordered = false
 
+# "İlgili İçerikler" bloğu için — etiket ve kategori ağırlıklı benzerlik.
+[related]
+  includeNewer = true
+  threshold = 20
+  toLower = true
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+
+  [[related.indices]]
+    name = "date"
+    weight = 10
+
+# JSON: istemci tarafı arama indeksi (/index.json)
 [outputs]
-  home = ["HTML", "RSS"]
+  home = ["HTML", "RSS", "JSON"]
 
 [sitemap]
   changefreq = "weekly"

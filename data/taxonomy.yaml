@@ -1,0 +1,14 @@
+# Kategori açıklamaları.
+# Anahtar = front matter'daki kategori adı (birebir).
+# Buraya eklenmemiş bir kategori için sayfa yine çalışır, sadece
+# genel bir açıklama gösterilir.
+categories:
+  "Vaka Analizi": "Tek bir olayın anatomisi: şema nasıl kuruldu, hangi kontrol devrede değildi ve olay nasıl görünür hale geldi."
+  "Analiz": "Rapor, veri ve düzenleyici açıklamalardan çıkan tabloyu bağlamına oturtan değerlendirme yazıları."
+  "Yaptırım": "OFAC, AB ve diğer yaptırım rejimleri; listeye alma kararları, gerekçeleri ve uyum tarafındaki karşılığı."
+  "AML/CFT": "Kara para aklama ve terörün finansmanıyla mücadele; uyum programları, denetim bulguları ve yaptırım kararları."
+  "Teknoloji": "Siber güvenlik, kimlik doğrulama ve finansal altyapıyı taşıyan sistemler."
+  "Fraud": "Dolandırıcılık şemaları, iç tehdit vakaları ve kurumların kontrol zaafiyetleri."
+  "Düzenleme": "Yeni mevzuat, taslak düzenlemeler ve düzenleyici kurum yaklaşımlarındaki değişim."
+  "Haber": "Gündemdeki gelişmelerin kısa aktarımı."
+  "Ekonomi": "Merkez bankaları, enerji piyasaları ve makro göstergeler."

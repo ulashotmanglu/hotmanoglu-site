@@ -1,0 +1,15 @@
+{{/* Son gelişmeler satırı — görselsiz, kronolojik akış için. */}}
+{{ $p := . }}
+<li class="latest-row">
+  <span class="latest-date">
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "02.01" }}</time>
+  </span>
+  <span class="latest-main">
+    <span class="card-kicker-row">
+      {{ partial "bits/kicker.html" (dict "page" $p) }}
+      {{ partial "bits/origin-badge.html" (dict "page" $p "style" "short") }}
+    </span>
+    <a class="latest-title" href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+  </span>
+  <span class="latest-time">{{ $p.ReadingTime }} dk</span>
+</li>
