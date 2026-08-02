@@ -6,7 +6,7 @@ description: "HOTMANOGLU'nun ne olduğu, nasıl hazırlandığı ve hangi editor
 
 ## Platformun amacı
 
-HOTMANOGLU, yapay zekâ, ekonomi, teknoloji ve finansal suçların kesiştiği alanda Türkçe içerik üreten bağımsız bir yayın.
+HOTMANOGLU, yapay zeka, ekonomi, teknoloji ve finansal suçların kesiştiği alanda Türkçe içerik üreten bağımsız bir yayın.
 
 Bu alanda Türkçe kaynak var; ancak çoğu ya haber diliyle sınırlı kalıyor ya da doğrudan mevzuat metnine dönüşüyor. Aradaki boşluk — bir olayın neden olduğu, hangi kontrolün çalışmadığı, düzenleyicinin neye tepki verdiği — genellikle boş kalıyor. Platform tam olarak bu boşluğu doldurmak için kuruldu.
 
@@ -20,29 +20,29 @@ Amaç haber vermek değil, okuduktan sonra benzer bir olaya bakarken neye dikkat
 
 ## Ulaş Hotmanoğlu
 
-Çalışma hayatı boyunca finansal kurumlarda risk, denetim ve inceleme süreçlerine odaklanan görevlerde bulundu. Farklı ölçek ve yapılardaki organizasyonların risklerle nasıl karşılaştığını, zafiyetin hangi noktada oluştuğunu ve bunun nasıl sonuçlara dönüştüğünü yakından gözleme imkânı buldu.
+Çalışma hayatı boyunca finansal kurumlarda risk, denetim ve inceleme süreçlerine odaklanan görevlerde bulundu. Farklı ölçek ve yapılardaki organizasyonların risklerle nasıl karşılaştığını, zafiyetin hangi noktada oluştuğunu ve bunun nasıl sonuçlara dönüştüğünü yakından gözleme imkanı buldu.
 
 Yaklaşımının merkezinde şu var: bir olay yalnızca yüzeyde göründüğü şekliyle değil; süreç tasarımı, yönetişim yapısı ve karar alma mekanizmalarıyla birlikte değerlendirilmeli. Bu bakış hem önleyici risk yönetiminde hem de olay sonrası incelemede daha bütüncül bir analiz sağlıyor.
 
 Bu deneyimin gösterdiği temel şey şu: risk çoğu zaman ani gelişen bir durum değil, zaman içinde biriken yapısal sorunların görünür hale gelmesidir.
 
-Çalışma alanları: fraud incelemeleri, iç denetim, AML/CFT ve yaptırım uyumu, finansal suçlar, ve son dönemde yapay zekâ destekli inceleme ve içerik üretim sistemleri.
+Çalışma alanları: fraud incelemeleri, iç denetim, AML/CFT ve yaptırım uyumu, finansal suçlar, ve son dönemde yapay zeka destekli inceleme ve içerik üretim sistemleri.
 
 ## AI destekli yayın modeli
 
-Bu platformdaki içeriklerin büyük bölümü yapay zekâ desteğiyle hazırlanıyor. Bunu saklamıyoruz, çünkü okurun ne okuduğunu bilmeye hakkı var.
+Bu platformdaki içeriklerin büyük bölümü yapay zeka desteğiyle hazırlanıyor. Bunu saklamıyoruz, çünkü okurun ne okuduğunu bilmeye hakkı var.
 
 Süreç şu adımlardan oluşuyor:
 
 1. **Araştırma.** Birincil kaynaklar taranır: düzenleyici duyuruları, mahkeme kararları, denetim raporları, kurum açıklamaları.
 2. **İçerik planlama.** Hangi olayın neden ele alınacağına ve hangi çerçeveden bakılacağına editoryal olarak karar verilir.
-3. **Yazım.** Bulgular yapay zekâ desteğiyle taslak metne dönüştürülür.
+3. **Yazım.** Bulgular yapay zeka desteğiyle taslak metne dönüştürülür.
 4. **Doğrulama.** Rakamlar, tarihler, kurum adları ve iddialar kaynağına geri götürülerek kontrol edilir.
-5. **Görsel üretim.** Yazıya eşlik eden görseller üretilir; bunlar gerçek fotoğraf değil, temsilî görsellerdir.
+5. **Görsel üretim.** Yazıya eşlik eden görseller üretilir; bunlar gerçek fotoğraf değil, temsili görsellerdir.
 6. **İnsan onayı.** Her içerik yayın öncesi okunur ve onaylanır. Onaylanmayan içerik yayımlanmaz.
 7. **Yayın.** İçerik yayımlanır ve gerektiğinde güncellenir.
 
-Yapay zekâ burada bir araç; editoryal sorumluluk araca devredilmez. Ayrıntılar için [AI Kullanım Politikası](/ai-politikasi/) sayfasına bakabilirsiniz.
+Yapay zeka burada bir araç; editoryal sorumluluk araca devredilmez. Ayrıntılar için [AI Kullanım Politikası](/ai-politikasi/) sayfasına bakabilirsiniz.
 
 ## Editoryal yaklaşım
 

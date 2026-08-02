@@ -44,7 +44,7 @@
 
   /* ── MOBİL ÇEKMECE ──────────────────────────────────────────────────── */
   var menuBtn = document.getElementById('menuBtn');
-  var drawer = document.getElementById('mobileDrawer');
+  var drawer = document.getElementById('drawer');
   var drawerClose = document.getElementById('drawerClose');
 
   function openDrawer() {
@@ -195,7 +195,61 @@
     });
   });
 
-  /* ── MASTHEAD ───────────────────────────────────────────────────────── */
+
+  /* ── OKUMA İLERLEMESİ ───────────────────────────────────────────────── */
+  var bar = document.getElementById('progressBar');
+  var body = document.getElementById('articleBody');
+  if (bar && body) {
+    var ticking = false;
+    var update = function () {
+      var r = body.getBoundingClientRect();
+      var total = r.height - window.innerHeight * 0.4;
+      var done = -r.top + window.innerHeight * 0.4;
+      var pct = total > 0 ? Math.min(1, Math.max(0, done / total)) : 0;
+      bar.style.transform = 'scaleX(' + pct + ')';
+      ticking = false;
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  /* ── İÇİNDEKİLER — aktif bölüm ──────────────────────────────────────── */
+  var rail = document.getElementById('tocRail');
+  if (rail && body && 'IntersectionObserver' in window) {
+    var links = {};
+    rail.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      links[decodeURIComponent(a.getAttribute('href').slice(1))] = a;
+    });
+    var heads = [].slice.call(body.querySelectorAll('h2[id]'));
+    var setActive = function (id) {
+      rail.querySelectorAll('a').forEach(function (a) { a.removeAttribute('aria-current'); });
+      if (links[id]) links[id].setAttribute('aria-current', 'true');
+    };
+    var seenMap = {};
+    var io2 = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { seenMap[en.target.id] = en.isIntersecting ? en.boundingClientRect.top : null; });
+      var current = null;
+      for (var i = 0; i < heads.length; i++) {
+        if (heads[i].getBoundingClientRect().top < window.innerHeight * 0.35) current = heads[i].id;
+      }
+      if (current) setActive(current);
+    }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+    heads.forEach(function (h) { io2.observe(h); });
+  }
+
+  /* ── MASTHEAD — scroll'da sıkışır ───────────────────────────────────── */
+  var mh = document.getElementById('masthead');
+  if (mh) {
+    var onS = function () { mh.classList.toggle('is-compact', window.scrollY > 120); };
+    window.addEventListener('scroll', onS, { passive: true });
+    onS();
+  }
+
+  /* ── MASTHEAD (eski) ────────────────────────────────────────────────── */
   var masthead = document.getElementById('masthead');
   if (masthead) {
     var onScroll = function () { masthead.classList.toggle('is-scrolled', window.scrollY > 40); };

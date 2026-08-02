@@ -1,61 +1,44 @@
 {{ $sections := slice }}
 {{ with site.Data.sections }}{{ with .sections }}{{ $sections = where . "nav" true }}{{ end }}{{ end }}
 
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <span class="footer-wordmark">HOTMANOGLU</span>
-      <p class="footer-desc">Yapay zekâ, ekonomi, teknoloji ve finansal suçların kesişiminden bağımsız içerikler. Yapay zekâ destekli üretim, insan onaylı yayın.</p>
-      <div class="footer-social">
-        {{ with site.Params.linkedin }}
-        <a href="{{ . }}" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        {{ end }}
-        {{ with site.Params.email }}
-        <a href="mailto:{{ . }}" aria-label="E-posta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-        {{ end }}
-        {{ with site.Home.OutputFormats.Get "rss" }}
-        <a href="{{ .RelPermalink }}" aria-label="RSS akışı">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.5" fill="currentColor"/></svg>
-        </a>
-        {{ end }}
-      </div>
+<footer class="ft">
+  <div class="shell ft-in">
+    <div class="ft-brand">
+      <span class="ft-word">HOTMANOGLU</span>
+      <p>Teknoloji, ekonomi ve finansal suçlar üzerine bağımsız Türkçe yayın.</p>
     </div>
 
-    <nav class="footer-col" aria-label="Bölümler">
-      <h2 class="footer-head">Bölümler</h2>
+    <nav class="ft-col" aria-label="Bölümler">
+      <h2>Bölümler</h2>
       <ul>
-        {{ range $sections }}<li><a href="{{ .url }}">{{ .title }}</a></li>{{ end }}
-        <li><a href="/ulastan/">Ulaş'tan</a></li>
+        {{ range $sections }}<li><a href="{{ .url }}">{{ with .nav_title }}{{ . }}{{ else }}{{ .title }}{{ end }}</a></li>{{ end }}
       </ul>
     </nav>
 
-    <nav class="footer-col" aria-label="Editoryal">
-      <h2 class="footer-head">Editoryal</h2>
+    <nav class="ft-col" aria-label="Yayın">
+      <h2>Yayın</h2>
+      <ul>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/hakkimda/">Hakkında</a></li>
+        <li><a href="/arsiv/">Arşiv</a></li>
+        <li><a href="/iletisim/">İletişim</a></li>
+      </ul>
+    </nav>
+
+    <nav class="ft-col" aria-label="Editoryal">
+      <h2>Editoryal</h2>
       <ul>
         <li><a href="/editoryal-ilkeler/">Editoryal İlkeler</a></li>
-        <li><a href="/ai-politikasi/">AI Kullanım Politikası</a></li>
+        <li><a href="/ai-politikasi/">AI Politikası</a></li>
         <li><a href="/duzeltme-politikasi/">Düzeltme Politikası</a></li>
-        <li><a href="/arsiv/">Arşiv</a></li>
-      </ul>
-    </nav>
-
-    <nav class="footer-col" aria-label="Platform">
-      <h2 class="footer-head">Platform</h2>
-      <ul>
-        <li><a href="/hakkimda/">Hakkında</a></li>
-        <li><a href="/iletisim/">İletişim</a></li>
-        {{ with site.Params.linkedin }}<li><a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end }}
         {{ with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
+        {{ with site.Params.linkedin }}<li><a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end }}
       </ul>
     </nav>
   </div>
 
-  <div class="wrap footer-bottom">
+  <div class="shell ft-bottom">
     <span>&copy; {{ now.Year }} HOTMANOGLU</span>
-    <span class="footer-note">Yapay zekâ destekli üretim · insan onaylı yayın</span>
+    <span>İstanbul</span>
   </div>
 </footer>

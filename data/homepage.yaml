@@ -25,11 +25,35 @@ hero:
 # yalnızca bölümde gösterir. Rozet yalnızca front matter'dan gelir.
 ulas_picks: []
 
+# ─────────────────────────────────────────────────────────────
+# KEŞFET — ana sayfadaki konu girişleri
+#
+# Bunlar yazı kartı değil, konu kapılarıdır. Başlık ve açıklama
+# buradan; hedef URL ve içerik sayısı data/sections.yaml'daki
+# bölümden hesaplanır (section_key). Sabit URL yazılmaz.
+# ─────────────────────────────────────────────────────────────
+discover:
+  - title: "Agentic AI"
+    description: "Karar veren, işlem yapan ve soruşturmayı kendi yürüten yapay zeka sistemleri."
+    section_key: "yapay-zeka"
+
+  - title: "Büyük Fraud Vakaları"
+    description: "Milyar dolarlık şemalar; nasıl kuruldular, hangi noktada görünür oldular."
+    section_key: "vaka-dosyalari"
+
+  - title: "AML ve Yaptırımlar"
+    description: "Uyum programlarının sınırları, denetim bulguları ve yaptırım kararları."
+    section_key: "fraud-regulasyon"
+
+  - title: "Ekonomi ve Piyasalar"
+    description: "Merkez bankaları, enerji fiyatları ve dijital varlık düzenlemeleri."
+    section_key: "ekonomi-finans"
+
 # F) BURADAN BAŞLA
 # Yeni okuyucular için küratörlü koleksiyonlar.
 collections:
   - title: "Agentic AI"
-    description: "Karar veren, işlem yapan ve kendi başına soruşturma yürüten yapay zekâ ajanları."
+    description: "Karar veren, işlem yapan ve kendi başına soruşturma yürüten yapay zeka ajanları."
     items:
       - "posts/alarmi-kim-inceliyor-agentic-ai-artik-sorusturmayi-kendisi-yurutuyor"
       - "posts/artik-odeme-dugmesine-basan-siz-degilsiniz-imfin-otonom-ai-ajanlari-raporu-ve-ba"

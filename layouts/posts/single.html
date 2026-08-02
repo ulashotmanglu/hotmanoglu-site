@@ -1,126 +1,172 @@
 {{ define "main" }}
 
+{{ $origin := .Params.content_origin | default "" | lower }}
+{{ $isBlog := eq $origin "ulas" }}
 {{ $author := partial "bits/byline.html" (dict "page" .) }}
 
-{{/* İçindekiler: show_toc açıkça verilmişse ona uy, verilmemişse uzun
-     yazılarda otomatik göster. Başlık yoksa hiç gösterme. */}}
-{{ $hasHeadings := gt (len (findRE "<li>" .TableOfContents)) 1 }}
-{{ $showToc := false }}
-{{ if isset .Params "show_toc" }}
-  {{ $showToc = and .Params.show_toc $hasHeadings }}
-{{ else }}
-  {{ $showToc = and $hasHeadings (ge .ReadingTime 7) }}
-{{ end }}
+{{/* Yalnızca h2 başlıkları — içindekiler için */}}
+{{/* Hugo, Fragments.Headings'i sentetik bir kök (Level 0) altında verir;
+     bu yüzden hem kök hem bir alt seviye taranıyor. */}}
+{{ $h2 := slice }}
+{{ with .Fragments }}{{ with .Headings }}
+  {{ range . }}
+    {{ if eq .Level 2 }}{{ $h2 = $h2 | append . }}{{ end }}
+    {{ range .Headings }}{{ if eq .Level 2 }}{{ $h2 = $h2 | append . }}{{ end }}{{ end }}
+  {{ end }}
+{{ end }}{{ end }}
+{{ $hasToc := ge (len $h2) 4 }}
 
-<article class="article{{ if $showToc }} has-toc{{ end }}">
+{{/* Okuma ilerleme çizgisi */}}
+<div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-  <!-- ── KÜNYE ──────────────────────────────────────────── -->
-  <header class="article-head wrap">
-    <div class="article-head-inner">
-      <div class="article-kicker-row">
-        {{ partial "bits/kicker.html" (dict "page" .) }}
-        {{ with .Params.series }}<span class="series-badge">{{ . }}</span>{{ end }}
-      </div>
+<article class="art{{ if $isBlog }} art-blog{{ end }}{{ if $hasToc }} art-toc{{ end }}">
 
-      <h1 class="article-title">{{ .Title }}</h1>
+  <!-- ── KÜNYE ─────────────────────────────────────────── -->
+  <header class="shell art-head">
+    {{ partial "bits/kicker.html" (dict "page" .) }}
+    <h1 class="art-h">{{ .Title }}</h1>
+    {{ with partial "bits/deck.html" (dict "page" . "max" 260) }}<p class="art-d">{{ . }}</p>{{ end }}
 
-      {{ with .Params.description }}<p class="article-deck">{{ . }}</p>{{ end }}
+    {{/* Kısaca — yalnızca front matter'da key_points varsa. Otomatik özet üretilmez. */}}
+    {{ with .Params.key_points }}
+    <div class="brief">
+      <span class="brief-lbl">Kısaca</span>
+      <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+    </div>
+    {{ end }}
 
-      <div class="article-meta">
-        <span class="article-byline">{{ $author }}</span>
-        <span class="meta-sep" aria-hidden="true">·</span>
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .Date) }}</time>
-        {{ with .Params.updated }}
-        <span class="meta-sep" aria-hidden="true">·</span>
-        <span class="article-updated">Güncellendi: {{ partial "bits/date.html" (dict "date" (time.AsTime .)) }}</span>
-        {{ end }}
-        <span class="meta-sep" aria-hidden="true">·</span>
-        <span>{{ .ReadingTime }} dk okuma</span>
-      </div>
-
-      {{ $badge := partial "bits/origin-badge.html" (dict "page" . "style" "full") }}
-      {{ with trim $badge " \n" }}<div class="article-origin">{{ . | safeHTML }}</div>{{ end }}
+    <div class="art-meta">
+      <span class="art-by">{{ $author }}</span>
+      <span aria-hidden="true">·</span>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .Date) }}</time>
+      {{ with .Params.updated }}<span aria-hidden="true">·</span><span>Güncellendi: {{ partial "bits/date.html" (dict "date" (time.AsTime .)) }}</span>{{ end }}
+      <span aria-hidden="true">·</span>
+      <span>{{ .ReadingTime }} dk okuma</span>
     </div>
   </header>
 
-  <!-- ── KAPAK ──────────────────────────────────────────── -->
+  <!-- ── KAPAK ─────────────────────────────────────────── -->
   {{ with .Params.image }}
-  <figure class="article-cover wrap">
+  <figure class="shell art-cover">
     <img src="{{ . }}" alt="{{ $.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
     {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}
 
-  <!-- ── GÖVDE ──────────────────────────────────────────── -->
-  <div class="wrap article-body">
-    {{ if $showToc }}
-    <nav class="toc" aria-labelledby="icindekiler">
-      <details open>
-        <summary id="icindekiler">İçindekiler</summary>
-        {{ .TableOfContents }}
-      </details>
+  <!-- ── GÖVDE ─────────────────────────────────────────── -->
+  <div class="shell art-body">
+
+    {{ if $hasToc }}
+    {{/* Mobil: açılır "Bu yazıda" — 1100px altında görünür */}}
+    <details class="toc-m">
+      <summary>Bu yazıda</summary>
+      <ol>{{ range $h2 }}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{ end }}</ol>
+    </details>
+
+    {{/* Masaüstü: yapışkan içindekiler rayı */}}
+    <nav class="toc-d" id="tocRail" aria-labelledby="toc-lbl">
+      <p class="toc-lbl" id="toc-lbl">Bu yazıda</p>
+      <ol>{{ range $h2 }}<li><a href="#{{ .ID }}">{{ .Title }}</a></li>{{ end }}</ol>
     </nav>
     {{ end }}
 
-    <div class="prose">
+    <div class="prose" id="articleBody">
       {{ .Content }}
     </div>
 
-    <!-- ── ETİKETLER ─────────────────────────────────── -->
     {{ with .Params.tags }}
-    <div class="article-tags">
-      <h2 class="article-tags-head">Etiketler</h2>
-      <ul>
-        {{ range . }}
-        <li><a class="tag" href="{{ printf "/tags/%s/" (urlize .) | relURL }}">{{ . }}</a></li>
-        {{ end }}
-      </ul>
+    <div class="art-tags">
+      <h2>Etiketler</h2>
+      <ul>{{ range . }}<li><a href="{{ printf "/tags/%s/" (urlize .) | relURL }}">{{ . }}</a></li>{{ end }}</ul>
     </div>
     {{ end }}
 
-    <!-- ── PAYLAŞ ────────────────────────────────────── -->
-    <div class="article-share">
-      <h2 class="article-share-head">Paylaş</h2>
-      <div class="share-links">
-        <a class="btn btn-ghost btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-ghost btn-sm" href="https://twitter.com/intent/tweet?url={{ .Permalink }}&amp;text={{ .Title }}" target="_blank" rel="noopener">X</a>
-        <button class="btn btn-ghost btn-sm" data-copy-link="{{ .Permalink }}">Bağlantıyı kopyala</button>
+    <aside class="art-author{{ if $isBlog }} art-author-lg{{ end }}">
+      <span class="aa-mark" aria-hidden="true">{{ if $isBlog }}UH{{ else }}H{{ end }}</span>
+      <div>
+        <p class="aa-name">{{ $author }}</p>
+        <p class="aa-role">
+          {{ if $isBlog }}Denetim, fraud incelemeleri ve AML/CFT üzerine çalışıyor. HOTMANOGLU'nun kurucusu ve editörü.
+          {{ else }}Bu içerik HOTMANOGLU editoryal süreciyle hazırlandı ve yayın öncesi insan onayından geçti.{{ end }}
+        </p>
+        <p class="aa-links">
+          <a href="/hakkimda/">Hakkında</a>
+          {{ with site.Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+          {{ if $isBlog }}<a href="/blog/">Diğer blog yazıları</a>{{ end }}
+        </p>
       </div>
-    </div>
+    </aside>
 
-    <!-- ── YAZAR ─────────────────────────────────────── -->
-    {{ partial "cards/card-author.html" (dict "page" .) }}
+    <div class="art-share">
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener">LinkedIn'de paylaş</a>
+      <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&amp;text={{ .Title }}" target="_blank" rel="noopener">X'te paylaş</a>
+      <button data-copy-link="{{ .Permalink }}">Bağlantıyı kopyala</button>
+    </div>
   </div>
 
-  <!-- ── ÖNCEKİ / SONRAKİ ───────────────────────────────── -->
-  <nav class="wrap article-nav" aria-label="Diğer yazılar">
-    {{ with .PrevInSection }}
-    <a class="article-nav-item" href="{{ .RelPermalink }}" rel="prev">
-      <span class="article-nav-label"><span aria-hidden="true">←</span> Önceki</span>
-      <span class="article-nav-title">{{ .Title }}</span>
-    </a>
-    {{ else }}<span></span>{{ end }}
-    {{ with .NextInSection }}
-    <a class="article-nav-item article-nav-next" href="{{ .RelPermalink }}" rel="next">
-      <span class="article-nav-label">Sonraki <span aria-hidden="true">→</span></span>
-      <span class="article-nav-title">{{ .Title }}</span>
-    </a>
-    {{ end }}
-  </nav>
-
-  <!-- ── İLGİLİ İÇERİKLER ───────────────────────────────── -->
+  <!-- ── SONRAKİ OKUMALAR — 1 büyük + 2 kompakt ────────── -->
   {{ $pool := where site.RegularPages "Section" "posts" }}
-  {{ $related := first 3 ($pool.Related .) }}
-  {{ if $related }}
-  <section class="wrap article-related" aria-labelledby="ilgili">
-    <div class="block-head block-head-tight">
-      <h2 class="block-title" id="ilgili">İlgili İçerikler</h2>
-    </div>
-    <div class="card-grid">
-      {{ range $related }}{{ partial "cards/card-standard.html" . }}{{ end }}
+  {{ $next := slice }}
+  {{ range ($pool.Related .) }}
+    {{ if and (lt (len $next) 3) (ne .Permalink $.Permalink) (not (in $next .)) }}{{ $next = $next | append . }}{{ end }}
+  {{ end }}
+  {{/* Yeterli benzer yazı yoksa aynı kategoriden tamamla */}}
+  {{ $cat := "" }}{{ with .Params.categories }}{{ range first 1 . }}{{ $cat = . }}{{ end }}{{ end }}
+  {{ if lt (len $next) 3 }}
+    {{ range $pool }}
+      {{ $pc := .Params.categories | default slice }}
+      {{ if and (lt (len $next) 3) (ne .Permalink $.Permalink) (not (in $next .)) (in $pc $cat) }}{{ $next = $next | append . }}{{ end }}
+    {{ end }}
+  {{ end }}
+  {{ if lt (len $next) 3 }}
+    {{ range $pool }}{{ if and (lt (len $next) 3) (ne .Permalink $.Permalink) (not (in $next .)) }}{{ $next = $next | append . }}{{ end }}{{ end }}
+  {{ end }}
+
+  {{ if $next }}
+  <section class="nextread" aria-labelledby="h-next">
+    <div class="shell">
+      {{ $catUrl := "" }}
+      {{ if $cat }}{{ with site.GetPage (printf "/categories/%s" (urlize $cat)) }}{{ $catUrl = .RelPermalink }}{{ end }}{{ end }}
+      {{ if $catUrl }}
+        {{ partial "mag/secbar.html" (dict "title" "Sonraki okumalar" "id" "h-next"
+            "links" (slice (dict "label" "Bu konudaki tüm yazılar" "url" $catUrl))) }}
+      {{ else }}
+        {{ partial "mag/secbar.html" (dict "title" "Sonraki okumalar" "id" "h-next"
+            "links" (slice (dict "label" "Tüm akış" "url" "/gundem/"))) }}
+      {{ end }}
+      <div class="next-grid">
+        <div class="next-lead">
+          {{ partial "mag/story.html" (dict "page" (index $next 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
+        </div>
+        <div class="next-side">
+          {{ range after 1 $next }}
+          {{ partial "mag/story.html" (dict "page" . "size" "sm" "img" true "ratio" "16x9" "dek" false) }}
+          {{ end }}
+        </div>
+      </div>
     </div>
   </section>
   {{ end }}
+
+  <!-- ── ÜRETİM NOTU — sayfanın en altı, vurgusuz ──────── -->
+  <div class="shell">
+    <details class="prodnote">
+      <summary>Üretim notu</summary>
+      <div class="prodnote-in">
+        {{ if $origin }}
+          <p>
+            {{ if eq $origin "ulas" }}Bu yazı Ulaş Hotmanoğlu tarafından kaleme alınmıştır.
+            {{ else if eq $origin "ai" }}Bu yazının taslağı yapay zeka desteğiyle hazırlanmış, yayın öncesi editoryal kontrolden ve insan onayından geçmiştir.
+            {{ else if eq $origin "hybrid" }}Bu yazı Ulaş Hotmanoğlu ve yapay zeka desteğiyle ortak üretilmiştir.
+            {{ end }}
+          </p>
+        {{ else }}
+          <p>Bu yazı için içerik üretim biçimi alanı belirtilmemiş; geriye dönük bir sınıflandırma yapılmamıştır.</p>
+        {{ end }}
+        <p>Yayın süreci: <a href="/ai-politikasi/">AI Politikası</a> · <a href="/editoryal-ilkeler/">Editoryal İlkeler</a> · <a href="/duzeltme-politikasi/">Düzeltme Politikası</a></p>
+      </div>
+    </details>
+  </div>
 
 </article>
 {{ end }}

@@ -6,10 +6,10 @@ title = "HOTMANOGLU"
 enableRobotsTXT = true
 
 [params]
-  description = "Yapay zekâ, ekonomi, teknoloji ve finansal suçların kesişiminden bağımsız içerikler. AI destekli üretim, insan onaylı yayın."
+  description = "Teknoloji, ekonomi ve finansal suçlar üzerine bağımsız Türkçe yayın."
   author = "Ulaş Hotmanoğlu"
-  tagline = "Yapay zekâ · Ekonomi · Teknoloji · Finansal suç"
-  positioning = "AI destekli bağımsız içerik ve analiz platformu"
+  tagline = "Bağımsız dijital yayın"
+  brandline = "Teknoloji, ekonomi ve finansal suçlar üzerine."
   linkedin = "https://www.linkedin.com/in/ulas-hotmanoglu-ab039b16b/"
   twitter = ""
   email = ""

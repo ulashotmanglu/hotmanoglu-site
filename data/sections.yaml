@@ -18,18 +18,17 @@ sections:
     nav: true
     mode: all
     tagline: "Tüm akış"
-    description: "Platformdaki bütün içerikler, en yeniden eskiye. Yapay zekâ, ekonomi, teknoloji ve finansal suç gündemi tek akışta."
+    description: "Platformdaki bütün içerikler, en yeniden eskiye. Yapay zeka, ekonomi, teknoloji ve finansal suç gündemi tek akışta."
 
   - key: yapay-zeka
-    title: "Yapay Zekâ"
+    title: "Yapay Zeka"
     url: "/yapay-zeka/"
     nav: true
     tagline: "Modeller, ajanlar, riskler"
-    description: "Yapay zekâ sistemlerinin gerçek dünyadaki etkisi: otonom ajanlar, model güvenliği, AI destekli saldırılar ve denetim tarafındaki karşılığı."
+    description: "Yapay zeka sistemlerinin gerçek dünyadaki etkisi: otonom ajanlar, model güvenliği, AI destekli saldırılar ve denetim tarafındaki karşılığı."
     categories: []
     tags:
       - "Yapay Zeka"
-      - "Yapay Zekâ"
       - "AI"
       - "AI Agent"
       - "Agentic AI"
@@ -44,6 +43,7 @@ sections:
 
   - key: ekonomi-finans
     title: "Ekonomi & Finans"
+    nav_title: "Ekonomi"
     url: "/ekonomi-finans/"
     nav: true
     tagline: "Piyasalar ve para"
@@ -75,6 +75,7 @@ sections:
 
   - key: fraud-regulasyon
     title: "Fraud & Regülasyon"
+    nav_title: "Fraud & Regülasyon"
     url: "/fraud-regulasyon/"
     nav: true
     tagline: "Suç, uyum, yaptırım"

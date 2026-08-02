@@ -2,232 +2,307 @@
 
 {{ $posts := where site.RegularPages "Section" "posts" }}
 {{ $hp := site.Data.homepage | default dict }}
+{{ $seen := slice }}
 
-{{/* ── B) MANŞET SEÇİMİ ──────────────────────────────────────
-     data/homepage.yaml'dan gelir; eksikse en yeni yazılarla doldurulur. */}}
-{{ $lead := false }}
-{{ $secondary := slice }}
-{{ with $hp.hero }}
-  {{ with .lead }}{{ with site.GetPage . }}{{ $lead = . }}{{ end }}{{ end }}
-  {{ $secondary = partial "query/resolve-pages.html" (dict "paths" .secondary) }}
-{{ end }}
-{{ if not $lead }}{{ with first 1 $posts }}{{ $lead = index . 0 }}{{ end }}{{ end }}
+{{/* ── HERO ────────────────────────────────────────────────── */}}
+{{ $hero := false }}
+{{ with $hp.hero }}{{ with .lead }}{{ with site.GetPage . }}{{ $hero = . }}{{ end }}{{ end }}{{ end }}
+{{ if not $hero }}{{ with first 1 $posts }}{{ $hero = index . 0 }}{{ end }}{{ end }}
+{{ if $hero }}{{ $seen = $seen | append $hero }}{{ end }}
 
-{{/* Manşette kullanılanları topla — alt akışta tekrar etmemek için. */}}
-{{ $used := slice }}
-{{ if $lead }}{{ $used = $used | append $lead }}{{ end }}
-{{ range $secondary }}{{ $used = $used | append . }}{{ end }}
+{{ if $hero }}
+<section class="hero" aria-label="Kapak">
+  <div class="shell hero-in">
+    <div class="hero-fig">
+      {{ with $hero.Params.image }}
+      <img src="{{ . }}" alt="{{ $hero.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
+      {{ end }}
+    </div>
+    <div class="hero-txt">
+      {{ partial "bits/kicker.html" (dict "page" $hero) }}
+      <h1 class="hero-h"><a href="{{ $hero.RelPermalink }}">{{ $hero.Title }}</a></h1>
+      {{ with partial "bits/deck.html" (dict "page" $hero "max" 190) }}<p class="hero-d">{{ . }}</p>{{ end }}
 
-{{ if lt (len $secondary) 2 }}
-  {{ range $posts }}
-    {{ if and (lt (len $secondary) 2) (not (in $used .)) }}
-      {{ $secondary = $secondary | append . }}
-      {{ $used = $used | append . }}
-    {{ end }}
-  {{ end }}
-{{ end }}
+      {{/* Bu dosyada — yazının kendi etiketlerinden ilk üçü */}}
+      {{ with $hero.Params.tags }}
+      <div class="hero-in-this">
+        <span class="hit-lbl">Bu dosyada</span>
+        <span class="hit-items">
+          {{ range $i, $t := first 3 . }}{{ if $i }}<i class="hit-sep" aria-hidden="true"></i>{{ end }}{{ $t }}{{ end }}
+        </span>
+      </div>
+      {{ end }}
 
-
-<!-- ══ A) PLATFORM TANIMI ═══════════════════════════════════ -->
-<section class="home-intro">
-  <div class="wrap">
-    <h1 class="home-intro-line">
-      Yapay zekâ, ekonomi, teknoloji ve finansal suçların kesişiminden
-      <em>bağımsız içerikler.</em>
-    </h1>
+      <p class="hero-m">
+        <time datetime="{{ $hero.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $hero.Date) }}</time>
+        <span aria-hidden="true">·</span>{{ $hero.ReadingTime }} dk okuma
+      </p>
+      <a class="hero-cta" href="{{ $hero.RelPermalink }}">Yazıyı oku<i aria-hidden="true">→</i></a>
+    </div>
   </div>
 </section>
-
-
-<!-- ══ B) MANŞET ════════════════════════════════════════════ -->
-{{ if $lead }}
-<section class="home-lead wrap" aria-label="Öne çıkanlar">
-  <div class="lead-main">
-    {{ partial "cards/card-hero.html" $lead }}
-  </div>
-  {{ if $secondary }}
-  <div class="lead-side">
-    {{ range $secondary }}
-      {{ partial "cards/card-standard.html" . }}
-    {{ end }}
-  </div>
-  {{ end }}
-</section>
 {{ end }}
 
 
-<!-- ══ C) SON GELİŞMELER ════════════════════════════════════ -->
+{{/* ── A) SON GELİŞMELER ───────────────────────────────────── */}}
 {{ $latest := slice }}
-{{ range $posts }}
-  {{ if and (lt (len $latest) 8) (not (in $used .)) }}{{ $latest = $latest | append . }}{{ end }}
-{{ end }}
+{{ range $posts }}{{ if and (lt (len $latest) 4) (not (in $seen .)) }}{{ $latest = $latest | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}
 {{ if $latest }}
-<section class="home-latest wrap" aria-labelledby="son-gelismeler">
-  <div class="block-head block-head-tight">
-    <h2 class="block-title" id="son-gelismeler">Son Gelişmeler</h2>
-    <a class="block-all" href="/gundem/">Tüm akış <span aria-hidden="true">→</span></a>
-  </div>
-  <ul class="latest-list">
-    {{ range $latest }}{{ partial "cards/row-latest.html" . }}{{ end }}
-  </ul>
-</section>
-{{ end }}
-
-
-<!-- ══ D) BÖLÜMLER ══════════════════════════════════════════ -->
-{{/* Bölümler aynı yazıyı paylaşabildiği için ana sayfada tekrarı azaltıyoruz:
-     önce daha önce gösterilmemiş içerikler seçilir. Bir bölümde yeterli taze
-     içerik yoksa blok boş kalmasın diye kalanlarla tamamlanır. */}}
-{{ $shown := $used }}
-<div class="wrap home-blocks">
-  {{ range $key := slice "yapay-zeka" "ekonomi-finans" "fraud-regulasyon" "vaka-dosyalari" "teknoloji" }}
-    {{ $all := partial "query/section-pages.html" (dict "key" $key) }}
-    {{ $pick := slice }}
-    {{ range $all }}
-      {{ if and (lt (len $pick) 4) (not (in $shown .)) }}{{ $pick = $pick | append . }}{{ end }}
-    {{ end }}
-    {{ if lt (len $pick) 4 }}
-      {{ range $all }}
-        {{ if and (lt (len $pick) 4) (not (in $pick .)) }}{{ $pick = $pick | append . }}{{ end }}
-      {{ end }}
-    {{ end }}
-    {{ range $pick }}{{ if not (in $shown .) }}{{ $shown = $shown | append . }}{{ end }}{{ end }}
-    {{ partial "blocks/section-block.html" (dict "key" $key "pages" $pick) }}
-  {{ end }}
-</div>
-
-
-<!-- ══ E) ULAŞ'TAN ══════════════════════════════════════════ -->
-{{ $ulas := where $posts "Params.content_origin" "ulas" }}
-{{ if not $ulas }}
-  {{ $ulas = partial "query/resolve-pages.html" (dict "paths" $hp.ulas_picks) }}
-{{ end }}
-<section class="home-personal" aria-labelledby="ulastan">
-  <div class="wrap personal-inner">
-    <div class="personal-head">
-      <span class="personal-eyebrow">Kişisel</span>
-      <h2 class="personal-title" id="ulastan">Ulaş'tan</h2>
-      <p class="personal-desc">Denetim, fraud, kariyer, teknoloji ve değişen iş dünyası üzerine kişisel yazılar.</p>
-      <a class="personal-link" href="/ulastan/">Bölüme git <span aria-hidden="true">→</span></a>
-    </div>
-    <div class="personal-body">
-      {{ if $ulas }}
-        <ul class="personal-list">
-          {{ range first 3 $ulas }}<li>{{ partial "cards/card-compact.html" . }}</li>{{ end }}
-        </ul>
-      {{ else }}
-        <div class="empty-state">
-          <p class="empty-title">Bu bölüm hazırlanıyor.</p>
-          <p class="empty-text">
-            Ulaş Hotmanoğlu'nun kendi kaleminden yazılar yakında burada yayımlanacak.
-            Platformun editoryal yaklaşımını bu arada
-            <a href="/hakkimda/">Hakkında</a> sayfasından okuyabilirsiniz.
-          </p>
+<section class="latest" aria-labelledby="h-latest">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Son gelişmeler" "id" "h-latest"
+        "links" (slice (dict "label" "Tüm akış" "url" "/gundem/"))) }}
+    <ol class="lt-list">
+      {{ range $i, $p := $latest }}
+      <li class="lt-item">
+        <span class="lt-n">{{ printf "%02d" (add $i 1) }}</span>
+        <div>
+          <span class="lt-k">{{ partial "bits/kicker.html" (dict "page" $p) }}</span>
+          <h3 class="lt-h"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+          <p class="lt-m"><time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time></p>
         </div>
+      </li>
+      {{ end }}
+    </ol>
+    <a class="lt-more" href="/gundem/">Tüm akış<i aria-hidden="true">→</i></a>
+  </div>
+</section>
+{{ end }}
+
+
+{{/* ── B) ÖNE ÇIKANLAR — 1 büyük + 3 satır (biri küçük görselli) ── */}}
+{{ $feat := slice }}
+{{ with $hp.hero }}{{ range partial "query/resolve-pages.html" (dict "paths" .secondary) }}{{ if not (in $seen .) }}{{ $feat = $feat | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}{{ end }}
+{{ range $posts }}{{ if and (lt (len $feat) 4) (not (in $seen .)) }}{{ $feat = $feat | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}
+{{ if ge (len $feat) 2 }}
+<section class="feat" aria-labelledby="h-feat">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Öne çıkanlar" "id" "h-feat") }}
+    <div class="feat-grid">
+      <div class="feat-lead">
+        {{ partial "mag/story.html" (dict "page" (index $feat 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
+      </div>
+      <ul class="feat-side">
+        {{ range $i, $p := after 1 $feat }}
+        {{/* İkinci satır küçük yatay görsel taşır; üç satır aynı görünmesin */}}
+        <li class="{{ if eq $i 1 }}fs-media{{ end }}">
+          {{ if eq $i 1 }}
+            {{ with $p.Params.image }}<span class="fs-thumb"><img src="{{ . }}" alt="" loading="lazy" decoding="async"></span>{{ end }}
+          {{ end }}
+          <div>
+            {{ partial "bits/kicker.html" (dict "page" $p) }}
+            <h3 class="fs-h"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+            {{ if ne $i 1 }}{{ with partial "bits/deck.html" (dict "page" $p "max" 120) }}<p class="fs-d">{{ . }}</p>{{ end }}{{ end }}
+            <p class="lt-m"><time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time><span class="m-sep" aria-hidden="true">·</span><span class="m-rt">{{ $p.ReadingTime }} dk</span></p>
+          </div>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+{{/* ── C) VAKA DOSYALARI — yumuşak koyu lacivert, 1 büyük + 1 kompakt ── */}}
+{{ $case := slice }}
+{{ range partial "query/section-pages.html" (dict "key" "vaka-dosyalari") }}
+  {{ if and (lt (len $case) 2) (not (in $seen .)) (.Params.image) }}{{ $case = $case | append . }}{{ $seen = $seen | append . }}{{ end }}
+{{ end }}
+{{ if $case }}
+<section class="cases" aria-labelledby="h-case">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Vaka dosyaları" "id" "h-case" "inv" true
+        "note" "Finansal suçların, sistem açıklarının ve insan kararlarının gerçek hikayeleri."
+        "links" (slice (dict "label" "Tümü" "url" "/vaka-dosyalari/"))) }}
+    <div class="case-grid">
+      {{ range $i, $p := $case }}
+      <article class="case {{ if eq $i 0 }}case-lead{{ else }}case-sub{{ end }}">
+        <a class="case-link" href="{{ $p.RelPermalink }}">
+          <div class="case-img"><img src="{{ $p.Params.image }}" alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>
+          <div class="case-body">
+            <span class="case-k">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
+            <h3 class="case-h">{{ $p.Title }}</h3>
+            {{ if eq $i 0 }}{{ with partial "bits/deck.html" (dict "page" $p "max" 160) }}<p class="case-d">{{ . }}</p>{{ end }}{{ end }}
+            <span class="case-m">{{ partial "bits/date.html" (dict "date" $p.Date) }} · {{ $p.ReadingTime }} dk</span>
+          </div>
+        </a>
+      </article>
       {{ end }}
     </div>
   </div>
 </section>
+{{ end }}
 
 
-<!-- ══ F) BURADAN BAŞLA ═════════════════════════════════════ -->
-{{ with $hp.collections }}
-<section class="home-start wrap" aria-labelledby="buradan-basla">
-  <div class="block-head block-head-tight">
-    <h2 class="block-title" id="buradan-basla">Buradan Başla</h2>
-    <p class="block-tagline">Platformda yeniyseniz, konuya bu seçkilerden girmek iyi bir başlangıç.</p>
-  </div>
-  <div class="start-grid">
-    {{ range . }}
-      {{ $items := partial "query/resolve-pages.html" (dict "paths" .items) }}
-      {{ if $items }}
-      <div class="start-col">
-        <h3 class="start-title">{{ .title }}</h3>
-        {{ with .description }}<p class="start-desc">{{ . }}</p>{{ end }}
-        <ol class="start-list">
-          {{ range $items }}
-          <li>
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-            <span class="start-meta">{{ .ReadingTime }} dk</span>
-          </li>
-          {{ end }}
-        </ol>
+{{/* ── D) YAPAY ZEKA VE TEKNOLOJİ — sol büyük, sağ 2 kompakt, altta 2 tipografik ── */}}
+{{ $tech := slice }}
+{{ range partial "query/section-pages.html" (dict "key" "yapay-zeka") }}
+  {{ if and (lt (len $tech) 3) (not (in $seen .)) }}{{ $tech = $tech | append . }}{{ $seen = $seen | append . }}{{ end }}
+{{ end }}
+{{ range partial "query/section-pages.html" (dict "key" "teknoloji") }}
+  {{ if and (lt (len $tech) 5) (not (in $seen .)) }}{{ $tech = $tech | append . }}{{ $seen = $seen | append . }}{{ end }}
+{{ end }}
+{{ if ge (len $tech) 3 }}
+<section class="tech" aria-labelledby="h-tech">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Yapay zeka ve teknoloji" "id" "h-tech"
+        "links" (slice (dict "label" "Yapay Zeka" "url" "/yapay-zeka/") (dict "label" "Teknoloji" "url" "/teknoloji/"))) }}
+    <div class="tech-grid">
+      <div class="tech-lead">
+        {{ partial "mag/story.html" (dict "page" (index $tech 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
       </div>
+      <div class="tech-side">
+        {{ range first 2 (after 1 $tech) }}
+        {{ partial "mag/story.html" (dict "page" . "size" "sm" "img" true "ratio" "16x9" "dek" false) }}
+        {{ end }}
+      </div>
+    </div>
+    {{ with after 3 $tech }}
+    <ul class="tech-links">
+      {{ range . }}
+      <li><a href="{{ .RelPermalink }}">
+        <span class="txl-c">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
+        <span class="txl-h">{{ .Title }}</span>
+        <i aria-hidden="true">→</i>
+      </a></li>
       {{ end }}
+    </ul>
     {{ end }}
   </div>
 </section>
 {{ end }}
 
 
-<!-- ══ G) YAYIN SÜRECİ ══════════════════════════════════════ -->
-<section class="home-process" aria-labelledby="nasil-hazirlaniyor">
-  <div class="wrap process-inner">
-    <div class="process-head">
-      <h2 class="process-title" id="nasil-hazirlaniyor">Bu yayın nasıl hazırlanıyor?</h2>
-      <p class="process-lead">
-        HOTMANOGLU, yapay zekâ destekli bir üretim hattı ile çalışır; ancak hiçbir içerik
-        insan onayından geçmeden yayımlanmaz. Süreç kısaca şöyle işler:
-      </p>
+{{/* ── E) EKONOMİ VE FRAUD — asimetrik ─────────────────────── */}}
+{{ $eko := slice }}
+{{ range partial "query/section-pages.html" (dict "key" "ekonomi-finans") }}
+  {{ if and (lt (len $eko) 4) (not (in $seen .)) }}{{ $eko = $eko | append . }}{{ $seen = $seen | append . }}{{ end }}
+{{ end }}
+{{ $fra := slice }}
+{{ range partial "query/section-pages.html" (dict "key" "fraud-regulasyon") }}
+  {{ if and (lt (len $fra) 3) (not (in $seen .)) (.Params.image) }}{{ $fra = $fra | append . }}{{ $seen = $seen | append . }}{{ end }}
+{{ end }}
+{{ if and $eko $fra }}
+<section class="duo" aria-labelledby="h-duo">
+  <div class="shell duo-in">
+    <h2 class="vh" id="h-duo">Ekonomi ve Fraud</h2>
+
+    {{/* Ekonomi — görselsiz, başlık odaklı kompakt kolon */}}
+    <div class="duo-eko">
+      {{ partial "mag/secbar.html" (dict "title" "Ekonomi" "id" "h-eko"
+          "links" (slice (dict "label" "Tümü" "url" "/ekonomi-finans/"))) }}
+      <ol class="eko-list">
+        {{ range $i, $p := $eko }}
+        <li>
+          <a href="{{ $p.RelPermalink }}">
+            <span class="ek-n">{{ printf "%02d" (add $i 1) }}</span>
+            <span class="ek-b">
+              <span class="ek-h">{{ $p.Title }}</span>
+              <span class="ek-m">{{ partial "bits/date.html" (dict "date" $p.Date) }}<span class="m-rt"> · {{ $p.ReadingTime }} dk</span></span>
+            </span>
+          </a>
+        </li>
+        {{ end }}
+      </ol>
     </div>
-    <ol class="process-steps">
+
+    {{/* Fraud — büyük vaka görseli + iki başlık */}}
+    <div class="duo-fra">
+      {{ partial "mag/secbar.html" (dict "title" "Fraud & Regülasyon" "id" "h-fra"
+          "links" (slice (dict "label" "Tümü" "url" "/fraud-regulasyon/"))) }}
+      {{ partial "mag/story.html" (dict "page" (index $fra 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
+      {{ with after 1 $fra }}
+      <ul class="fra-list">
+        {{ range . }}
+        <li><a href="{{ .RelPermalink }}">
+          <span class="fr-h">{{ .Title }}</span>
+          <span class="fr-m">{{ partial "bits/date.html" (dict "date" .Date) }}<span class="m-rt"> · {{ .ReadingTime }} dk</span></span>
+        </a></li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+{{/* ── KEŞFET — konu girişleri (yazı kartı değil) ──────────── */}}
+{{ with $hp.discover }}
+{{ $secs := slice }}
+{{ with site.Data.sections }}{{ with .sections }}{{ $secs = . }}{{ end }}{{ end }}
+<section class="discover" aria-labelledby="h-disc">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Keşfet" "id" "h-disc") }}
+    <ul class="disc-grid">
+      {{ range . }}
+      {{ $m := where $secs "key" .section_key }}
+      {{ if $m }}
+        {{ $sec := index $m 0 }}
+        {{ $n := len (partial "query/section-pages.html" (dict "key" .section_key)) }}
+        <li class="disc">
+          <a href="{{ $sec.url }}">
+            <span class="disc-h">{{ .title }}</span>
+            <span class="disc-d">{{ .description }}</span>
+            <span class="disc-f"><span class="disc-n">{{ $n }} içerik</span><i aria-hidden="true">→</i></span>
+          </a>
+        </li>
+      {{ end }}
+      {{ end }}
+    </ul>
+    <a class="sec-more" href="/arsiv/">Tümünü gör<i aria-hidden="true">→</i></a>
+  </div>
+</section>
+{{ end }}
+
+
+{{/* ── F) BLOG — içerik yoksa bölüm hiç basılmaz ───────────── */}}
+{{ $blog := where $posts "Params.content_origin" "ulas" }}
+{{ if $blog }}
+<section class="blog" aria-labelledby="h-blog">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Blog" "id" "h-blog"
+        "note" "Ulaş Hotmanoğlu'nun kişisel yazıları ve değerlendirmeleri."
+        "links" (slice (dict "label" "Tümü" "url" "/blog/"))) }}
+    <div class="blog-grid">
+      {{ range first 3 $blog }}{{ partial "mag/story.html" (dict "page" . "size" "md" "img" true "ratio" "4x3" "dek" true) }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+
+
+{{/* ── G) ARŞİVDEN — 4 satır, masaüstünde iki kolon ────────── */}}
+{{ $arch := slice }}
+{{ with $hp.collections }}
+  {{ range . }}
+    {{ range partial "query/resolve-pages.html" (dict "paths" .items) }}
+      {{ if and (lt (len $arch) 4) (not (in $seen .)) (not (in $arch .)) }}{{ $arch = $arch | append . }}{{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ range $posts }}{{ if and (lt (len $arch) 4) (not (in $seen .)) (not (in $arch .)) }}{{ $arch = $arch | append . }}{{ end }}{{ end }}
+{{ if $arch }}
+<section class="arch" aria-labelledby="h-arch">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Arşivden" "id" "h-arch"
+        "links" (slice (dict "label" "Tüm arşiv" "url" "/arsiv/"))) }}
+    <ol class="arch-list">
+      {{ range $i, $p := $arch }}
       <li>
-        <span class="process-num">01</span>
-        <h3>Araştırma</h3>
-        <p>Birincil kaynaklar taranır: düzenleyici duyuruları, mahkeme kararları, denetim raporları ve kurum açıklamaları.</p>
+        <a href="{{ $p.RelPermalink }}">
+          <span class="ar-n">{{ printf "%02d" (add $i 1) }}</span>
+          <span class="ar-h">{{ $p.Title }}</span>
+          <span class="ar-c">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
+          <span class="ar-m">{{ $p.Date.Format "2006" }}</span>
+        </a>
       </li>
-      <li>
-        <span class="process-num">02</span>
-        <h3>Yazım</h3>
-        <p>Bulgular yapay zekâ desteğiyle taslağa dönüştürülür; anlatı, bağlam ve çerçeve editoryal olarak belirlenir.</p>
-      </li>
-      <li>
-        <span class="process-num">03</span>
-        <h3>Doğrulama</h3>
-        <p>Rakamlar, tarihler, kurum adları ve iddialar kaynağına geri götürülerek kontrol edilir.</p>
-      </li>
-      <li>
-        <span class="process-num">04</span>
-        <h3>İnsan onayı</h3>
-        <p>Her yazı yayın öncesi Ulaş Hotmanoğlu tarafından okunur ve onaylanır. Onaylanmayan içerik yayımlanmaz.</p>
-      </li>
-      <li>
-        <span class="process-num">05</span>
-        <h3>Yayın ve düzeltme</h3>
-        <p>Yayın sonrası tespit edilen hatalar düzeltilir ve düzeltme yazının içinde görünür biçimde belirtilir.</p>
-      </li>
+      {{ end }}
     </ol>
-    <p class="process-more">
-      Ayrıntılar: <a href="/ai-politikasi/">AI Kullanım Politikası</a> ·
-      <a href="/editoryal-ilkeler/">Editoryal İlkeler</a> ·
-      <a href="/duzeltme-politikasi/">Düzeltme Politikası</a>
-    </p>
+    <a class="sec-more" href="/arsiv/">Tüm arşiv<i aria-hidden="true">→</i></a>
   </div>
 </section>
-
-
-<!-- ══ H) BÜLTEN ════════════════════════════════════════════ -->
-<section class="home-newsletter" aria-labelledby="bulten">
-  <div class="wrap newsletter-inner">
-    <div class="newsletter-text">
-      <span class="newsletter-eyebrow">Bülten</span>
-      <h2 class="newsletter-title" id="bulten">Haftanın İzleri</h2>
-      <p class="newsletter-desc">Haftanın önemli AI, ekonomi, teknoloji ve regülasyon gelişmeleri.</p>
-    </div>
-    <div class="newsletter-action">
-      <p class="newsletter-status">
-        Bülten altyapısı hazırlanıyor. Açıldığında duyurulacak.
-      </p>
-      <div class="newsletter-links">
-        {{ with site.Home.OutputFormats.Get "rss" }}
-        <a class="btn btn-primary" href="{{ .RelPermalink }}">RSS ile takip et</a>
-        {{ end }}
-        {{ with site.Params.linkedin }}
-        <a class="btn btn-ghost" href="{{ . }}" target="_blank" rel="noopener">LinkedIn'den takip et</a>
-        {{ end }}
-      </div>
-    </div>
-  </div>
-</section>
+{{ end }}
 
 {{ end }}

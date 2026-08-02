@@ -1,0 +1,16 @@
+{{/*
+  Güvenli özet metni döndürür.
+
+  Publisher bazı yazılarda description alanına özet yerine tarih parçası
+  yazmış ("9 Şub", "2 Mar" — 62 yazının 14'ünde). Bu durumda ve alan çok
+  kısaysa yazının kendi özetine düşülür, böylece arayüzde anlamsız metin
+  görünmez.
+*/}}
+{{ $p := .page }}
+{{ $max := .max | default 190 }}
+{{ $d := trim ($p.Params.description | default "") " " }}
+{{ if or (lt (len $d) 40) (findRE `^\d{1,2}\s+\S{3,10}\.?$` $d) }}
+  {{ $d = $p.Summary | plainify | htmlUnescape }}
+{{ end }}
+{{ $d = trim $d " \n" | truncate $max }}
+{{ return $d }}

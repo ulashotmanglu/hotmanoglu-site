@@ -1,0 +1,12 @@
+{{/*
+  Bölüm başlığı — marka imzası olarak kısa kobalt çubuk taşır.
+  Bu motif yalnızca bölüm başlangıçlarında kullanılır, kartlarda değil.
+
+  dict: title, id, note (ops.), links (ops. slice of dict "label" "url"), inv (ops.)
+*/}}
+<div class="sec-bar{{ if .inv }} sec-bar-inv{{ end }}">
+  <span class="sec-mark" aria-hidden="true"></span>
+  <h2 class="sec-t" id="{{ .id }}">{{ .title }}</h2>
+  {{ range .links }}<a class="sec-a" href="{{ .url }}">{{ .label }}<i aria-hidden="true">→</i></a>{{ end }}
+</div>
+{{ with .note }}<p class="sec-note">{{ . }}</p>{{ end }}

@@ -1,0 +1,39 @@
+{{/*
+  Dergi hikaye birimi.
+
+  dict:
+    page   — sayfa
+    size   — "lg" | "md" | "sm"  (tipografik ölçek)
+    img    — true/false (görsel gösterilsin mi)
+    ratio  — "16x9" | "4x3" | "3x2" | "1x1"
+    dek    — true/false (özet gösterilsin mi)
+    eager  — true ise görsel öncelikli yüklenir (hero)
+*/}}
+{{ $p := .page }}
+{{ $size := .size | default "md" }}
+{{ $img := .img | default false }}
+{{ $ratio := .ratio | default "16x9" }}
+{{ $dek := .dek | default false }}
+{{ $eager := .eager | default false }}
+{{ $src := $p.Params.image | default "" }}
+
+<article class="st st-{{ $size }}">
+  {{ if and $img $src }}
+  <div class="st-img ar-{{ $ratio }}">
+    <img src="{{ $src }}" alt="{{ $p.Params.image_alt | default "" }}"
+         {{ if $eager }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
+  </div>
+  {{ end }}
+  <div class="st-body">
+    {{ partial "bits/kicker.html" (dict "page" $p) }}
+    <h3 class="st-h"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+    {{ if $dek }}
+      {{ $d := partial "bits/deck.html" (dict "page" $p "max" (cond (eq $size "lg") 200 130)) }}
+      {{ with $d }}<p class="st-d">{{ . }}</p>{{ end }}
+    {{ end }}
+    <p class="st-m">
+      <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time>
+      <span class="m-sep" aria-hidden="true">·</span><span class="m-rt">{{ $p.ReadingTime }} dk</span>
+    </p>
+  </div>
+</article>

@@ -1,0 +1,43 @@
+{{ define "main" }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $blog := where $posts "Params.content_origin" "ulas" }}
+
+<header class="shell blog-head">
+  <h1 class="blog-t">Blog</h1>
+  <p class="blog-lede">Ulaş Hotmanoğlu'nun kişisel yazıları ve değerlendirmeleri.</p>
+  <div class="blog-author">
+    <span class="aa-mark" aria-hidden="true">UH</span>
+    <div>
+      <p class="aa-name">{{ site.Params.author }}</p>
+      <p class="aa-role">Denetim, fraud incelemeleri ve AML/CFT üzerine çalışıyor. Bu bölümde kurumsal analiz dilinden çıkıp kendi gözlemlerini yazıyor.</p>
+      <p class="aa-links">
+        <a href="/hakkimda/">Hakkında</a>
+        {{ with site.Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+      </p>
+    </div>
+  </div>
+</header>
+
+<div class="shell blog-body">
+  {{ if $blog }}
+    <div class="blog-list">
+      {{ range $blog }}
+      <article class="bl-item">
+        {{ with .Params.image }}<div class="bl-img"><img src="{{ . }}" alt="{{ $.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>{{ end }}
+        <div>
+          {{ partial "bits/kicker.html" (dict "page" .) }}
+          <h2 class="bl-h"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          {{ with partial "bits/deck.html" (dict "page" . "max" 200) }}<p class="bl-d">{{ . }}</p>{{ end }}
+          <p class="bl-m"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .Date) }}</time><span aria-hidden="true">·</span>{{ .ReadingTime }} dk</p>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  {{ else }}
+    <div class="blog-empty blog-empty-lg">
+      <p class="be-t">Bu bölüm hazırlanıyor.</p>
+      <p>Denetim, fraud, kariyer ve değişen iş dünyası üzerine kişisel yazılar yakında burada yayımlanacak. Bu arada platformun nasıl çalıştığını <a href="/hakkimda/">Hakkında</a> sayfasından okuyabilir, güncel içerikler için <a href="/gundem/">Gündem</a> akışına bakabilirsiniz.</p>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

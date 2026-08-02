@@ -34,13 +34,13 @@ Aktarım ile yorum ayrı tutulur. Bir değerlendirme yapılıyorsa bunun yazarı
 
 ## Bağımsızlık
 
-- İçerikler herhangi bir kurumun resmî görüşünü temsil etmez.
+- İçerikler herhangi bir kurumun resmi görüşünü temsil etmez.
 - Sponsorlu içerik yayımlanmaz; bu durum değişirse açıkça etiketlenir.
 - Yazılarda geçen kurum ve kişilerle ticari bir ilişki varsa belirtilir.
 
-## Yapay zekâ
+## Yapay zeka
 
-İçeriklerin bir bölümü yapay zekâ desteğiyle hazırlanır. Kullanım kapsamı [AI Kullanım Politikası](/ai-politikasi/) sayfasında ayrıntılı olarak açıklanmıştır. Hiçbir içerik insan onayı olmadan yayımlanmaz.
+İçeriklerin bir bölümü yapay zeka desteğiyle hazırlanır. Kullanım kapsamı [AI Kullanım Politikası](/ai-politikasi/) sayfasında ayrıntılı olarak açıklanmıştır. Hiçbir içerik insan onayı olmadan yayımlanmaz.
 
 ## Sınırlar
 
