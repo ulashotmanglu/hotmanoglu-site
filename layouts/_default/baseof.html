@@ -24,7 +24,10 @@
 
   {{ $title := "" }}
   {{ if .IsHome }}
-    {{ $title = printf "%s — %s" site.Title "Bağımsız dijital yayın" }}
+    {{ $title = printf "%s | %s" site.Title "Bağımsız dijital yayın" }}
+  {{ else if eq .Kind "404" }}
+    {{/* Hugo'nun varsayılan "404 Page not found" başlığı yerine Türkçe karşılığı */}}
+    {{ $title = printf "Sayfa bulunamadı | %s" site.Title }}
   {{ else }}
     {{ $title = printf "%s | %s" .Title site.Title }}
   {{ end }}
@@ -48,7 +51,7 @@
   {{ with .Params.image }}{{ if ne . "" }}{{ $img = . | absURL }}{{ end }}{{ end }}
 
   <!-- Open Graph -->
-  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} — Bağımsız dijital yayın{{ else }}{{ .Title }}{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} | Bağımsız dijital yayın{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
   <meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">

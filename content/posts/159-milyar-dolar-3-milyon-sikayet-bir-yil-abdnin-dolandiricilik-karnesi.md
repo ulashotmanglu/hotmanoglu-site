@@ -47,7 +47,7 @@ Ama en yüksek toplam kayıp 60 yaş üstü grupta. FBI'ın verilerine göre bu 
 
 İlk temas noktası çoğunlukla sosyal medya. FTC'ye göre 2025'te sosyal medya üzerinden başlayan dolandırıcılıklarda 2 milyar doların üzerinde kayıp bildirildi. Kısa mesajlar ise en sık kullanılan iletişim yöntemi.
 
-En yaygın dolandırıcılık türü ise impersonation — yani kimliğe bürünme. FBI, FTC, IRS, polis, banka, torun, sevgili. Birisi olduğundan başka biri gibi davranıyor ve güven üzerinden para koparmaya çalışıyor. Bu kategoride 3.5 milyar doların üzerinde kayıp bildirildi.
+En yaygın dolandırıcılık türü ise impersonation, yani kimliğe bürünme. FBI, FTC, IRS, polis, banka, torun, sevgili. Birisi olduğundan başka biri gibi davranıyor ve güven üzerinden para koparmaya çalışıyor. Bu kategoride 3.5 milyar doların üzerinde kayıp bildirildi.
 
 
 ## Ödeme Yöntemleri
@@ -61,7 +61,7 @@ FBI 2024'te Operation Level Up'ı başlattı. Bu operasyonla yatırım dolandır
 
 ## Bankaların Rolü
 
-Bu rakamlar bankalar için de uyandırma çağrısı. Çünkü paranın büyük kısmı banka transferleri üzerinden gidiyor. Dolandırıcılık mağduru olan müşteri parayı kendi isteğiyle gönderiyor (authorized push payment — APP fraud). Bu, bankaların geleneksel fraud tespit mekanizmalarının dışında kalıyor.
+Bu rakamlar bankalar için de uyandırma çağrısı. Çünkü paranın büyük kısmı banka transferleri üzerinden gidiyor. Dolandırıcılık mağduru olan müşteri parayı kendi isteğiyle gönderiyor (authorized push payment, APP fraud). Bu, bankaların geleneksel fraud tespit mekanizmalarının dışında kalıyor.
 
 Banka açısından müşteri oturum açmış, kimlik doğrulaması geçmiş, transfer talimatını kendi vermiş. Sistem açısından her şey normal. Ama müşteri dolandırılıyor.
 

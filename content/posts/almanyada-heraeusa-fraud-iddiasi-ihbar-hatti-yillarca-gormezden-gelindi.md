@@ -60,7 +60,7 @@ Fraud risk management
 
 Whistleblower mekanizmaları
 
-İç denetim – uyum ilişkisi
+İç denetim ve uyum ilişkisi
 
 Kurumsal yönetişim ve etik kültür
 

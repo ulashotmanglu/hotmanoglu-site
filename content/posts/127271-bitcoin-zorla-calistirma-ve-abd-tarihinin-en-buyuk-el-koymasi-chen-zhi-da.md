@@ -19,7 +19,7 @@ Ama bu vakanın asıl hikayesi rakamlardan çok daha karanlık. Çünkü bu sade
 
 Prince Holding Group, dışarıdan bakıldığında Kamboçya'nın en büyük holding şirketlerinden biri gibi görünüyor. 30'dan fazla ülkede operasyon, gayrimenkul, turizm, teknoloji yatırımları. Chen Zhi'nin "Vincent" takma adıyla bilinen genç bir iş insanı olarak tanıtıldığı parlak bir kurumsal cephe.
 
-Ama iddianameye göre bu cephenin arkasında başka bir şey var. Prince Group'a bağlı en az 10 "scam compound" — dolandırıcılık kampüsü — Kamboçya'da faaliyet gösteriyordu. Bu kampüslere insanlar "iyi maaşlı IT işi" vaadiyle getiriliyordu. Varınca pasaportlarına el konuyordu. Günde 12 ila 16 saat çalıştırılıyorlardı. Hedeflerini karşılayamayanlar dövülüyor veya elektrik şoku uygulanıyordu.
+Ama iddianameye göre bu cephenin arkasında başka bir şey var. Prince Group'a bağlı en az 10 "scam compound" (dolandırıcılık kampüsü) Kamboçya'da faaliyet gösteriyordu. Bu kampüslere insanlar "iyi maaşlı IT işi" vaadiyle getiriliyordu. Varınca pasaportlarına el konuyordu. Günde 12 ila 16 saat çalıştırılıyorlardı. Hedeflerini karşılayamayanlar dövülüyor veya elektrik şoku uygulanıyordu.
 
 Bu insanların yaptığı iş: "pig butchering" dolandırıcılığı. Sosyal medya veya tanışma uygulamaları üzerinden kurbanlarla uzun süreli ilişkiler kuruyorlardı. Güven inşa ettikten sonra kurbanları sahte kripto yatırım platformlarına yönlendiriyorlardı. Kurbanlar para yatırıyor, ekranda kârlar görüyor ama çekmeye çalıştığında paranın gittiğini anlıyordu.
 

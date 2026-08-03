@@ -39,7 +39,7 @@ Dördüncüsü, belge sahteciliği. Sahte yatırım platformları, sahte getiri 
 
 ## Kimlik Taklidi: Yüzde 1400 Artış
 
-Raporun en dramatik kategorisi impersonation scam'ler — yani birinin başkası gibi davranarak yaptığı dolandırıcılık. 2024'e göre yüzde 1400 artış. Ortalama ödeme tutarı yüzde 600'den fazla arttı.
+Raporun en dramatik kategorisi impersonation scam'ler, yani birinin başkası gibi davranarak yaptığı dolandırıcılık. 2024'e göre yüzde 1400 artış. Ortalama ödeme tutarı yüzde 600'den fazla arttı.
 
 İki somut örnek var raporda.
 
@@ -56,7 +56,7 @@ Raporun en önemli tespitlerinden biri: dolandırıcılık artık bireysel deği
 
 Phishing-as-a-service platformları var. AI-as-a-service araçları var. Sahte web sitesi şablonları satılıyor. Veri ihlallerinden elde edilen kişisel bilgiler paketler halinde satışta. Ve tüm bu altyapı kripto ile satın alınıyor.
 
-Lighthouse örneği bunu somutlaştırıyor. Platform 7.000'den fazla ödeme almış. Toplam kripto geliri 1.5 milyon doları aşmış. Ve Lighthouse tek değil. DarkTower'ın istihbarat direktörü Gary Warner, Telegram'da en az 8 büyük Çince "Crime-as-a-Service" grubunu takip ettiklerini söylüyor. Bazı grupların 300.000'den fazla üyesi var. Her şey — phishing tasarımı, hosting, spam gönderimi, alışveriş, nakit toplama — stablecoin ile alınıp satılıyor.
+Lighthouse örneği bunu somutlaştırıyor. Platform 7.000'den fazla ödeme almış. Toplam kripto geliri 1.5 milyon doları aşmış. Ve Lighthouse tek değil. DarkTower'ın istihbarat direktörü Gary Warner, Telegram'da en az 8 büyük Çince "Crime-as-a-Service" grubunu takip ettiklerini söylüyor. Bazı grupların 300.000'den fazla üyesi var. Her şey (phishing tasarımı, hosting, spam gönderimi, alışveriş, nakit toplama) stablecoin ile alınıp satılıyor.
 
 Bu, dolandırıcılığın demokratikleştiği anlamına geliyor. Artık sofistike bir saldırı düzenlemek için teknik bilgiye ihtiyacınız yok. 50 dolara phishing kiti alıyorsunuz, AI ile mesajlar üretiyorsunuz, kurbanlardan gelen kripto ödemeler otomatik olarak cüzdanınıza düşüyor.
 

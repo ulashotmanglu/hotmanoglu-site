@@ -58,7 +58,7 @@ Fiş doğrulama süreçleri güncellenmeli. Sadece tutara ve politikaya bakmak y
 
 AI destekli tespit araçları devreye girmeli. AI ile üretilen sahte fişleri yakalamak için yine AI kullanmak gerekiyor. Bu araçlar fiş görüntüsündeki metadata tutarsızlıklarını, yazı tipi anomalilerini, logo kalitesini ve template kalıplarını analiz ediyor. Aynı template'ten üretilmiş birden fazla fiş tespit edilebiliyor. Farklı çalışanların aynı hash değerine sahip fiş sunması alarm tetikliyor.
 
-Davranışsal analiz eklenmeli. Bir çalışanın masraf kalıpları aniden değişiyorsa — örneğin daha önce hiç taksi kullanmayan biri her ay düzenli taksi fişi sunuyorsa — bu bir kırmızı bayrak. Veya masraf raporları her zaman eşik değerinin hemen altındaysa, structuring yapılıyor olabilir.
+Davranışsal analiz eklenmeli. Bir çalışanın masraf kalıpları aniden değişiyorsa (örneğin daha önce hiç taksi kullanmayan biri her ay düzenli taksi fişi sunuyorsa) bu bir kırmızı bayrak. Veya masraf raporları her zaman eşik değerinin hemen altındaysa, structuring yapılıyor olabilir.
 
 Politika netleştirilmeli. Sahte veya manipüle edilmiş belge sunmanın sonuçları açıkça yazılmalı. Çoğu şirketin masraf politikasında "sahte fiş sunmayın" yazmıyor bile. Yazsın. Ve sonuçları belirtsin. Caydırıcılık önemli.
 

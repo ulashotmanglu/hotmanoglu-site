@@ -28,9 +28,9 @@ Yazılardaki görseller kural olarak temsilidir; olayın kendisine ait belge vey
 
 Yeni yazılarda içeriğin nasıl üretildiği künyede gösterilir:
 
-- **Ulaş Hotmanoğlu tarafından yazıldı** — metin doğrudan yazar tarafından kaleme alınmıştır.
-- **AI destekli içerik** — taslak yapay zeka desteğiyle hazırlanmış, editoryal kontrolden geçmiştir.
-- **Ulaş Hotmanoğlu ve AI ortak üretimi** — metin üzerinde her iki tarafın da katkısı vardır.
+- **Ulaş Hotmanoğlu tarafından yazıldı:** metin doğrudan yazar tarafından kaleme alınmıştır.
+- **AI destekli içerik:** taslak yapay zeka desteğiyle hazırlanmış, editoryal kontrolden geçmiştir.
+- **Ulaş Hotmanoğlu ve AI ortak üretimi:** metin üzerinde her iki tarafın da katkısı vardır.
 
 Bu etiket, alanın eklenmeye başlandığı tarihten önceki yazılarda bulunmayabilir. Etiketi olmayan yazılar için geriye dönük bir sınıflandırma yapılmamıştır; olmayan bir bilgi tahmin edilerek doldurulmaz.
 

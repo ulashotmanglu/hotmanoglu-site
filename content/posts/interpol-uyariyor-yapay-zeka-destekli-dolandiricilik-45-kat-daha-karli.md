@@ -32,18 +32,18 @@ Ben de öyle düşünüyorum.
 
 ## Dolandırıcılık Fabrikaları
 
-Raporun bir diğer ağır bölümü scam compound'lar hakkında. Güneydoğu Asya'da — özellikle Myanmar, Kamboçya, Laos'ta — devasa binalar var. Dışarıdan bakınca ofis parkı gibi görünüyor. İçeride yüzlerce, bazen binlerce insan oturuyor ve günde 12-16 saat dolandırıcılık yapıyor.
+Raporun bir diğer ağır bölümü scam compound'lar hakkında. Güneydoğu Asya'da, özellikle Myanmar, Kamboçya ve Laos'ta, devasa binalar var. Dışarıdan bakınca ofis parkı gibi görünüyor. İçeride yüzlerce, bazen binlerce insan oturuyor ve günde 12-16 saat dolandırıcılık yapıyor.
 
 Ama çoğu gönüllü değil. "Yurtdışında iyi maaşlı IT işi" vaadleriyle getirilen insanlar. Varınca pasaportlarına el konuyor. Kaçmaya çalışanlar dövülüyor. INTERPOL yaklaşık 80 farklı ülke vatandaşının bu kampüslerde tespit edildiğini söylüyor.
 
 Bu yapılar artık Asya'yla sınırlı değil. Rapor, Orta Doğu, Afrika ve Latin Amerika'ya yayıldığını belgeliyor. Afrika'da bazı terör örgütlerinin kripto tabanlı dolandırıcılık şemalarını finansman kaynağı olarak kullandığı tespit edilmiş. Yani dolandırıcılık sadece ekonomik suç olmaktan çıkmış, doğrudan güvenlik tehdidine dönüşmüş.
 
-Ve bunların arkasındaki organizasyonlar artık "birkaç kişilik çete" ölçeğinde değil. Profesyonel kara para aklama gruplarıyla çalışıyorlar. Teknoloji paylaşıyorlar. Franchise benzeri modeller kuruyorlar. INTERPOL buna "polycriminality" diyor — uyuşturucu, insan kaçakçılığı, siber suç ve dolandırıcılık hepsi aynı şebekenin farklı kolları.
+Ve bunların arkasındaki organizasyonlar artık "birkaç kişilik çete" ölçeğinde değil. Profesyonel kara para aklama gruplarıyla çalışıyorlar. Teknoloji paylaşıyorlar. Franchise benzeri modeller kuruyorlar. INTERPOL buna "polycriminality" diyor: uyuşturucu, insan kaçakçılığı, siber suç ve dolandırıcılık, hepsi aynı şebekenin farklı kolları.
 
 
 ## Fraud-as-a-Service
 
-Bir de şu var: artık dolandırıcı olmak için teknik bilgi gerekmiyor. Dark web'de hazır paketler satılıyor. Sahte yatırım sitesi şablonu, çalıntı kimlik veritabanları, ses klonlama araçları, kurban listeleri — hepsi fiyatlandırılmış ve satışta.
+Bir de şu var: artık dolandırıcı olmak için teknik bilgi gerekmiyor. Dark web'de hazır paketler satılıyor. Sahte yatırım sitesi şablonu, çalıntı kimlik veritabanları, ses klonlama araçları, kurban listeleri; hepsi fiyatlandırılmış ve satışta.
 
 Buna "Fraud-as-a-Service" deniyor ve giriş bariyerini tamamen ortadan kaldırıyor. Eskiden dolandırıcılık yapmak belirli bir teknik yetkinlik gerektirirdi. Artık gerektirmiyor. Kredi kartı bilgisi olan herkes dark web'den bir "dolandırıcılık starter kit" alıp başlayabiliyor.
 
@@ -56,7 +56,7 @@ Katılıyorum. Bu artık zanaat değil, üretim hattı.
 
 Rapor sadece korkutmak için yazılmamış, adil olmak gerekirse. INTERPOL birkaç somut adım duyurdu.
 
-Operation Shadow Storm adında yeni bir uluslararası görev gücü kuruldu. İngiltere İçişleri Bakanlığı finanse ediyor. Scam compound'larla bağlantılı dolandırıcılık, siber suç ve insan kaçakçılığı ağlarını hedef alacak. I-GRIP adlı stop-payment mekanizmasını kullanacaklar — dolandırıcılık gelirlerinin uluslararası transferlerini gerçek zamanlı durdurmak için tasarlanmış bir araç.
+Operation Shadow Storm adında yeni bir uluslararası görev gücü kuruldu. İngiltere İçişleri Bakanlığı finanse ediyor. Scam compound'larla bağlantılı dolandırıcılık, siber suç ve insan kaçakçılığı ağlarını hedef alacak. I-GRIP adlı stop-payment mekanizmasını kullanacaklar. Bu araç, dolandırıcılık gelirlerinin uluslararası transferlerini gerçek zamanlı durdurmak için tasarlandı.
 
 Rakamlar da bir miktar umut veriyor: 2024'ten bu yana dolandırıcılıkla ilgili INTERPOL uyarıları yüzde 54 artmış, 1.500'den fazla uluslararası davaya destek sağlanmış, 1.1 milyar dolarlık varlık geri kazanılmış veya takip altına alınmış.
 
@@ -67,7 +67,7 @@ Ama 442 milyar dolar kayıp, 1.1 milyar dolar geri kazanım. Yüzde 0.25. Bu ora
 
 Türkiye'nin bu tablodan bağımsız olduğunu düşünmek saflık olur.
 
-Sahte yatırım platformları burada da var. Thodex hâlâ belleklerde ama ondan sonra da onlarca platform aynı şemalarla çalıştı. Sesli dolandırıcılık vakaları — özellikle aile üyelerinin taklidi — artıyor. Deepfake'in Türkçe dil desteği henüz İngilizce kadar gelişmiş değil ama bu sadece zaman meselesi.
+Sahte yatırım platformları burada da var. Thodex hâlâ belleklerde ama ondan sonra da onlarca platform aynı şemalarla çalıştı. Sesli dolandırıcılık vakaları, özellikle aile üyelerinin taklidi, artıyor. Deepfake'in Türkçe dil desteği henüz İngilizce kadar gelişmiş değil ama bu sadece zaman meselesi.
 
 Bankalar açısından asıl soru şu: mevcut fraud tespit sistemleri AI ile kişiselleştirilmiş, sürekli adapte olan saldırıları yakalayabilecek kapasitede mi? Geleneksel kural tabanlı sistemler bu işe yetmez. Statik kurallar, statik tehditlere karşı çalışır. AI destekli dolandırıcılık statik değil.
 

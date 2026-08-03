@@ -106,7 +106,7 @@
     </div>
   </div>
 
-  <!-- ── SONRAKİ OKUMALAR — 1 büyük + 2 kompakt ────────── -->
+  {{/* SONRAKİ OKUMALAR: 1 büyük + 2 kompakt */}}
   {{ $pool := where site.RegularPages "Section" "posts" }}
   {{ $next := slice }}
   {{ range ($pool.Related .) }}
@@ -150,7 +150,7 @@
   </section>
   {{ end }}
 
-  <!-- ── ÜRETİM NOTU — sayfanın en altı, vurgusuz ──────── -->
+  {{/* ÜRETİM NOTU: sayfanın en altı, vurgusuz */}}
   <div class="shell">
     <details class="prodnote">
       <summary>Üretim notu</summary>

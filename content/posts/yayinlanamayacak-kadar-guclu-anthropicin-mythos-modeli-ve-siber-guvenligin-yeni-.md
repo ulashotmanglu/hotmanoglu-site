@@ -93,7 +93,7 @@ Mythos'un doğrudan AML veya fraud ile ilgisi olmadığı söylenebilir. Ama dol
 
 Bankacılık sistemlerindeki güvenlik açıkları, hesap ele geçirme (account takeover), yetkisiz transfer ve veri hırsızlığı için kullanılıyor. Bir yapay zeka modeli bu açıkları saatler içinde bulabiliyorsa, siber suçlular için saldırı maliyeti dramatik olarak düşüyor.
 
-Türk bankacılık sektörü açısından bu özellikle önemli. BDDK'nın siber güvenlik düzenlemeleri var ama bu düzenlemeler, yapay zeka destekli saldırı vektörlerini ne ölçüde kapsıyor? İşlem izleme sistemleri, ödeme altyapıları, mobil bankacılık API'leri — bunların hepsi potansiyel hedef.
+Türk bankacılık sektörü açısından bu özellikle önemli. BDDK'nın siber güvenlik düzenlemeleri var ama bu düzenlemeler, yapay zeka destekli saldırı vektörlerini ne ölçüde kapsıyor? İşlem izleme sistemleri, ödeme altyapıları, mobil bankacılık API'leri; bunların hepsi potansiyel hedef.
 
 Ve bir adım daha ileri: Mythos gibi modeller sadece teknik açıkları değil, iş süreçlerindeki zafiyetleri de analiz edebilir. Bir compliance sürecindeki boşluk, bir onay mekanizmasındaki zayıflık, bir raporlama akışındaki gecikme. Bunlar da birer "güvenlik açığı" ve doğru araçlarla tespit edilebilir.
 

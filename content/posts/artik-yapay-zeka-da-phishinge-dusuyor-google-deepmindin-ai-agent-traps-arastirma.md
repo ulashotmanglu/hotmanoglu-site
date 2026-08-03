@@ -67,7 +67,7 @@ Bu sorular henüz Türkiye'de geniş çapta tartışılmıyor. Ama dünya bu tar
 
 ## Sonuç
 
-Google DeepMind'ın "AI Agent Traps" araştırması bir uyandırma çağrısı. Yapay zeka ajanlarını güçlü kılan her şey — otonom karar alma, internet erişimi, araç kullanımı, bellek — aynı zamanda onu savunmasız kılıyor.
+Google DeepMind'ın "AI Agent Traps" araştırması bir uyandırma çağrısı. Yapay zeka ajanlarını güçlü kılan her şey (otonom karar alma, internet erişimi, araç kullanımı, bellek) aynı zamanda onu savunmasız kılıyor.
 
 Ve savunmasızlık noktaları şaşırtıcı derecede basit. HTML yorumuna gizlenmiş bir komut. Zehirlenmiş bir belge. Manipüle edilmiş bir e-posta. Bunlar sofistike saldırılar değil. Araştırmacıların ifadesiyle "uygulaması önemsiz derecede kolay" ve "sıfır makine öğrenimi uzmanlığı gerektiriyor."
 

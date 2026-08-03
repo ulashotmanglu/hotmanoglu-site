@@ -12,7 +12,7 @@ ABD Hazine Bakanlığı'nın yaptırım birimi OFAC, 2022'den bu yana kripto mik
 
 ## Mikser Hizmetleri Neden Hedefte?
 
-Kripto mikserler — veya teknik adıyla "tumbler" hizmetleri — blockchain üzerindeki işlem izini kırmak için tasarlandı. Kullanıcı fonlarını bir havuza gönderir, protokol bu fonları diğer kullanıcıların fonlarıyla karıştırır ve farklı adreslerden farklı zamanlarda çıkış yapar. Sonuç: gönderici ile alıcı arasındaki bağlantı kopar.
+Kripto mikserler, teknik adıyla "tumbler" hizmetleri, blockchain üzerindeki işlem izini kırmak için tasarlandı. Kullanıcı fonlarını bir havuza gönderir, protokol bu fonları diğer kullanıcıların fonlarıyla karıştırır ve farklı adreslerden farklı zamanlarda çıkış yapar. Sonuç: gönderici ile alıcı arasındaki bağlantı kopar.
 
 Bu mekanizma, meşru gizlilik talebi için de kullanılabilir. Ancak OFAC'ın odağı farklı: Lazarus Group başta olmak üzere Kuzey Kore bağlantılı aktörler, bu hizmetleri yaptırım rejimlerini aşmak ve çalınan fonları aklamak için sistematik biçimde kullandı.
 
@@ -44,9 +44,9 @@ Bu gelişmeler, özellikle kripto borsaları ve VASP'lar için somut aksiyon ger
 
 **Cüzdan tarama zorunluluğu.** SDN listesindeki akıllı kontrat adresleri ve bunlarla etkileşime girmiş cüzdanların gerçek zamanlı taranması artık temel bir beklenti. Chainalysis, Elliptic veya TRM Labs gibi araçlar bu taramayı otomatize ediyor, ancak kuralların düzenli güncellenmesi gerekiyor.
 
-**Mikser kalıplarının izlenmesi.** Transaction monitoring sistemlerinde mikser kullanım kalıpları — eşit tutarlı çoklu transferler, zaman gecikmeli çıkışlar, yeni oluşturulmuş cüzdanlara dağıtım — ayrı bir senaryo seti olarak tanımlanmalı. Geleneksel bankacılık AML kuralları bu kalıpları yakalamakta yetersiz kalıyor.
+**Mikser kalıplarının izlenmesi.** Transaction monitoring sistemlerinde mikser kullanım kalıpları (eşit tutarlı çoklu transferler, zaman gecikmeli çıkışlar, yeni oluşturulmuş cüzdanlara dağıtım) ayrı bir senaryo seti olarak tanımlanmalı. Geleneksel bankacılık AML kuralları bu kalıpları yakalamakta yetersiz kalıyor.
 
-**İkincil riskler.** Bir müşterinin doğrudan mikser kullanmamış olması yeterli değil. "Tainted funds" analizi — yani fonların geçmişte mikser hizmetinden geçip geçmediğinin kontrolü — giderek standart hale geliyor. Bu, özellikle DeFi protokollerinden gelen fonlar için kritik.
+**İkincil riskler.** Bir müşterinin doğrudan mikser kullanmamış olması yeterli değil. "Tainted funds" analizi, yani fonların geçmişte mikser hizmetinden geçip geçmediğinin kontrolü, giderek standart hale geliyor. Bu, özellikle DeFi protokollerinden gelen fonlar için kritik.
 
 **Düzenleyici iletişim.** OFAC yaptırımları, yerel düzenleyiciler tarafından da referans alınıyor. Türkiye'de MASAK, kripto varlık hizmet sağlayıcılarından bu tür kontrolleri beklemeye başladı. SPK'nın yeni kripto düzenlemesi kapsamında bu beklentilerin formalize edilmesi muhtemel.
 

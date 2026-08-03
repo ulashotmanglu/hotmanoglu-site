@@ -10,7 +10,7 @@
 <html lang="tr">
 <head>
   <meta charset="utf-8">
-  <title>Yönlendiriliyor — {{ with .Page }}{{ .Title }}{{ else }}HOTMANOGLU{{ end }}</title>
+  <title>Yönlendiriliyor: {{ with .Page }}{{ .Title }}{{ else }}HOTMANOGLU{{ end }}</title>
   <link rel="canonical" href="{{ .Permalink }}">
   <meta name="robots" content="noindex, follow">
   <meta http-equiv="refresh" content="0; url={{ .Permalink }}">

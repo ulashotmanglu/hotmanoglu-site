@@ -15,7 +15,7 @@ Dava, tek başına bir ihlal vakası değil. Bankacılık sektöründe içeriden
 
 ## Şebekenin Yapısı: Operation Gold Rush
 
-Davanın arka planında 2025 yılında 300'den fazla sanığın yargılandığı "Operation Gold Rush" operasyonu var. Soruşturma kapsamında ortaya çıkan tablo şöyle: Esas itibarıyla Rusya merkezli çalışan ulusötesi bir suç örgütü (TCO), Medicare'e kayıtlı 20'den fazla tıbbi cihaz şirketi satın aldı. Bu şirketler asla var olmayan ürünler — çoğunlukla idrar kateteri ve glikoz monitörü — için Medicare'e 10,6 milyar dolarlık sahte fatura kesti. Faturalar için gereken hasta kimlik bilgileri ise 1 milyondan fazla Amerikalının tıbbi kayıtlarından çalındı.
+Davanın arka planında 2025 yılında 300'den fazla sanığın yargılandığı "Operation Gold Rush" operasyonu var. Soruşturma kapsamında ortaya çıkan tablo şöyle: Esas itibarıyla Rusya merkezli çalışan ulusötesi bir suç örgütü (TCO), Medicare'e kayıtlı 20'den fazla tıbbi cihaz şirketi satın aldı. Bu şirketler asla var olmayan ürünler (çoğunlukla idrar kateteri ve glikoz monitörü) için Medicare'e 10,6 milyar dolarlık sahte fatura kesti. Faturalar için gereken hasta kimlik bilgileri ise 1 milyondan fazla Amerikalının tıbbi kayıtlarından çalındı.
 
 Sahte talepler kabul edildi, ödemeler yapıldı. Geriye yalnızca paraların ABD finansal sisteminden çıkarılması kalıyordu. İşte bu noktada Renat Abramov devreye girdi.
 
@@ -33,7 +33,7 @@ Abramov'un bu süreçten elde ettiği maddi kazancın ayrıntıları iddianamede
 
 ## Kaçış Girişimi ve Yakalanma
 
-Abramov, sonun geldiğini anlayınca Eylül 2024'te JFK Havalimanı'ndan Moskova'ya tek yönlü bilet kesti — bankasından izin almadan. Federal yetkililer bilet rezervasyonunu öğrenince müdahale etti. Abramov havalimanında ya da ayrılmadan önce gözaltına alındı.
+Abramov, sonun geldiğini anlayınca Eylül 2024'te JFK Havalimanı'ndan Moskova'ya, bankasından izin almadan, tek yönlü bilet kesti. Federal yetkililer bilet rezervasyonunu öğrenince müdahale etti. Abramov havalimanında ya da ayrılmadan önce gözaltına alındı.
 
 Bu detay tesadüf değil. İçeriden aktörlerin yakalanma biçimlerinin önemli bir bölümü tam da bu tür davranış değişikliklerine, ani kaçış hazırlıklarına ya da rutin dışı hareketlere dayanıyor.
 
@@ -42,7 +42,7 @@ Bu detay tesadüf değil. İçeriden aktörlerin yakalanma biçimlerinin önemli
 
 Dava dosyaları, hesaplardaki anormalliklerin standart işlem izleme araçlarıyla tespit edilebilir nitelikte olduğunu ortaya koyuyor:
 
-Müşteri profiliyle tutarsız işlemler: Tıbbi cihaz şirketleri düzenli operasyonel giderlere — stok alımı, kargo, depolama — sahip olmalıdır. Söz konusu hesaplar yalnızca Medicare'den büyük miktarlarda para aldı, hiçbir operasyonel harcama kaydedilmedi.
+Müşteri profiliyle tutarsız işlemler: Tıbbi cihaz şirketleri düzenli operasyonel giderlere (stok alımı, kargo, depolama) sahip olmalıdır. Söz konusu hesaplar yalnızca Medicare'den büyük miktarlarda para aldı, hiçbir operasyonel harcama kaydedilmedi.
 
 Gerçek faydalanıcı belirsizliği: Hesap sahiplerinin önemli bir kısmı ABD'de yasal ikamet hakkına sahip değildi. Sahte şirket belgelerine rağmen KYC süreçleri tamamlandı.
 

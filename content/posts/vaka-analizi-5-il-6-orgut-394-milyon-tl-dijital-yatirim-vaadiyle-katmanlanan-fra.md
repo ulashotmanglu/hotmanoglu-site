@@ -1,5 +1,5 @@
 ---
-title: "Vaka Analizi: 5 İl, 6 Örgüt, 394 Milyon TL — Dijital Yatırım Vaadiyle Katmanlanan Fraud Operasyonu"
+title: "Vaka Analizi: 5 İl, 6 Örgüt, 394 Milyon TL: Dijital Yatırım Vaadiyle Katmanlanan Fraud Operasyonu"
 date: 2026-03-03
 draft: false
 categories: ["Vaka Analizi"]

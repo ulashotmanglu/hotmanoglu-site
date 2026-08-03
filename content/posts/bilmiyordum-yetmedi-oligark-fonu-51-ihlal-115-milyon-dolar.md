@@ -21,7 +21,7 @@ aliases:
 
 2017: Kerimov ailesine ait bir vakıf, IPI'ın fona yönelik fonuna 25 milyon dolarlık yatırım taahhüdünde bulunur. Yapı şöyle kurgulanmış: Kerimov → BVI kayıtlı Definition Services → Delaware eyaletinde kurulu Heritage Trust → IPI fonu. Yatırım dolaylı, Kerimov'un adı hiçbir belgede geçmiyor.
 
-Yatırımın akabinde IPI'ın üst yönetimi Kerimov'la bizzat görüşüyor. Bir de yeğeni Nariman Gadzhiev'le — ki Gadzhiev, Kerimov'un yatırım temsilcisi olarak tanıtılıyor.
+Yatırımın akabinde IPI'ın üst yönetimi Kerimov'la bizzat görüşüyor. Bir de yeğeni Nariman Gadzhiev'le görüşüyor. Gadzhiev, Kerimov'un yatırım temsilcisi olarak tanıtılıyor.
 
 2018 başı: IPI aynı yapı üzerinden ek 25 milyon dolar daha alır. Toplam taahhüt 50 milyon dolara ulaşır.
 
@@ -31,7 +31,7 @@ Kerimov'un listede olması, ona ait her mülk ve mülk üzerindeki her "çıkar"
 
 IPI ne yapar? Avukatlarından görüş alır. Avukatlar, aile vakfındaki fonları dondurma yükümlülüğü olmadığına hükmeder. IPI bu görüşe dayanarak işlemlerine devam eder.
 
-Temmuz 2018 – Haziran 2022: 18 sermaye çağrısı, 20 dağıtım, 13 yönetim ücreti ödemesi. 51 işlem, 51 ihlal.
+Temmuz 2018 ile Haziran 2022 arasında: 18 sermaye çağrısı, 20 dağıtım, 13 yönetim ücreti ödemesi. 51 işlem, 51 ihlal.
 
 Kasım 2022: OFAC, Gadzhiev'i de SDN listesine alır. IPI artık Kerimov'un listede olan yeğeniyle de doğrudan muhatap.
 
@@ -44,7 +44,9 @@ IPI'ın hukuki danışmana başvurması doğruydu. Sorun danışmaya değil, dan
 
 Neler sakladı?
 
-— Kerimov'la bizzat yüz yüze görüşüldüğünü— Gadzhiev'in Kerimov'un temsilcisi olduğu bilgisini— Daha önceki bazı beyanların gerçeği yansıtmadığını
+- Kerimov'la bizzat yüz yüze görüşüldüğünü
+- Gadzhiev'in Kerimov'un temsilcisi olduğu bilgisini
+- Daha önceki bazı beyanların gerçeği yansıtmadığını
 
 Avukatlar eksik bilgiyle analiz yaptı, hatalı sonuca ulaştı. IPI bu sonucu kalkan olarak kullandı. OFAC bunu kabul etmedi.
 
@@ -77,7 +79,7 @@ Dolaylı maruz kalma riski. Yabancı fon veya SPV'lerden gelen yatırımların g
 
 Muhabir bankacılık ve kormuhabir riski. ABD kaynaklı işlemlerde karşı tarafın SDN'le dolaylı bağlantısı bile yükümlülük doğurabilir. "Müşteri temiz" analizi yeterli değil; müşterinin müşterisi de kapsama girebilir.
 
-Hukuki görüş kalkan değil. Danışman aldıysanız, danışmana tam bilgi verdiniz mi? OFAC, eksik bilgiyle alınan hukuki görüşü hafifletici faktör saymıyor — aksine, bazı durumlarda ağırlaştırıcı değerlendiriyor.
+Hukuki görüş kalkan değil. Danışman aldıysanız, danışmana tam bilgi verdiniz mi? OFAC, eksik bilgiyle alınan hukuki görüşü hafifletici faktör saymıyor; aksine, bazı durumlarda ağırlaştırıcı değerlendiriyor.
 
 Gönüllü bildirim mekanizması. OFAC'ın Şubat 2026'da devreye aldığı yeni Self-Disclosure Portal ile gönüllü bildirim süreci dijitalize edildi. %30-50 indirim fırsatı hâlâ masa üstünde. Erken fark edip bildirenlere fırsat, fark etmeyenlere ya da ört bas edenlere çarpan etkisi.
 
@@ -88,6 +90,6 @@ IPI Partners davası birkaç şeyi netleştiriyor:
 
 Katmanlı yapılar SDN tespitini zorlaştırabilir ama ortadan kaldırmaz. OFAC, formdan değil ekonomik gerçeklikten bakıyor.
 
-Avukata danışmak yükümlülüğü kaldırmaz. Danışmana sunulan bilgi eksikse, görüş de eksik — ve bu eksiklik kuruma karşı kullanılır.
+Avukata danışmak yükümlülüğü kaldırmaz. Danışmana sunulan bilgi eksikse, görüş de eksik kalır ve bu eksiklik kuruma karşı kullanılır.
 
 "Bilmiyordum" standardı artık "bilmesi gerekirdi" standardıyla değerlendiriliyor. Yöneticiler yatırımcıyla bizzat görüştüyse, bu eşiği geçmiş sayılır ve 51 işlem 51 ihlal demek. Her sermaye çağrısı, her dağıtım, her komisyon ödemesi ayrı ihlal olarak sayılıyor.

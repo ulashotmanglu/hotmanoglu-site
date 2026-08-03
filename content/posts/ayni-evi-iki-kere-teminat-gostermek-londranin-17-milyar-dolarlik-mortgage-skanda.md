@@ -54,7 +54,7 @@ Barclays CEO'su CS Venkatakrishnan, bankanın kayıplarının MFS'e olan 500 mil
 
 Bu sorunun cevabı henüz tam olarak ortaya çıkmadı ama bazı ipuçları var.
 
-MFS kompleks gayrimenkul kredileri veriyordu. Kısa vadeli köprü kredileri, ticari gayrimenkul finansmanı, çok katmanlı yapılar. Bu tür kredilerde due diligence süreci geleneksel mortgage'a göre daha karmaşık. Teminatın değerlemesi, borçlunun gerçek kimliği, kredi amacının doğrulanması — hepsi daha fazla dikkat gerektirir.
+MFS kompleks gayrimenkul kredileri veriyordu. Kısa vadeli köprü kredileri, ticari gayrimenkul finansmanı, çok katmanlı yapılar. Bu tür kredilerde due diligence süreci geleneksel mortgage'a göre daha karmaşık. Teminatın değerlemesi, borçlunun gerçek kimliği, kredi amacının doğrulanması; hepsi daha fazla dikkat gerektirir.
 
 Ama MFS'in alacaklıları arasında dünyanın en sofistike finans kurumları var. Barclays, Santander, Jefferies, Elliott, Apollo. Bunlar due diligence yapmayı bilen yerler. Peki nasıl oldu?
 

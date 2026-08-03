@@ -8,7 +8,7 @@ description: "HOTMANOGLU'nun ne olduğu, nasıl hazırlandığı ve hangi editor
 
 HOTMANOGLU, yapay zeka, ekonomi, teknoloji ve finansal suçların kesiştiği alanda Türkçe içerik üreten bağımsız bir yayın.
 
-Bu alanda Türkçe kaynak var; ancak çoğu ya haber diliyle sınırlı kalıyor ya da doğrudan mevzuat metnine dönüşüyor. Aradaki boşluk — bir olayın neden olduğu, hangi kontrolün çalışmadığı, düzenleyicinin neye tepki verdiği — genellikle boş kalıyor. Platform tam olarak bu boşluğu doldurmak için kuruldu.
+Bu alanda Türkçe kaynak var; ancak çoğu ya haber diliyle sınırlı kalıyor ya da doğrudan mevzuat metnine dönüşüyor. Aradaki boşluk, yani bir olayın neden olduğu, hangi kontrolün çalışmadığı ve düzenleyicinin neye tepki verdiği, genellikle boş kalıyor. Platform tam olarak bu boşluğu doldurmak için kuruldu.
 
 Burada üç tür içerik yayımlanıyor:
 
@@ -59,4 +59,4 @@ Buradaki içerikler bilgilendirme amaçlıdır; hukuki, mali veya yatırım tavs
 
 İçerik önerileri, düzeltme bildirimleri, iş birliği ve konuşma talepleri için LinkedIn üzerinden yazabilirsiniz.
 
-Bir yazıda hata gördüyseniz bunu bildirmeniz en çok işe yarayan katkıdır — nasıl ele alındığını [Düzeltme Politikası](/duzeltme-politikasi/) sayfasında bulabilirsiniz. Tüm iletişim kanalları için [İletişim](/iletisim/) sayfasına bakınız.
+Bir yazıda hata gördüyseniz bunu bildirmeniz en çok işe yarayan katkıdır; nasıl ele alındığını [Düzeltme Politikası](/duzeltme-politikasi/) sayfasında bulabilirsiniz. Tüm iletişim kanalları için [İletişim](/iletisim/) sayfasına bakınız.

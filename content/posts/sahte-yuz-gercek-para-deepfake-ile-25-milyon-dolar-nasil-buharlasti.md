@@ -23,7 +23,7 @@ Bu vakayı anlamak için deepfake teknolojisinin bugün nerede olduğunu bilmek 
 
 Ses klonlama artık 3 saniyelik bir ses örneğiyle yapılabiliyor. Üç saniye. Bir konferans konuşmasından, bir YouTube videosundan, hatta bir sesli mesajdan alınan örnek yeterli. Daha kaliteli bir klon istiyorsanız 10-30 saniye lazım, o kadar.
 
-Video tarafında biraz daha fazla malzeme gerekiyor ama o da o kadar zor değil. AI modelinin yüz hareketlerini farklı açılardan ve farklı ışık koşullarında görmesi lazım. Bir şirket yöneticisinin LinkedIn'deki konuşma videoları, basın açıklamaları, panel katılımları — bunlar fazlasıyla yeterli. Model bunları analiz edip senkronize dudak hareketleri, doğal yüz ifadeleri ve gerçekçi vücut dili oluşturabiliyor.
+Video tarafında biraz daha fazla malzeme gerekiyor ama o da o kadar zor değil. AI modelinin yüz hareketlerini farklı açılardan ve farklı ışık koşullarında görmesi lazım. Bir şirket yöneticisinin LinkedIn'deki konuşma videoları, basın açıklamaları, panel katılımları; bunlar fazlasıyla yeterli. Model bunları analiz edip senkronize dudak hareketleri, doğal yüz ifadeleri ve gerçekçi vücut dili oluşturabiliyor.
 
 Arup vakasında muhtemelen olan şu: saldırganlar yöneticilerin kamuya açık videolarını indirdi, AI modellerini eğitti ve toplantı için önceden hazırlanmış video klipler üretti. Gerçek zamanlı sohbet yerine, önceden üretilmiş içerikleri toplantıda oynatmış olmaları kuvvetli ihtimal. 2024 başında gerçek zamanlı deepfake teknolojisi henüz o kadar gelişmiş değildi.
 

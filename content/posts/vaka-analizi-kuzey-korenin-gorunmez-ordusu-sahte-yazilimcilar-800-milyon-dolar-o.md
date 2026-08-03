@@ -12,7 +12,7 @@ aliases:
   - "/tags/siber/page/1/"
 ---
 
-12 Mart 2026'da OFAC, Kuzey Kore'nin (DPRK) organize BT işçisi dolandırıcılık şebekesine yönelik yeni bir yaptırım dalgası başlattı. 6 kişi ve 2 kuruluş SDN listesine eklendi. Aynı anda 21 kripto para adresi — Ethereum ve Tron dahil birden fazla blockchain ağında donduruldu.
+12 Mart 2026'da OFAC, Kuzey Kore'nin (DPRK) organize BT işçisi dolandırıcılık şebekesine yönelik yeni bir yaptırım dalgası başlattı. 6 kişi ve 2 kuruluş SDN listesine eklendi. Aynı anda 21 kripto para adresi, Ethereum ve Tron dahil birden fazla blockchain ağında donduruldu.
 
 Bağlam kritik: Bu şemalar 2024 yılında DPRK rejimine yaklaşık 800 milyon dolar gelir sağladı. Para doğrudan nükleer silah ve balistik füze programlarına aktarıldı.
 
@@ -64,7 +64,7 @@ Coğrafi dağılım: Çin, Rusya, Laos, Vietnam, işçiler farklı ülkelerde ko
 
 OFAC bu eylemde 21 kripto adresi dondurdu. Ethereum ve Tron ağlarında, yani multi-chain bir yapı.
 
-Bu önemli bir sinyal: DPRK şebekesi artık tek bir blockchain'e bağlı değil. Fonlar birden fazla ağda hareket ettirilerek izlenebilirlik zorlaştırılıyor. Chainalysis bu adresleri kendi ürün kataloğuna ekledi — kripto şirketleri için screening yükümlülüğü anında doğdu.
+Bu önemli bir sinyal: DPRK şebekesi artık tek bir blockchain'e bağlı değil. Fonlar birden fazla ağda hareket ettirilerek izlenebilirlik zorlaştırılıyor. Chainalysis bu adresleri kendi ürün kataloğuna ekledi; kripto şirketleri için screening yükümlülüğü anında doğdu.
 
 
 ## Türkiye ve Bölgesel Bağlam

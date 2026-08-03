@@ -1,5 +1,5 @@
 ---
-title: "Vaka Analizi: Tek Adam, Beş Unvan, Sıfır Denetim — First National Bank of Lindsay'in Çöküşü"
+title: "Vaka Analizi: Tek Adam, Beş Unvan, Sıfır Denetim: First National Bank of Lindsay'in Çöküşü"
 date: 2026-02-26
 draft: false
 categories: ["Vaka Analizi"]
@@ -22,7 +22,7 @@ CFO, IT Yöneticisi, BSA Uyum Yetkilisi ve Uyum Görevlisi
 
 Suçlamalar:
 
-Banka dolandırıcılığı komploya girmek, banka dolandırıcılığı, finansal kurum kayıtlarına yanlış giriş yapmak, finansal kurum denetimini engellemek ve Banka Gizliliği Yasası kapsamında AML programı uygulamayı ihmal etmek — toplam
+Banka dolandırıcılığı komploya girmek, banka dolandırıcılığı, finansal kurum kayıtlarına yanlış giriş yapmak, finansal kurum denetimini engellemek ve Banka Gizliliği Yasası kapsamında AML programı uygulamayı ihmal etmek. Toplam
 
 18 suçlama.
 
@@ -58,7 +58,7 @@ Bu dava, sektörün iyi bildiği ama uygulamada sıklıkla göz ardı ettiği bi
 
 Seibel, CEO'luk, CFO'luk, IT yöneticiliği, BSA uyum yetkililiği ve genel uyum sorumluluğunu aynı anda üstlendi. Bu roller birbirini denetlemesi gereken işlevlerdir. Tamamının tek kişide toplanması, sistemin kendi kendini kontrol edemez hale gelmesi demektir. Küçük kurumlar için bu risk gerçek ve yaygındır.
 
-2. BSA Yetkilisi Bağımsız Olmalı — Yöneticiden Değil
+2. BSA Yetkilisi Bağımsız Olmalı, Yöneticiden Değil
 
 BSA/AML uyum işlevi, yönetim kuruluna doğrudan raporlama yapabilecek bir yapıya sahip olmalıdır. Burada hem yetkilinin hem denetlenenin aynı kişi olması, uyum programını işlevsiz kıldı. OCC'nin topluluğu bankalar için Kasım 2025'te yayımladığı yeni denetim kılavuzu da bu riskin altını özellikle çiziyor.
 

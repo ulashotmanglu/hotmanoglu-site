@@ -30,7 +30,7 @@ Yani mesele şu: kural tabanlı sistem bir alarm üretiyor. Diyelim ki "bu hesap
 
 En ilginç kısmı bu aslında. Sistem, kurumun kendi SOP'larına (Standart Operasyon Prosedürleri) göre yapılandırılıyor. Yani genel bir "AI modeli" değil. Bankanın kendi soruşturma adımlarını takip eden, o kuruma özel bir dijital müfettiş.
 
-Nadig'in anlattığına göre süreç şöyle işliyor: kurum SOP dokümanını sisteme yüklüyor. AI ajanı bu dokümanı okuyor ve soruşturma adımlarını otomatik olarak yapılandırıyor. Hangi veri kaynaklarına bakılacak, hangi kontroller yapılacak, hangi kriterlere göre karar verilecek — hepsi SOP'tan geliyor.
+Nadig'in anlattığına göre süreç şöyle işliyor: kurum SOP dokümanını sisteme yüklüyor. AI ajanı bu dokümanı okuyor ve soruşturma adımlarını otomatik olarak yapılandırıyor. Hangi veri kaynaklarına bakılacak, hangi kontroller yapılacak, hangi kriterlere göre karar verilecek; hepsi SOP'tan geliyor.
 
 Sonra iki modda çalışabiliyor. Birincisi yarı otonom mod: AI ajanı veri topluyor, özet hazırlıyor, bulgularını sunuyor, son kararı analist veriyor. İkincisi tam otonom mod: düşük riskli alarmlar için AI ajanı soruşturmayı baştan sona yapıp kapatıyor, insan müdahalesine gerek kalmıyor.
 
@@ -47,7 +47,7 @@ Sorun kuralda değil, kuralın ürettiği alarmın arkasındaki süreçte. Kural
 
 Bu ayrım önemli çünkü regülatörler kural tabanlı izleme beklentisinden vazgeçmedi. FATF hâlâ risk bazlı yaklaşım ve transaction monitoring bekliyor. MASAK hâlâ şüpheli işlem bildirimi bekliyor. AI burada kuralı değil, kuralın arkasındaki iş yükünü hafifletiyor.
 
-Bir de şeffaflık meselesi var. "AI öyle dedi" cevabı düzenleyiciler için kabul edilebilir değil. Neden bu alarm kapatıldı, hangi verilere bakıldı, hangi sonuca nasıl ulaşıldı — bunların hepsinin açıklanabilir olması gerekiyor. SOP bazlı çalışan bir sistem bu açıdan avantajlı çünkü adımlar önceden tanımlı ve izlenebilir.
+Bir de şeffaflık meselesi var. "AI öyle dedi" cevabı düzenleyiciler için kabul edilebilir değil. Neden bu alarm kapatıldı, hangi verilere bakıldı, hangi sonuca nasıl ulaşıldı; bunların hepsinin açıklanabilir olması gerekiyor. SOP bazlı çalışan bir sistem bu açıdan avantajlı çünkü adımlar önceden tanımlı ve izlenebilir.
 
 
 ## Peki Bu Gerçekçi mi?
@@ -60,14 +60,14 @@ Birincisi, SOP kalitesi. Eğer kurumun SOP'ları zaten yetersizse, AI ajanı yet
 
 Üçüncüsü, regülatör kabulü. MASAK, BDDK veya herhangi bir düzenleyici "bu alarmları AI kapattı" dediğinizde ne tepki verir? Henüz bu konuda net bir düzenleyici çerçeve yok. FCA Supercharged AI Sandbox'ta bu tip çözümleri test ediyor ama Türkiye'de böyle bir sandbox mevcut değil.
 
-Dördüncüsü, veri kalitesi. AI ajanının doğru soruşturma yapması için doğru veriye erişmesi lazım. Türk bankacılık sisteminde veri siloları hâlâ yaygın. Core banking, kart sistemi, dijital kanallar, müşteri şikayet sistemi — bunlar çoğu zaman birbirleriyle konuşmuyor. AI ajanı silolar arasında veri toplayamıyorsa, soruşturma kalitesi düşer.
+Dördüncüsü, veri kalitesi. AI ajanının doğru soruşturma yapması için doğru veriye erişmesi lazım. Türk bankacılık sisteminde veri siloları hâlâ yaygın. Core banking, kart sistemi, dijital kanallar, müşteri şikayet sistemi; bunlar çoğu zaman birbirleriyle konuşmuyor. AI ajanı silolar arasında veri toplayamıyorsa, soruşturma kalitesi düşer.
 
 
 ## Türkiye'de Neredeyiz?
 
 Açık konuşmak gerekirse, erken aşamadayız.
 
-Büyük Türk bankaları machine learning tabanlı fraud tespit modelleri kullanıyor. Özellikle kart dolandırıcılığı ve online bankacılık fraud'unda ML modelleri yaygınlaştı. Ama AML tarafında — transaction monitoring, alarm soruşturması, SAR hazırlama — çoğu kurum hâlâ kural tabanlı sistemlerle çalışıyor.
+Büyük Türk bankaları machine learning tabanlı fraud tespit modelleri kullanıyor. Özellikle kart dolandırıcılığı ve online bankacılık fraud'unda ML modelleri yaygınlaştı. Ama AML tarafında (transaction monitoring, alarm soruşturması, SAR hazırlama) çoğu kurum hâlâ kural tabanlı sistemlerle çalışıyor.
 
 Bunun nedeni sadece teknolojik değil. Düzenleyici beklenti de belirleyici. MASAK'ın mevcut çerçevesi, AI tabanlı soruşturmayı açıkça ne teşvik ediyor ne de yasaklıyor. Bu belirsizlik, bankaların "bekle gör" modunda kalmasına yol açıyor.
 
@@ -80,7 +80,7 @@ AI Forensics kavramı henüz olgun değil. Ama işaret ettiği yön doğru.
 
 Compliance'ın geleceği, daha fazla insan istihdam etmek değil. Mevcut insanları daha yüksek değerli işlere yönlendirmek. Bir analistin günde 200 düşük riskli alarmı inceleyip "sorun yok" demesinin kimseye faydası yok. O analistin zamanını, gerçekten karmaşık ve şüpheli vakalara harcaması gerekiyor.
 
-AI Forensics — ya da ona benzer yaklaşımlar — bu dönüşümün aracı olabilir. Ama bu aracın düzgün çalışması için SOP'ların sağlam olması, veri altyapısının yeterli olması, regülatör kabulün netleşmesi ve insan gözetiminin korunması gerekiyor.
+AI Forensics ya da ona benzer yaklaşımlar, bu dönüşümün aracı olabilir. Ama bu aracın düzgün çalışması için SOP'ların sağlam olması, veri altyapısının yeterli olması, regülatör kabulün netleşmesi ve insan gözetiminin korunması gerekiyor.
 
 Sonuçta dijital müfettiş, insan müfettişin yerini almıyor. İnsan müfettişin yaptığı işin en sıkıcı kısmını devralıyor. Ve o sıkıcı kısım, bugün compliance ekiplerinin zamanının büyük çoğunluğunu yiyor.
 

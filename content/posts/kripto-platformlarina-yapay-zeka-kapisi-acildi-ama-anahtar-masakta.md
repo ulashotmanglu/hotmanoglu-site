@@ -1,5 +1,5 @@
 ---
-title: "Kripto Platformlarına Yapay Zekâ Kapısı Açıldı — Ama Anahtar MASAK'ta"
+title: "Kripto Platformlarına Yapay Zekâ Kapısı Açıldı, Ama Anahtar MASAK'ta"
 date: 2026-03-02
 draft: false
 categories: ["AML/CFT"]

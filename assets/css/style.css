@@ -948,18 +948,8 @@ main>section:first-child{padding-top:var(--s7)}
   text-wrap:wrap;            /* justify ile öngörülebilir satır kırma */
 }
 
-/* Mobilde yaslama kapalı: 358px sütunda kısa satırlar aşırı kelime boşluğu
-   üretiyordu (ölçüm: ortalama 2,08× normal boşluk, en kötü satır 9,63×).
-   Font boyutu ve satır yüksekliği değişmez. */
-@media (max-width: 620px) {
-  .art-body .prose > p {
-    text-align: left;
-    text-justify: auto;
-    word-spacing: normal;
-    hyphens: none;
-    -webkit-hyphens: none;
-  }
-}
+/* Not: mobilde yaslamayı kapatan kural kullanıcı tercihiyle kaldırıldı.
+   Makale paragrafları 390px dahil tüm genişliklerde iki yana yaslı kalır. */
 
 /* ==========================================================================
    KAYNAKLAR

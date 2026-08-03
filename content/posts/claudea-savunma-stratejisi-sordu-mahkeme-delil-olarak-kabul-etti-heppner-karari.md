@@ -57,7 +57,7 @@ Heppner kararına göre: bu konuşmalar korunmuyor.
 
 Veya bir iç denetçi, bir fraud vakasını araştırırken yapay zekaya bulgularını yüklüyor ve analiz ettiriyor. Sonra dava açılıyor ve karşı taraf bu belgeleri keşif sürecinde talep ediyor. Heppner kararına göre: avukat yönlendirmesi yoksa korunmuyor.
 
-Bu, yapay zeka kullanan her profesyonel için bir uyandırma çağrısı. Özellikle hassas konularda — hukuki riskler, soruşturmalar, düzenleyici incelemeler — halka açık yapay zeka platformlarına ne girdi verdiğiniz artık çok daha kritik.
+Bu, yapay zeka kullanan her profesyonel için bir uyandırma çağrısı. Özellikle hassas konularda (hukuki riskler, soruşturmalar, düzenleyici incelemeler) halka açık yapay zeka platformlarına ne girdi verdiğiniz artık çok daha kritik.
 
 
 ## Peki Ne Yapılmalı?
@@ -68,7 +68,7 @@ Hassas hukuki konularda halka açık yapay zeka platformları kullanıyorsanız,
 
 Avukatınız yönlendirmiyorsa, yapay zekayla ürettiğiniz hukuki analizler korunmuyor. Eğer bir avukat size "şu konuyu Claude'da araştır" derse ve siz bunu avukatın iş akışının bir parçası olarak yaparsanız, sonuç farklı olabilir. Ama kendi başınıza yaparsanız, Heppner kararı geçerli.
 
-Kurumsal düzeyde yapay zeka kullanım politikaları oluşturulmalı. Hangi konularda yapay zeka kullanılabilir, hangi platformlar kabul edilir, hassas verilerin yapay zekaya girilmesi hangi koşullarda uygun — bunların hepsinin yazılı bir politikası olmalı. Özellikle hukuk departmanları, compliance birimleri ve iç denetim ekipleri için.
+Kurumsal düzeyde yapay zeka kullanım politikaları oluşturulmalı. Hangi konularda yapay zeka kullanılabilir, hangi platformlar kabul edilir, hassas verilerin yapay zekaya girilmesi hangi koşullarda uygun; bunların hepsinin yazılı bir politikası olmalı. Özellikle hukuk departmanları, compliance birimleri ve iç denetim ekipleri için.
 
 Enterprise yapay zeka çözümleri farklı bir kategori. Kapalı, kurumsal lisansla çalışan, verilerin model eğitimine kullanılmadığı garanti edilen platformlar farklı bir hukuki değerlendirmeye tabi. Rakoff kararı tüketici versiyonuna (consumer-grade) özgü. Ama bu ayrımı yapmak için platform sözleşmesinin detaylarına bakmak gerekiyor.
 

@@ -1,5 +1,5 @@
 ---
-title: "Vaka Analizi: İki Banka, Bir Adam, Aynı Oyun — Edward Low Davası"
+title: "Vaka Analizi: İki Banka, Bir Adam, Aynı Oyun: Edward Low Davası"
 date: 2026-03-17
 draft: false
 categories: ["Vaka Analizi"]
@@ -15,7 +15,7 @@ Low'un hikayesi, içeriden tehdit konusunda sık karşılaşılan bir yanılgıy
 
 ## TD Bank Dönemi
 
-Ocak 2021'den Mayıs 2021'e kadar, yaklaşık beş ay. Low o dönemde TD Bank'ta çalışıyor. Pozisyonu gereği müşteri bilgilerine erişimi var. Hesap detayları, kişisel bilgiler, işlem geçmişi — bir banka çalışanının günlük işinde kullandığı her şey.
+Ocak 2021'den Mayıs 2021'e kadar, yaklaşık beş ay. Low o dönemde TD Bank'ta çalışıyor. Pozisyonu gereği müşteri bilgilerine erişimi var. Hesap detayları, kişisel bilgiler, işlem geçmişi; bir banka çalışanının günlük işinde kullandığı her şey.
 
 Low bu erişimi dışarıdaki dolandırıcılara sattı. Karşılığında nakit aldı. Süreç basit: dışarıdaki grup Low'a hedef müşteri bilgilerini soruyor, Low sisteme girip bilgileri çekiyor, bilgileri iletiyor. Dolandırıcılar bu bilgilerle hesapları ele geçiriyor, parayı çekiyor.
 
@@ -41,7 +41,7 @@ Bu davayı önemli kılan birkaç şey var.
 
 Birincisi, tekrar eden kalıp. Low bir bankadan ayrılıp diğerine geçtiğinde, arkasında herhangi bir uyarı işareti bırakmadı. Ya da bıraktıysa, yeni işvereni bunu görmedi. Finansal sektörde çalışan geçmişi taraması yapılıyor mu? Çoğu zaman evet. Ama bu taramalar genellikle sabıka kaydına bakıyor. Low'un TD Bank döneminde henüz bir sabıka kaydı yoktu. Soruşturma devam ediyordu ama bu bilgi yeni işverenine ulaşmadı.
 
-İkincisi, erişim seviyesi meselesi. Low üst düzey bir yönetici değildi. Sıradan bir banka çalışanıydı. Ama sıradan bir banka çalışanının erişebildiği bilgi miktarı, dışarıdan bakıldığında şaşırtıcı derecede geniş. Müşteri kimlik bilgileri, hesap bakiyeleri, işlem geçmişleri — bunların hepsi günlük operasyonun parçası. Sorun, bu erişimin nasıl izlendiği.
+İkincisi, erişim seviyesi meselesi. Low üst düzey bir yönetici değildi. Sıradan bir banka çalışanıydı. Ama sıradan bir banka çalışanının erişebildiği bilgi miktarı, dışarıdan bakıldığında şaşırtıcı derecede geniş. Müşteri kimlik bilgileri, hesap bakiyeleri, işlem geçmişleri; bunların hepsi günlük operasyonun parçası. Sorun, bu erişimin nasıl izlendiği.
 
 Üçüncüsü, rüşvet kanalı. Low'a yapılan ödemeler nakit. 26.700 dolar, beş ayda. Bu, ayda ortalama 5.000 doların biraz üzerinde. Bir banka çalışanının maaşına ek olarak düzenli nakit akışı alması, çalışan davranış analizi sistemlerinde tespit edilebilecek bir anomali. Ama bu sistemler her kurumda yok. Olanların çoğunda ise nakit işlemlere değil, dijital kanallara odaklanılıyor.
 
@@ -58,7 +58,7 @@ Yine Ocak 2026'da Oscar Marcel Nunez-Flores, TD Bank New Jersey şubesinden Kolo
 
 Ve şimdi Edward Low. Aynı dönem. Aynı banka. Farklı şube, farklı ağ, aynı zafiyet.
 
-DOJ soruşturması sırasında ortaya çıkan bir detay çarpıcıydı: TD Bank'ın bazı şubelerinde çalışanların örgütlü suç ağları tarafından kasıtlı olarak işe alındığı tespit edilmişti. Yani içeriden tehdit, rastgele bir sapma değil — hedefli bir sızma stratejisiydi.
+DOJ soruşturması sırasında ortaya çıkan bir detay çarpıcıydı: TD Bank'ın bazı şubelerinde çalışanların örgütlü suç ağları tarafından kasıtlı olarak işe alındığı tespit edilmişti. Yani içeriden tehdit, rastgele bir sapma değil, hedefli bir sızma stratejisiydi.
 
 
 ## Kontrol Zafiyetleri
@@ -67,7 +67,7 @@ Bu vakada devre dışı kalan kontrolleri düşünmek gerekiyor.
 
 Çalışan bilgi erişim izleme sistemi ya yoktu ya da yeterince granüler değildi. Low'un hangi müşteri kayıtlarına ne zaman ve ne sıklıkla eriştiği takip edilseydi, normal iş akışının dışındaki kalıplar tespit edilebilirdi. Bir çalışanın kendi müşteri portföyü dışındaki hesaplara sistematik olarak erişmesi, en temel anlamda kırmızı bayrak olmalıydı.
 
-Çalışan davranış analizi uygulanmadı ya da Low'un aldığı nakit rüşvetleri yakalayamadı. Bir banka çalışanının yaşam standardındaki açıklanamayan değişiklikler — düzenli nakit harcamaları, yeni varlıklar — izlenebilir sinyallerdir. Ama bunun için kurumun çalışanlarını da "müşteri" gibi izlemeye alması gerekir. Çoğu banka bunu yapmıyor.
+Çalışan davranış analizi uygulanmadı ya da Low'un aldığı nakit rüşvetleri yakalayamadı. Bir banka çalışanının yaşam standardındaki açıklanamayan değişiklikler (düzenli nakit harcamaları, yeni varlıklar) izlenebilir sinyallerdir. Ama bunun için kurumun çalışanlarını da "müşteri" gibi izlemeye alması gerekir. Çoğu banka bunu yapmıyor.
 
 Kurumlar arası bilgi paylaşımı çalışmadı. Low, TD Bank'tan ayrılıp başka bir bankaya geçtiğinde, devam eden soruşturma bilgisi yeni işverene ulaşmadı. Bu, sektörün kronik bir sorunu. Bir çalışan hakkında şüphe varsa bile, hukuki ve gizlilik kısıtlamaları nedeniyle bu bilgi çoğu zaman paylaşılmıyor.
 

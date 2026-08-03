@@ -14,7 +14,7 @@ image: "/img/posts/kripto-vergi-duzenlemesi-tbmmde-uc-katmanli-bir-yapi-geliyor.
 
 Bu yazı, teklifi compliance ve platform operasyonu açısından okumak isteyenler için.
 
-## Katman 1: Kripto Varlık İşlem Vergisi — On Binde 3
+## Katman 1: Kripto Varlık İşlem Vergisi, On Binde 3
 
 Teklifin en çok konuşulan kalemi bu. Gider Vergileri Kanunu'na "kripto varlık işlem vergisi" adıyla yeni bir vergi türü ekleniyor.
 
@@ -26,15 +26,15 @@ on binde 3
 
 Beyan takvimi de netleşmiş: Bir aya ait vergi, izleyen ayın 15'i akşamına kadar platformun bağlı olduğu vergi dairesine beyan edilip ödenecek.
 
-Cumhurbaşkanı'na bu oranı sıfıra kadar indirme veya beş katına — yani on binde 15'e — çıkarma yetkisi tanınıyor. Hazine ve Maliye Bakanlığı ise uygulamanın usul ve esaslarını belirlemeye yetkili olacak.
+Cumhurbaşkanı'na bu oranı sıfıra kadar indirme veya beş katına, yani on binde 15'e, çıkarma yetkisi tanınıyor. Hazine ve Maliye Bakanlığı ise uygulamanın usul ve esaslarını belirlemeye yetkili olacak.
 
-On binde 3, başlı başına küçük bir oran. Ancak sektörün günlük işlem hacmi milyarlarca TL düzeyinde olduğunda bu rakamın aylık birikmesi önemli bir vergi yüküne dönüşüyor — ve tüm yük platformun üstünde.
+On binde 3, başlı başına küçük bir oran. Ancak sektörün günlük işlem hacmi milyarlarca TL düzeyinde olduğunda bu rakamın aylık birikmesi önemli bir vergi yüküne dönüşüyor ve tüm yük platformun üstünde.
 
-## Katman 2: Yüzde 10 Stopaj — Kazanç Vergilemesi
+## Katman 2: Yüzde 10 Stopaj, Kazanç Vergilemesi
 
 yüzde 10 oranında tevkifat
 
-yapılacak. Tevkifat, takvim yılının 3'er aylık dönemleri itibarıyla uygulanacak. Gerçek ya da tüzel kişi olması, tam veya dar mükellef olması, hatta vergiden muaf olup olmaması fark etmiyor — kesinti yapılacak.
+yapılacak. Tevkifat, takvim yılının 3'er aylık dönemleri itibarıyla uygulanacak. Gerçek ya da tüzel kişi olması, tam veya dar mükellef olması, hatta vergiden muaf olup olmaması fark etmiyor; kesinti yapılacak.
 
 Maliyet hesabında
 
@@ -44,7 +44,7 @@ yöntemi esas alınacak. Aynı tür kripto varlıkta farklı tarihlerde alım ya
 
 SPK'ya kayıtlı platformlarda tevkifata tabi tutulan kazançlar için gerçek kişilerin ayrıca yıllık beyanname vermesine gerek kalmıyor. Tevkifat bu anlamda nihai vergi sayılıyor. Ancak iki önemli istisna var: platform dışı işlemlerden elde edilen gelirler yıllık gelir vergisi beyannamesiyle beyan edilecek, ticari faaliyet kapsamındaki kazançlar ise ticari kazanç hükümlerine göre ayrıca değerlendirilecek ve önceden kesilen vergiler yıllık beyannamede mahsup edilebilecek.
 
-## Katman 3: Hukuki Statü — Değer Artışı Kazancı
+## Katman 3: Hukuki Statü, Değer Artışı Kazancı
 
 Teklifin vergi boyutunun dışında ama belki de en temel kısmı bu: Kripto varlıkların elden çıkarılmasından doğan kazançlar,
 
@@ -58,9 +58,9 @@ Bir de KDV boyutu var: Kripto varlık işlem vergisi kapsamına giren kripto var
 
 Teklifin dikkatli okunması gereken kısmı burası.
 
-Platformlarda gerçekleştirilen işlemler için tevkifat mekanizması devreye giriyor ve kullanıcı beyanname vermiyor. Ancak SPK'ya kayıtlı platformlar dışında yapılan işlemler — kişiden kişiye transferler, merkezi olmayan borsalar (DEX), yurt dışı platformlar — yıllık gelir vergisi beyannamesiyle bildirilmek zorunda.
+Platformlarda gerçekleştirilen işlemler için tevkifat mekanizması devreye giriyor ve kullanıcı beyanname vermiyor. Ancak SPK'ya kayıtlı platformlar dışında yapılan işlemler, yani kişiden kişiye transferler, merkezi olmayan borsalar (DEX) ve yurt dışı platformlar, yıllık gelir vergisi beyannamesiyle bildirilmek zorunda.
 
-Bu da şu anlama geliyor: Yurt dışı platformlarda işlem yapan Türk yatırımcılar beyan yükümlülüğünü kaybetmiyor, aksine bu yükümlülük daha net hale geliyor. Düzenleme aynı zamanda yerli ve kayıtlı platformları cazip kılmak için bir teşvik mekanizması gibi de çalışıyor — zira orada "iş bitti, vergin kesildi, beyanname yok." Yurt dışında ise yükümlülük kullanıcıda kalıyor.
+Bu da şu anlama geliyor: Yurt dışı platformlarda işlem yapan Türk yatırımcılar beyan yükümlülüğünü kaybetmiyor, aksine bu yükümlülük daha net hale geliyor. Düzenleme aynı zamanda yerli ve kayıtlı platformları cazip kılmak için bir teşvik mekanizması gibi de çalışıyor; zira orada "iş bitti, vergin kesildi, beyanname yok." Yurt dışında ise yükümlülük kullanıcıda kalıyor.
 
 ## Platform Uyum Ekibine Pratik Notlar
 
@@ -76,7 +76,7 @@ Bir kullanıcı kripto varlığını başka bir platforma aktardığında, alı�
 
 İlk transfer beyanı.
 
-Kullanıcı kripto varlığını ilk kez bir platforma transfer ettiğinde alış bedeli, kullanıcının beyanına dayanacak — ancak bu beyanın tevsik edilmesi şartı var. Bu, "kendi dediğini yaz" değil, belgelen ve kanıtla anlamına geliyor.
+Kullanıcı kripto varlığını ilk kez bir platforma transfer ettiğinde alış bedeli, kullanıcının beyanına dayanacak, ancak bu beyanın tevsik edilmesi şartı var. Bu, "kendi dediğini yaz" değil, belgelen ve kanıtla anlamına geliyor.
 
 KYC ve vergi kimliği entegrasyonu.
 

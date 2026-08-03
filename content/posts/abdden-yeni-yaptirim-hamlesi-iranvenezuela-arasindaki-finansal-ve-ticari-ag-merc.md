@@ -1,5 +1,5 @@
 ---
-title: "ABD’den Yeni Yaptırım Hamlesi: İran–Venezuela Arasındaki Finansal ve Ticari Ağ Mercek Altında"
+title: "ABD’den Yeni Yaptırım Hamlesi: İran-Venezuela Arasındaki Finansal ve Ticari Ağ Mercek Altında"
 date: 2026-02-09
 draft: false
 categories: ["Yaptırım"]
