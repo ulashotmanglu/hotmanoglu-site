@@ -8,6 +8,8 @@ description: "12 Mart 2026'da OFAC, Kuzey Kore'nin DPRK organize BT işçisi dol
 image: "/img/posts/vaka-analizi-kuzey-korenin-gorunmez-ordusu-sahte-yazilimcilar-800-milyon-dolar-o.png"
 aliases:
   - "/posts/kuzey-kore-sahte-yazilimcilar/"
+  - "/tags/siber/"
+  - "/tags/siber/page/1/"
 ---
 
 12 Mart 2026'da OFAC, Kuzey Kore'nin (DPRK) organize BT işçisi dolandırıcılık şebekesine yönelik yeni bir yaptırım dalgası başlattı. 6 kişi ve 2 kuruluş SDN listesine eklendi. Aynı anda 21 kripto para adresi — Ethereum ve Tron dahil birden fazla blockchain ağında donduruldu.

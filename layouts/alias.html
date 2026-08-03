@@ -1,0 +1,22 @@
+{{/*
+  Alias (yönlendirme) şablonu — Hugo'nun dahili şablonunu geçersiz kılar.
+  Tüm aliases girdileri bu dosyayı kullanır: eski yazı URL'leri, kaldırılan
+  etiket sayfaları ve eski sayfalama adresleri.
+
+  Dahili şablona göre eklenenler: robots noindex, JavaScript fallback ve
+  script kapalıysa görünen açık bir bağlantı. canonical + meta refresh korunur.
+*/}}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Yönlendiriliyor — {{ with .Page }}{{ .Title }}{{ else }}HOTMANOGLU{{ end }}</title>
+  <link rel="canonical" href="{{ .Permalink }}">
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="refresh" content="0; url={{ .Permalink }}">
+  <script>location.replace({{ .Permalink }});</script>
+</head>
+<body>
+  <p>Bu adres taşındı. Yönlendirilmediyseniz <a href="{{ .Permalink }}">buraya tıklayın</a>.</p>
+</body>
+</html>
