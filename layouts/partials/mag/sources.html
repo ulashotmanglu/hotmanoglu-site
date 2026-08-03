@@ -1,0 +1,77 @@
+{{/*
+  KAYNAKLAR — yazı sonunda, "Sonraki okumalar"dan önce.
+
+  Belgelenmiş şema (front matter):
+    sources:
+      - title: "Kaynak başlığı"
+        url: "https://..."
+        publisher: "Kurum veya yayın"
+        date: "2026-08-01"
+        accessed: "2026-08-03"
+
+  Geriye dönük olarak şu biçimler de kabul edilir:
+      sources:
+        - "https://example.com"                    # düz URL
+        - name: "SEC"
+          link: "https://..."                      # eski anahtar adları
+
+  Davranış:
+  - sources yoksa hiçbir şey basılmaz
+  - url yoksa satır atlanır (başlıksız/linksiz kayıt gösterilmez)
+  - title yoksa bağlantı metni olarak alan adı kullanılır (uzun URL basılmaz)
+  - publisher / date / accessed yalnızca varsa gösterilir
+  - dış bağlantılar rel="noopener noreferrer" alır
+  - metin ve URL Hugo'nun varsayılan kaçışıyla güvenli basılır
+*/}}
+{{ $src := .Params.sources }}
+{{ if $src }}
+{{ $rows := slice }}
+{{ range $src }}
+  {{ $t := "" }}{{ $u := "" }}{{ $pub := "" }}{{ $d := "" }}{{ $acc := "" }}
+  {{ if reflect.IsMap . }}
+    {{ $t   = or (.title | default "") (.name | default "") }}
+    {{ $u   = or (.url | default "") (.link | default "") }}
+    {{ $pub = .publisher | default "" }}
+    {{ $d   = .date | default "" }}
+    {{ $acc = .accessed | default "" }}
+  {{ else }}
+    {{ $u = printf "%v" . }}
+  {{ end }}
+  {{ if $u }}
+    {{ $host := "" }}
+    {{ with urls.Parse $u }}{{ $host = .Host }}{{ end }}
+    {{ if not $t }}{{ $t = or $host $u }}{{ end }}
+    {{ $rows = $rows | append (dict "t" $t "u" $u "pub" $pub "d" $d "acc" $acc "host" $host) }}
+  {{ end }}
+{{ end }}
+
+{{ if $rows }}
+<section class="sources" aria-labelledby="h-sources">
+  <h2 class="sources-h" id="h-sources">Kaynaklar</h2>
+  <ol class="sources-list">
+    {{ range $rows }}
+    {{ $ext := hasPrefix .u "http" }}
+    <li>
+      <a class="src-t" href="{{ .u }}"{{ if $ext }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .t }}</a>
+      {{ $meta := slice }}
+      {{ with .pub }}{{ $meta = $meta | append . }}{{ end }}
+      {{ with .d }}
+        {{ $ds := printf "%v" . }}
+        {{ if findRE `^\d{4}-\d{2}-\d{2}` $ds }}
+          {{ $meta = $meta | append (partial "bits/date.html" (dict "date" (time.AsTime (substr $ds 0 10)))) }}
+        {{ else }}{{ $meta = $meta | append $ds }}{{ end }}
+      {{ end }}
+      {{ if and $ext .host (ne .t .host) }}{{ $meta = $meta | append .host }}{{ end }}
+      {{ with $meta }}<span class="src-m">{{ delimit . " · " }}</span>{{ end }}
+      {{ with .acc }}
+        {{ $as := printf "%v" . }}
+        <span class="src-a">Erişim:
+          {{ if findRE `^\d{4}-\d{2}-\d{2}` $as }}{{ partial "bits/date.html" (dict "date" (time.AsTime (substr $as 0 10))) }}{{ else }}{{ $as }}{{ end }}
+        </span>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ol>
+</section>
+{{ end }}
+{{ end }}

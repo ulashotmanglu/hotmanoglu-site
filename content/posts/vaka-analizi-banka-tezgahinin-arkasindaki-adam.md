@@ -6,6 +6,8 @@ categories: ["Vaka Analizi"]
 tags: ["ABD", "Fraud", "Kara Para Aklama", "Rüşvet", "TD Bank", "Türkiye"]
 description: "21 Ocak 2026'da DOJ, TD Bank New Jersey şubesi çalışanı Oscar Marcel Nunez-Flores'ın suçlamaları kabul ettiğini duyurdu. Nunez, Kolombiyalı kara para aklama..."
 image: "/img/posts/vaka-analizi-banka-tezgahinin-arkasindaki-adam.png"
+aliases:
+  - "/posts/td-bank-kasiyer-davasi/"
 ---
 
 21 Ocak 2026'da DOJ, TD Bank New Jersey şubesi çalışanı Oscar Marcel Nunez-Flores'ın suçlamaları kabul ettiğini duyurdu. Nunez, Kolombiyalı kara para aklama şebekesine banka içinden erişim sağlamış, karşılığında hesap başına 500 ila 2.500 dolar nakit almıştı.

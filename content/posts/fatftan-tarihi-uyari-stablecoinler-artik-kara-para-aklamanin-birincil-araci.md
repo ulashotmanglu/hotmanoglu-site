@@ -6,6 +6,8 @@ categories: ["AML/CFT"]
 tags: ["ABD", "FATF", "Fraud", "Kara Para Aklama", "Kripto", "Kuzey Kore"]
 description: "3 Mart 2026'da FATF, stablecoin ekosistemindeki kara para aklama risklerini ele alan 42 sayfalık kapsamlı bir rapor yayınladı. Rapor bir uyarıdan çok bir..."
 image: "/img/posts/fatftan-tarihi-uyari-stablecoinler-artik-kara-para-aklamanin-birincil-araci.png"
+aliases:
+  - "/posts/fatf-stablecoin-uyari/"
 ---
 
 3 Mart 2026'da FATF, stablecoin ekosistemindeki kara para aklama risklerini ele alan 42 sayfalık kapsamlı bir rapor yayınladı. Rapor bir uyarıdan çok bir itiraf niteliği taşıyor: düzenleyiciler kripto suç tiplemesini yanlış okuyordu.

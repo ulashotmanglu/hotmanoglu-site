@@ -6,6 +6,8 @@ categories: ["Yaptırım"]
 tags: ["ABD", "OFAC", "Rusya", "Türkiye", "Yaptırım", "İran"]
 description: "2 Aralık 2025'te ABD Hazine Bakanlığı'nın yaptırım birimi OFAC, Chicago merkezli özel sermaye fonu IPI Partners'a 11,485,352 USD ceza kesti. Gerekçe: Rus..."
 image: "/img/posts/bilmiyordum-yetmedi-oligark-fonu-51-ihlal-115-milyon-dolar.jpg"
+aliases:
+  - "/posts/bilmiyordum-yetmedi-oligark/"
 ---
 
 2 Aralık 2025'te ABD Hazine Bakanlığı'nın yaptırım birimi OFAC, Chicago merkezli özel sermaye fonu IPI Partners'a 11,485,352 USD ceza kesti. Gerekçe: Rus oligark Suleiman Kerimov'un fonlarını Nisan 2018'deki SDN listesine girişinin ardından dört yıl boyunca yönetmeye devam etmek.

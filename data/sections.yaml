@@ -47,10 +47,10 @@ sections:
     url: "/ekonomi-finans/"
     nav: true
     tagline: "Piyasalar ve para"
-    description: "Merkez bankaları, enerji ve emtia piyasaları, dijital varlık düzenlemeleri ve finansal sistemin makro resmi."
-    # NOT: "Kripto" etiketi bilerek listede değil — 20 yazıda geçiyor ve
-    # bunların çoğu piyasa değil kripto üzerinden aklama/dolandırıcılık
-    # vakası. Onların yeri Fraud & Regülasyon ya da Vaka Dosyaları.
+    description: "Makroekonomi, merkez bankaları, faiz ve enflasyon, enerji piyasaları, bankacılık sektörü ve finansal piyasalar."
+    # KAPSAM: yalnızca makro/piyasa içerikleri. Fraud, AML, yaptırım ve vaka
+    # analizleri buraya düşmesin diye hem etiket listesi daraltıldı hem de
+    # aşağıdaki dışlamalar eklendi. (Önce: 11 yazının 6'sı fraud içeriğiydi.)
     categories:
       - "Ekonomi"
     tags:
@@ -66,12 +66,28 @@ sections:
       - "Küresel Piyasalar"
       - "Piyasalar"
       - "Jeopolitik"
-      - "Stablecoin"
-      - "DeFi"
       - "Bankacılık"
-      - "Sermaye Piyasası"
-      - "Yatırım"
       - "Ödeme Sistemleri"
+      - "IMF"
+      - "Fintech"
+    exclude_categories:
+      - "Fraud"
+      - "AML/CFT"
+      - "Yaptırım"
+      - "Vaka Analizi"
+    exclude_tags:
+      - "Fraud"
+      - "Dolandırıcılık"
+      - "Kara Para Aklama"
+      - "Deepfake"
+      - "OFAC"
+      - "FATF"
+      - "FinCEN"
+      - "KYC"
+      - "SAR"
+      - "BSA"
+      - "Insider Trading"
+      - "İç Tehdit"
 
   - key: fraud-regulasyon
     title: "Fraud & Regülasyon"
@@ -107,6 +123,11 @@ sections:
       - "RegTech"
       - "İşlem İzleme"
       - "Terör Finansmanı"
+      - "FTC"
+      - "Insider Trading"
+      - "Rüşvet"
+      - "Yolsuzluk"
+      - "Sahte İşlem"
 
   - key: teknoloji
     title: "Teknoloji"

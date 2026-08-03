@@ -26,13 +26,19 @@
   {{ else }}
     {{ $cats := $sec.categories | default slice }}
     {{ $tags := $sec.tags | default slice }}
+    {{/* Opsiyonel dışlamalar: bir bölüm, konusu dışındaki içerikleri
+         (ör. Ekonomi'ye düşen fraud vakaları) kapsam dışı bırakabilir. */}}
+    {{ $xc := $sec.exclude_categories | default slice }}
+    {{ $xt := $sec.exclude_tags | default slice }}
     {{ range $pool }}
       {{ $pc := .Params.categories | default slice }}
       {{ $pt := .Params.tags | default slice }}
       {{ if not (reflect.IsSlice $pc) }}{{ $pc = slice $pc }}{{ end }}
       {{ if not (reflect.IsSlice $pt) }}{{ $pt = slice $pt }}{{ end }}
       {{ if or (intersect $pc $cats) (intersect $pt $tags) }}
-        {{ $result = $result | append . }}
+        {{ if not (or (intersect $pc $xc) (intersect $pt $xt)) }}
+          {{ $result = $result | append . }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}

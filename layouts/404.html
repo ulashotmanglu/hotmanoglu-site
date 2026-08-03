@@ -1,0 +1,33 @@
+{{ define "main" }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
+
+<section class="nf" aria-labelledby="nf-h">
+  <div class="shell nf-in">
+    <p class="nf-code">404</p>
+    <h1 class="nf-h" id="nf-h">Sayfa bulunamadı</h1>
+    <p class="nf-d">
+      Aradığınız sayfa taşınmış, adı değişmiş veya hiç var olmamış olabilir.
+      Aşağıdan aramayı açabilir ya da güncel akışa geçebilirsiniz.
+    </p>
+
+    <div class="nf-actions">
+      <a class="nf-btn nf-btn-primary" href="/">Ana sayfa</a>
+      <button class="nf-btn" id="nf-search">Sitede ara</button>
+      <a class="nf-btn" href="/gundem/">Gündem</a>
+      <a class="nf-btn" href="/arsiv/">Arşiv</a>
+    </div>
+  </div>
+</section>
+
+{{ with first 3 $posts }}
+<section class="nf-latest" aria-labelledby="nf-latest-h">
+  <div class="shell">
+    {{ partial "mag/secbar.html" (dict "title" "Son yayımlananlar" "id" "nf-latest-h"
+        "links" (slice (dict "label" "Tüm akış" "url" "/gundem/"))) }}
+    <div class="nf-grid">
+      {{ range . }}{{ partial "mag/story.html" (dict "page" . "size" "md" "img" true "ratio" "16x9" "dek" true) }}{{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}
+{{ end }}

@@ -1,0 +1,15 @@
+{{/*
+  Görselin gerçek piksel boyutlarını width/height niteliği olarak döndürür.
+  Kaynak: data/imagesizes.yaml. Kayıt yoksa boş döner — görünüm bozulmaz,
+  çünkü tüm görsel kaplarında CSS aspect-ratio zaten tanımlı.
+
+  Kullanım: <img src="..."{{ partial "bits/imgattr.html" $src }} ...>
+*/}}
+{{ $src := . | string }}
+{{ $out := "" }}
+{{ with site.Data.imagesizes }}{{ with .sizes }}
+  {{ with index . $src }}
+    {{ $out = printf " width=\"%v\" height=\"%v\"" .w .h }}
+  {{ end }}
+{{ end }}{{ end }}
+{{ return ($out | safeHTMLAttr) }}

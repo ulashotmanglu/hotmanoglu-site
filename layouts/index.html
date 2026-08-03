@@ -15,7 +15,7 @@
   <div class="shell hero-in">
     <div class="hero-fig">
       {{ with $hero.Params.image }}
-      <img src="{{ . }}" alt="{{ $hero.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
+      <img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="{{ $hero.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
       {{ end }}
     </div>
     <div class="hero-txt">
@@ -87,7 +87,7 @@
         {{/* İkinci satır küçük yatay görsel taşır; üç satır aynı görünmesin */}}
         <li class="{{ if eq $i 1 }}fs-media{{ end }}">
           {{ if eq $i 1 }}
-            {{ with $p.Params.image }}<span class="fs-thumb"><img src="{{ . }}" alt="" loading="lazy" decoding="async"></span>{{ end }}
+            {{ with $p.Params.image }}<span class="fs-thumb"><img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="" loading="lazy" decoding="async"></span>{{ end }}
           {{ end }}
           <div>
             {{ partial "bits/kicker.html" (dict "page" $p) }}
@@ -119,7 +119,7 @@
       {{ range $i, $p := $case }}
       <article class="case {{ if eq $i 0 }}case-lead{{ else }}case-sub{{ end }}">
         <a class="case-link" href="{{ $p.RelPermalink }}">
-          <div class="case-img"><img src="{{ $p.Params.image }}" alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>
+          <div class="case-img"><img src="{{ $p.Params.image }}"{{ partial "bits/imgattr.html" $p.Params.image }} alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>
           <div class="case-body">
             <span class="case-k">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
             <h3 class="case-h">{{ $p.Title }}</h3>

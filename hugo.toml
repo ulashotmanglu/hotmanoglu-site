@@ -21,7 +21,9 @@ enableRobotsTXT = true
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
-      unsafe = true
+      # content/posts içinde ham HTML kullanılmıyor (iframe/script/style/div/
+      # img/a/table/br/sup taraması: 0 dosya), bu yüzden kapatıldı.
+      unsafe = false
   [markup.tableOfContents]
     startLevel = 2
     endLevel = 3
@@ -47,7 +49,7 @@ enableRobotsTXT = true
 
 # JSON: istemci tarafı arama indeksi (/index.json)
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "ROBOTS"]
 
 [sitemap]
   changefreq = "weekly"

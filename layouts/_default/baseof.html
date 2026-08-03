@@ -17,6 +17,11 @@
     })();
   </script>
 
+  {{/* ── Sayfa tipi ────────────────────────────────────────────
+       Yalnızca content/posts altındaki gerçek yazılar "article";
+       ana sayfa, hub, Hakkında, İletişim ve politika sayfaları "website". */}}
+  {{ $isArticle := and .IsPage (eq .Section "posts") }}
+
   {{ $title := "" }}
   {{ if .IsHome }}
     {{ $title = printf "%s — %s" site.Title "Bağımsız dijital yayın" }}
@@ -27,6 +32,7 @@
 
   {{ $desc := "" }}
   {{ with .Description }}{{ $desc = . }}{{ else }}{{ with .Params.description }}{{ $desc = . }}{{ else }}{{ $desc = site.Params.description }}{{ end }}{{ end }}
+  {{ if $isArticle }}{{ $desc = partial "bits/deck.html" (dict "page" . "max" 200) }}{{ end }}
   <meta name="description" content="{{ $desc }}">
   <meta name="author" content="{{ site.Params.author }}">
   <link rel="canonical" href="{{ .Permalink }}">
@@ -34,24 +40,89 @@
   <meta name="theme-color" content="#F5F4F0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
 
+  {{/* Paylaşım görseli: yalnızca sayfanın kendi görseli varsa verilir.
+       Site geneli için uygun bir raster paylaşım görseli repository'de
+       bulunmadığından favicon.svg fallback olarak KULLANILMAZ — geçersiz
+       bir og:image vermektense hiç vermemek doğrudur. */}}
+  {{ $img := "" }}
+  {{ with .Params.image }}{{ if ne . "" }}{{ $img = . | absURL }}{{ end }}{{ end }}
+
   <!-- Open Graph -->
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} — Bağımsız dijital yayın{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
-  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ site.Title }}">
   <meta property="og:locale" content="tr_TR">
-  {{ if and .Params.image (ne .Params.image "") }}
-  <meta property="og:image" content="{{ .Params.image | absURL }}">
-  {{ else }}
-  <meta property="og:image" content="{{ "favicon.svg" | absURL }}">
+  {{ with $img }}<meta property="og:image" content="{{ . }}">{{ end }}
+
+  {{ if $isArticle }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{ with .Params.updated }}<meta property="article:modified_time" content="{{ (time.AsTime .).Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  <meta property="article:author" content="{{ partial "bits/byline.html" (dict "page" .) }}">
+  {{ with .Params.categories }}{{ range first 1 . }}{{ if . }}<meta property="article:section" content="{{ . }}">{{ end }}{{ end }}{{ end }}
+  {{ range .Params.tags }}<meta property="article:tag" content="{{ . }}">
   {{ end }}
-  <meta name="twitter:card" content="summary_large_image">
+  {{ end }}
+
+  <meta name="twitter:card" content="{{ if $img }}summary_large_image{{ else }}summary{{ end }}">
   <meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }}{{ end }}">
   <meta name="twitter:description" content="{{ $desc }}">
+  {{ with $img }}<meta name="twitter:image" content="{{ . }}">{{ end }}
 
-  {{ with .OutputFormats.Get "rss" }}
+  {{ with site.Home.OutputFormats.Get "rss" }}
   <link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+  {{ end }}
+
+  {{/* ── JSON-LD ───────────────────────────────────────────────
+       dict + jsonify ile güvenli serileştirme; elle string birleştirme yok.
+       Yalnızca config ve içerikte gerçekten bulunan veriler kullanılır. */}}
+  {{ $person := dict "@type" "Person" "name" site.Params.author }}
+  {{ with site.Params.linkedin }}{{ $person = merge $person (dict "sameAs" (slice .)) }}{{ end }}
+
+  {{ if .IsHome }}
+    {{ $ld := dict
+        "@context" "https://schema.org"
+        "@type" "WebSite"
+        "name" site.Title
+        "url" site.BaseURL
+        "inLanguage" "tr-TR"
+        "description" site.Params.description
+        "publisher" $person }}
+    <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+  {{ else if $isArticle }}
+    {{ $art := dict
+        "@context" "https://schema.org"
+        "@type" "BlogPosting"
+        "headline" .Title
+        "description" $desc
+        "url" .Permalink
+        "mainEntityOfPage" .Permalink
+        "inLanguage" "tr-TR"
+        "datePublished" (.Date.Format "2006-01-02")
+        "author" $person
+        "publisher" (dict "@type" "Organization" "name" site.Title "url" site.BaseURL) }}
+    {{ with $img }}{{ $art = merge $art (dict "image" (slice .)) }}{{ end }}
+    {{ with .Params.updated }}{{ $art = merge $art (dict "dateModified" ((time.AsTime .).Format "2006-01-02")) }}{{ end }}
+    {{ with .Params.tags }}{{ $art = merge $art (dict "keywords" (delimit . ", ")) }}{{ end }}
+    {{ with .Params.categories }}{{ range first 1 . }}{{ if . }}{{ $art = merge $art (dict "articleSection" .) }}{{ end }}{{ end }}{{ end }}
+    <script type="application/ld+json">{{ $art | jsonify | safeJS }}</script>
+
+    {{ $crumbs := slice
+        (dict "@type" "ListItem" "position" 1 "name" "Ana sayfa" "item" site.BaseURL)
+        (dict "@type" "ListItem" "position" 2 "name" "Yazılar" "item" (absURL "/posts/"))
+        (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink) }}
+    <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs | jsonify | safeJS }}</script>
+  {{ else }}
+    {{ $wp := dict
+        "@context" "https://schema.org"
+        "@type" "WebPage"
+        "name" .Title
+        "url" .Permalink
+        "inLanguage" "tr-TR"
+        "description" $desc
+        "isPartOf" (dict "@type" "WebSite" "name" site.Title "url" site.BaseURL) }}
+    <script type="application/ld+json">{{ $wp | jsonify | safeJS }}</script>
   {{ end }}
 
   <!-- Fonts -->
@@ -61,7 +132,12 @@
        Metadata için sistem mono yığını kullanılır, ek webfont yüklenmez. */}}
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="/css/style.css">
+  {{/* Asset pipeline: içerik hash'i URL'ye gömülür, deploy sonrası eski
+       cache kalmaz. integrity + SRI birlikte üretilir. */}}
+  {{ with resources.Get "css/style.css" }}
+    {{ $css := . | minify | fingerprint "sha256" }}
+    <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{ end }}
   {{ block "head" . }}{{ end }}
 </head>
 <body>
@@ -72,6 +148,9 @@
   </main>
   {{ partial "footer.html" . }}
   {{ partial "search-overlay.html" . }}
-  <script src="/js/main.js" defer></script>
+  {{ with resources.Get "js/main.js" }}
+    {{ $js := . | minify | fingerprint "sha256" }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  {{ end }}
 </body>
 </html>

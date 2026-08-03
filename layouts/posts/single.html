@@ -48,7 +48,7 @@
   <!-- ── KAPAK ─────────────────────────────────────────── -->
   {{ with .Params.image }}
   <figure class="shell art-cover">
-    <img src="{{ . }}" alt="{{ $.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
+    <img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="{{ $.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
     {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}
@@ -73,6 +73,8 @@
     <div class="prose" id="articleBody">
       {{ .Content }}
     </div>
+
+    {{ partial "mag/sources.html" . }}
 
     {{ with .Params.tags }}
     <div class="art-tags">

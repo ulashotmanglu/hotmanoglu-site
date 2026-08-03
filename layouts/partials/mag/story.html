@@ -20,7 +20,7 @@
 <article class="st st-{{ $size }}">
   {{ if and $img $src }}
   <div class="st-img ar-{{ $ratio }}">
-    <img src="{{ $src }}" alt="{{ $p.Params.image_alt | default "" }}"
+    <img src="{{ $src }}"{{ partial "bits/imgattr.html" $src }} alt="{{ $p.Params.image_alt | default "" }}"
          {{ if $eager }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
   </div>
   {{ end }}

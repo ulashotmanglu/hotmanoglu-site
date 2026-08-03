@@ -23,7 +23,7 @@
     <div class="blog-list">
       {{ range $blog }}
       <article class="bl-item">
-        {{ with .Params.image }}<div class="bl-img"><img src="{{ . }}" alt="{{ $.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>{{ end }}
+        {{ with .Params.image }}<div class="bl-img"><img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="{{ $.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>{{ end }}
         <div>
           {{ partial "bits/kicker.html" (dict "page" .) }}
           <h2 class="bl-h"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
@@ -35,8 +35,12 @@
     </div>
   {{ else }}
     <div class="blog-empty blog-empty-lg">
-      <p class="be-t">Bu bölüm hazırlanıyor.</p>
-      <p>Denetim, fraud, kariyer ve değişen iş dünyası üzerine kişisel yazılar yakında burada yayımlanacak. Bu arada platformun nasıl çalıştığını <a href="/hakkimda/">Hakkında</a> sayfasından okuyabilir, güncel içerikler için <a href="/gundem/">Gündem</a> akışına bakabilirsiniz.</p>
+      <p class="be-t">Kişisel yazılar ve değerlendirmeler yakında burada yayımlanacak.</p>
+      <p>Denetim, fraud incelemeleri, kariyer ve değişen iş dünyası üzerine yazılar bu bölümde toplanacak.</p>
+      <p class="be-links">
+        <a href="/arsiv/">Arşive göz at</a>
+        <a href="/hakkimda/">Yazar hakkında</a>
+      </p>
     </div>
   {{ end }}
 </div>

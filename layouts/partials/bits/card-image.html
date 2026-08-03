@@ -11,10 +11,10 @@
 
 <div class="card-media ratio-{{ $ratio }}">
   {{ if $img }}
-    {{/* Görseller temsilî; başlık zaten içeriği anlatıyor, bu yüzden alt
+    {{/* Görseller temsili; başlık zaten içeriği anlatıyor, bu yüzden alt
          varsayılan olarak boştur (dekoratif). Front matter'da image_alt
          verilirse o kullanılır. */}}
-    <img src="{{ $img }}" alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async" sizes="{{ $sizes }}">
+    <img src="{{ $img }}"{{ partial "bits/imgattr.html" $img }} alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async" sizes="{{ $sizes }}">
   {{ else }}
     {{/* Estetik fallback: marka harfi + ince tarama deseni */}}
     <div class="card-media-fallback" aria-hidden="true">

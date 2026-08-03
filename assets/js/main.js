@@ -160,6 +160,8 @@
     if (lastFocused && lastFocused.focus) lastFocused.focus();
   }
   if (searchBtn) searchBtn.addEventListener('click', openSearch);
+  var nfSearch = document.getElementById('nf-search');   // 404 sayfasındaki arama düğmesi
+  if (nfSearch) nfSearch.addEventListener('click', openSearch);
   if (searchClose) searchClose.addEventListener('click', closeSearch);
   if (overlay) {
     overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSearch(); });

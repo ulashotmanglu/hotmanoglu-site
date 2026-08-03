@@ -960,3 +960,58 @@ main>section:first-child{padding-top:var(--s7)}
     -webkit-hyphens: none;
   }
 }
+
+/* ==========================================================================
+   KAYNAKLAR
+   Makale gövdesinin iki yana yaslama stilinden bağımsızdır (.prose dışında).
+   ========================================================================== */
+.sources{max-width:var(--read);margin-top:var(--s7);padding-top:var(--s5);border-top:1px solid var(--line)}
+.sources-h{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:var(--s4)}
+.sources-list{counter-reset:src}
+.sources-list>li{counter-increment:src;position:relative;padding:var(--s3) 0 var(--s3) var(--s6);
+  border-top:1px solid var(--line-soft);text-align:left;overflow-wrap:anywhere}
+.sources-list>li:first-child{border-top:0}
+.sources-list>li::before{content:counter(src);position:absolute;left:0;top:calc(var(--s3) + 3px);
+  font-family:var(--f-mono);font-size:11.5px;color:var(--blue)}
+.src-t{display:inline;font-size:16px;line-height:1.45;color:var(--ink);
+  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;
+  text-decoration-color:var(--line);transition:color var(--t),text-decoration-color var(--t)}
+.src-t:hover{color:var(--blue);text-decoration-color:var(--blue)}
+.src-m,.src-a{display:block;margin-top:4px;font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.src-a{opacity:.85}
+@media(max-width:620px){
+  .sources-list>li{padding-left:var(--s5)}
+  .src-t{font-size:15.5px}
+}
+
+/* Blog boş durumu — sade yönlendirme bağlantıları */
+.be-links{display:flex;flex-wrap:wrap;gap:var(--s5);margin-top:var(--s5)}
+.be-links a{font-family:var(--f-sans);font-weight:600;font-size:14.5px;color:var(--blue);
+  border-bottom:2px solid var(--blue);padding-bottom:3px}
+.blog-empty-lg .be-links a{border-bottom-width:2px}
+
+/* ==========================================================================
+   404 — mevcut tasarım sistemiyle aynı dil
+   ========================================================================== */
+.nf{padding-top:var(--s9)!important}
+.nf-in{max-width:var(--read)}
+.nf-code{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;color:var(--blue)}
+.nf-h{margin-top:var(--s3);font-size:clamp(32px,3.6vw,50px);line-height:1.05;letter-spacing:-.036em}
+.nf-d{margin-top:var(--s4);font-size:18px;line-height:1.55;color:var(--muted);max-width:52ch}
+.nf-actions{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s6);
+  padding-top:var(--s5);border-top:1px solid var(--line)}
+.nf-btn{display:inline-flex;align-items:center;padding:10px 18px;border:1px solid var(--line);
+  font-family:var(--f-sans);font-size:14.5px;font-weight:600;color:var(--ink);
+  transition:border-color var(--t),color var(--t),background var(--t)}
+.nf-btn:hover{border-color:var(--ink)}
+.nf-btn-primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.nf-btn-primary:hover{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
+.nf-latest{padding-bottom:var(--s8)}
+.nf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s6)}
+@media(max-width:980px){.nf-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){
+  .nf-grid{grid-template-columns:1fr;gap:var(--s5)}
+  .nf-actions{gap:var(--s2)}
+  .nf-btn{padding:9px 14px;font-size:14px}
+}
