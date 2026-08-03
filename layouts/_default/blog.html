@@ -23,7 +23,7 @@
     <div class="blog-list">
       {{ range $blog }}
       <article class="bl-item">
-        {{ with .Params.image }}<div class="bl-img"><img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="{{ $.Params.image_alt | default "" }}" loading="lazy" decoding="async"></div>{{ end }}
+        {{ with .Params.image }}<div class="bl-img">{{ partial "bits/img.html" (dict "src" . "alt" ($.Params.image_alt | default "") "sizes" "(max-width: 620px) 100vw, 300px") }}</div>{{ end }}
         <div>
           {{ partial "bits/kicker.html" (dict "page" .) }}
           <h2 class="bl-h"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>

@@ -1,0 +1,62 @@
+{{/*
+  Merkezî responsive görsel partial'ı.
+
+  Tek <img> etiketi basar. Kaynağı üç ayrı yoldan ele alır:
+
+  1) İşlenebilir yerel görsel — static/img mount'u sayesinde
+     resources.Get ile bulunur. WebP varyantları üretilir, srcset,
+     sizes, width ve height verilir.
+  2) Dış URL (http, protokolsüz veya data:) — Hugo processing
+     uygulanmaz, olduğu gibi basılır.
+  3) Bulunamayan yerel yol — mevcut davranış korunur: ham src ve
+     data/imagesizes.yaml'dan width/height. Publisher yeni bir görseli
+     henüz yüklememişse ya da alışılmadık bir yol yazmışsa sayfa
+     bozulmaz.
+
+  Görsel yolu hiç yoksa hiçbir şey basılmaz; kırık <img> üretilmez.
+  Fallback kutusu çağıran tarafın sorumluluğundadır (bkz. card-image).
+
+  dict:
+    src    — front matter'daki yol, örn "/img/posts/x.png"
+    alt    — alternatif metin (varsayılan boş: görseller temsili)
+    sizes  — CSS sizes ifadesi
+    class  — <img> üzerindeki sınıf
+    eager  — true ise fetchpriority="high" ve lazy yok (LCP görseli)
+
+  Kalite: PNG kaynaklar q82. Görsellerin tamamı karanlık, gradyan
+  ağırlıklı illüstrasyon; q80 bu bölgelerde bantlanma riski taşıyor.
+  Zaten JPEG olan kaynaklar bir kez daha kayıplı kodlanacağı için q80.
+*/}}
+{{ $src := .src | default "" }}
+{{ if $src }}
+  {{ $alt := .alt | default "" }}
+  {{ $sizes := .sizes | default "100vw" }}
+  {{ $class := .class | default "" }}
+  {{ $eager := .eager | default false }}
+
+  {{ $external := or (hasPrefix $src "http") (hasPrefix $src "//") (hasPrefix $src "data:") }}
+  {{ $res := false }}
+  {{ if not $external }}
+    {{ $res = resources.Get (strings.TrimPrefix "/" $src) }}
+  {{ end }}
+
+  {{ if $res }}
+    {{ $q := cond (eq $res.MediaType.SubType "png") 82 80 }}
+    {{/* Kaynaktan geniş varyant üretilmez: küçük görseller büyütülmez. */}}
+    {{ $vars := slice }}
+    {{ range (slice 600 900 1200 1600) }}
+      {{ if le . $res.Width }}
+        {{ $vars = $vars | append ($res.Resize (printf "%dx webp q%d" . $q)) }}
+      {{ end }}
+    {{ end }}
+    {{ if not $vars }}
+      {{ $vars = slice ($res.Resize (printf "%dx webp q%d" $res.Width $q)) }}
+    {{ end }}
+    {{ $big := index $vars (sub (len $vars) 1) }}
+    {{ $set := slice }}
+    {{ range $vars }}{{ $set = $set | append (printf "%s %dw" .RelPermalink .Width) }}{{ end }}
+    <img src="{{ $big.RelPermalink }}" srcset="{{ delimit $set ", " }}" sizes="{{ $sizes }}" width="{{ $big.Width }}" height="{{ $big.Height }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} decoding="async"{{ if $eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}>
+  {{ else }}
+    <img src="{{ $src }}"{{ if not $external }}{{ partial "bits/imgattr.html" $src }}{{ end }} alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }} decoding="async"{{ if $eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }}>
+  {{ end }}
+{{ end }}

@@ -5,6 +5,35 @@ title = "HOTMANOGLU"
   pagerSize = 12
 enableRobotsTXT = true
 
+# ─────────────────────────────────────────────────────────────
+# GÖRSEL MOUNT KATMANI
+#
+# Hugo yalnızca assets altındaki dosyaları işleyebilir; static
+# altındakiler olduğu gibi kopyalanır. Görseller ise static/img/posts
+# altında durmak zorunda: sanal-ofis publisher (static/admin.html)
+# GitHub API ile oraya yüklüyor, o dizini listeliyor ve front matter'a
+# /img/posts/<slug>.<ext> yazıyor.
+#
+# Aşağıdaki mount, static/img'i ikinci bir ad altında assets/img olarak
+# da görünür kılar. Tek fiziksel kopya vardır:
+#   - /img/posts/x.png olarak static gibi yayınlanmaya devam eder
+#     (eski URL'ler, publisher önizlemesi ve paylaşılmış og:image'lar
+#      kırılmaz)
+#   - resources.Get "img/posts/x.png" ile işlenebilir hale gelir
+#     (WebP + responsive varyantlar)
+#
+# assets mount'u da açıkça yazılmalı: bir hedef kök için mount
+# tanımlandığında o kökün varsayılanı devre dışı kalır, aksi halde
+# assets/css ve assets/js kaybolur.
+# ─────────────────────────────────────────────────────────────
+[module]
+  [[module.mounts]]
+    source = "assets"
+    target = "assets"
+  [[module.mounts]]
+    source = "static/img"
+    target = "assets/img"
+
 [params]
   description = "Teknoloji, ekonomi ve finansal suçlar üzerine bağımsız Türkçe yayın."
   author = "Ulaş Hotmanoğlu"

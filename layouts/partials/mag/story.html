@@ -20,8 +20,11 @@
 <article class="st st-{{ $size }}">
   {{ if and $img $src }}
   <div class="st-img ar-{{ $ratio }}">
-    <img src="{{ $src }}"{{ partial "bits/imgattr.html" $src }} alt="{{ $p.Params.image_alt | default "" }}"
-         {{ if $eager }}fetchpriority="high"{{ else }}loading="lazy"{{ end }} decoding="async">
+    {{ partial "bits/img.html" (dict
+         "src" $src
+         "alt" ($p.Params.image_alt | default "")
+         "eager" $eager
+         "sizes" (.sizes | default (cond (eq $size "lg") "(max-width: 900px) 100vw, 62vw" "(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"))) }}
   </div>
   {{ end }}
   <div class="st-body">

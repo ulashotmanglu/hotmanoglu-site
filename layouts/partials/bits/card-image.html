@@ -14,7 +14,7 @@
     {{/* Görseller temsili; başlık zaten içeriği anlatıyor, bu yüzden alt
          varsayılan olarak boştur (dekoratif). Front matter'da image_alt
          verilirse o kullanılır. */}}
-    <img src="{{ $img }}"{{ partial "bits/imgattr.html" $img }} alt="{{ $p.Params.image_alt | default "" }}" loading="lazy" decoding="async" sizes="{{ $sizes }}">
+    {{ partial "bits/img.html" (dict "src" $img "alt" ($p.Params.image_alt | default "") "sizes" $sizes) }}
   {{ else }}
     {{/* Estetik fallback: marka harfi + ince tarama deseni */}}
     <div class="card-media-fallback" aria-hidden="true">

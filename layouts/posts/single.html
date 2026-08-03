@@ -48,7 +48,13 @@
   <!-- ── KAPAK ─────────────────────────────────────────── -->
   {{ with .Params.image }}
   <figure class="shell art-cover">
-    <img src="{{ . }}"{{ partial "bits/imgattr.html" . }} alt="{{ $.Params.image_alt | default "" }}" fetchpriority="high" decoding="async">
+    {{/* Yazı kapağı LCP görselidir: lazy değil, fetchpriority yüksek.
+         .art-cover max 1100px, shell padding 64px. */}}
+    {{ partial "bits/img.html" (dict
+         "src" .
+         "alt" ($.Params.image_alt | default "")
+         "eager" true
+         "sizes" "(max-width: 1164px) calc(100vw - 64px), 1100px") }}
     {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>
   {{ end }}
