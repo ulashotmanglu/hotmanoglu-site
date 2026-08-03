@@ -18,7 +18,7 @@ Konu seçimi, yazıların editoryal değerlendirmesi ve yayın öncesi son kontr
 
 ## İçerikler nasıl hazırlanıyor?
 
-Önce konu seçiliyor. Bir olayın ele alınması için anlatmaya değer bir tarafının olması bekleniyor: işlemeyen bir kontrol, düzenleyici tarafta yeni bir eğilim ya da benzer kurumlar için karşılığı olan bir bulgu. Ardından kaynaklar toplanıyor; metindeki tarihler, tutarlar, kurum ve kişi adları kaynağına geri götürülerek kontrol ediliyor.
+Önce konu seçiliyor. Bir konu seçilirken işlemeyen bir kontrol, yeni bir düzenleyici eğilim veya benzer kurumlar için anlam taşıyan bir bulgu aranıyor. Ardından kaynaklar toplanıyor; metindeki tarihler, tutarlar, kurum ve kişi adları kaynağına geri götürülerek kontrol ediliyor.
 
 Metin editoryal düzenlemeden geçtikten sonra yayımlanıyor. Yazıların bir bölümü yapay zeka desteğiyle hazırlanıyor, yayımlanan her metin insan kontrolünden geçiyor. Yayından sonra hata fark edilirse yazı düzeltiliyor ve değişiklik gizlenmiyor.
 

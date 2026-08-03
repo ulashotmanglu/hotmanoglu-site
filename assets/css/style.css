@@ -1029,7 +1029,8 @@ main>section:first-child{padding-top:var(--s7)}
   justify-content:start;
 }
 .page-body{max-width:var(--read)}
-/* Statik sayfalar sola hizalı kalır; yaslama yalnızca makalelerde. */
+/* Taban hizalama sola. Yaslama yalnızca gövde paragraflarına verilir
+   (aşağıdaki blok); başlıklar, listeler ve kart bu tabandan miras alır. */
 .page-prose{font-size:17.5px;line-height:1.72;text-align:left}
 .page-prose>*+*{margin-top:var(--s4)}
 .page-prose h2{
@@ -1060,9 +1061,38 @@ main>section:first-child{padding-top:var(--s7)}
 /* Buton .prose içinde kaldığı için `.prose a` (0,1,1) rengi `.btn-primary`
    (0,1,0) kuralını eziyordu: mavi zemin üstünde mavi metin. Aşağıdaki
    kurallar buton görünümünü .prose bağlamında geri verir. */
-.page-prose .btn{line-height:1.2;text-decoration:none}
+/* text-align açıkça center: buton, gövde paragraflarının yaslama kuralından
+   markup değişse de etkilenmesin. İçerik genişliğinde kutu olduğu için
+   masaüstünde görsel etkisi yok. */
+.page-prose .btn{line-height:1.2;text-decoration:none;text-align:center;justify-content:center}
 .page-prose .btn-primary,.page-prose .btn-primary:hover{color:#fff}
 .page-prose .btn-ghost,.page-prose .btn-ghost:hover{color:var(--ink)}
+
+/* ─── Statik sayfa gövde paragrafları: iki yana yaslama ────────────────────
+   Kapsam .static-page kapsayıcısına bağlıdır ve yalnızca .page-prose'un
+   DOĞRUDAN p çocuklarını ile İletişim sayfasındaki .contact-note'u alır.
+   Kapsam dışında kalanlar:
+     h1/h2/h3 başlıkları ve .page-hero-eyebrow  (başlık alanı, sola hizalı)
+     .page-hero-desc                            (künye açıklaması)
+     .contact-topics li ve diğer listeler       (madde metinleri)
+     .contact-links .btn                        (buton, kendi flex hizası)
+     .about-aside .author-card                  (.page-prose dışında)
+     .ft footer                                 (.static-page dışında)
+   Özgüllük (0,2,1); .prose p (0,1,1) ve .page-prose (0,1,0) kurallarını
+   dosya sırasından bağımsız olarak geçer. Makale kuralı
+   .art-body .prose > p ayrı bir kapsayıcıya bağlı olduğundan etkilenmez.
+   Türkçe heceleme <html lang="tr"> üzerinden çalışır.
+   Üç genişlikte de (1440/820/390) geçerlidir; mobilde sola dönen kural yok.
+   ───────────────────────────────────────────────────────────────────────── */
+.static-page .page-prose > p,
+.static-page .page-prose .contact-note{
+  text-align:justify;
+  text-justify:inter-word;
+  hyphens:auto;
+  -webkit-hyphens:auto;
+  overflow-wrap:break-word;
+  text-wrap:wrap;            /* .prose p'deki text-wrap:pretty'yi ezer */
+}
 
 /* ─── Mobil ────────────────────────────────────────────────────────────── */
 @media(max-width:1180px){
