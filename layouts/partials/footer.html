@@ -19,20 +19,22 @@
       <h2>Yayın</h2>
       <ul>
         <li><a href="/blog/">Blog</a></li>
-        <li><a href="/hakkimda/">Hakkında</a></li>
         <li><a href="/arsiv/">Arşiv</a></li>
-        <li><a href="/iletisim/">İletişim</a></li>
+        {{ with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
+        {{ with site.Params.linkedin }}<li><a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end }}
       </ul>
     </nav>
 
-    <nav class="ft-col" aria-label="Editoryal">
-      <h2>Editoryal</h2>
+    {{/* Hakkında, İletişim ve politika sayfaları tek yerde toplanır.
+         Hakkında sayfası bu bağlantıları ayrıca listelemez. */}}
+    <nav class="ft-col" aria-label="Platform ve editoryal">
+      <h2>Platform</h2>
       <ul>
+        <li><a href="/hakkimda/">Hakkında</a></li>
+        <li><a href="/iletisim/">İletişim</a></li>
         <li><a href="/editoryal-ilkeler/">Editoryal İlkeler</a></li>
-        <li><a href="/ai-politikasi/">AI Politikası</a></li>
+        <li><a href="/ai-politikasi/">AI Kullanım Politikası</a></li>
         <li><a href="/duzeltme-politikasi/">Düzeltme Politikası</a></li>
-        {{ with site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .RelPermalink }}">RSS</a></li>{{ end }}
-        {{ with site.Params.linkedin }}<li><a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a></li>{{ end }}
       </ul>
     </nav>
   </div>

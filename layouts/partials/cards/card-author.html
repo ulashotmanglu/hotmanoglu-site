@@ -5,6 +5,9 @@
   yazarına eşitse kurucu profili gösterir; aksi halde nötr editoryal
   imza kartı basar. Eski yazılara insan yazarlığı atfedilmez.
 */}}
+{{/* compact: yalnızca LinkedIn bağlantısı gösterilir. Hakkında sayfasında
+     "Hakkında" ve "Editoryal ilkeler" bağlantıları tekrar olurdu. */}}
+{{ $compact := .compact | default false }}
 {{ $isFounder := .founder | default false }}
 {{ with .page }}
   {{ $o := .Params.content_origin | default "" | lower }}
@@ -16,15 +19,17 @@
   <div class="author-card-body">
     {{ if $isFounder }}
       <p class="author-card-name">{{ site.Params.author }}</p>
-      <p class="author-card-role">Denetim, fraud incelemeleri ve AML/CFT üzerine çalışıyor. HOTMANOGLU'nun kurucusu ve editörü.</p>
+      {{/* compact modda kısa rol: Hakkında sayfasında gövdedeki biyografiyi
+           birebir tekrar etmesin. */}}
+      <p class="author-card-role">{{ if $compact }}HOTMANOGLU'nun kurucusu ve editörü.{{ else }}Denetim, fraud incelemeleri ve AML/CFT üzerine çalışıyor. HOTMANOGLU'nun kurucusu ve editörü.{{ end }}</p>
     {{ else }}
       <p class="author-card-name">HOTMANOGLU Editoryal</p>
       <p class="author-card-role">Bu içerik platformun editoryal süreciyle hazırlandı ve yayın öncesi insan onayından geçti.</p>
     {{ end }}
     <div class="author-card-links">
-      <a href="/hakkimda/">Hakkında</a>
+      {{ if not $compact }}<a href="/hakkimda/">Hakkında</a>{{ end }}
       {{ with site.Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
-      <a href="/editoryal-ilkeler/">Editoryal ilkeler</a>
+      {{ if not $compact }}<a href="/editoryal-ilkeler/">Editoryal ilkeler</a>{{ end }}
     </div>
   </div>
 </aside>

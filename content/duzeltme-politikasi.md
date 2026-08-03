@@ -1,33 +1,24 @@
 ---
 title: "Düzeltme Politikası"
 layout: "page"
-eyebrow: "Editoryal çerçeve"
-description: "Hata tespit edildiğinde ne yapıldığı, nasıl işaretlendiği ve nasıl bildirilebileceği."
+eyebrow: "Editoryal"
+description: "Bir hatanın nasıl bildirileceği, nasıl kontrol edildiği ve nasıl düzeltildiği."
 ---
 
 Hata yapılır. Önemli olan, hatanın sessizce kaybolmaması.
 
-## Nasıl işliyor
-
-1. **Bildirim.** Hata; okur bildirimi, kaynak güncellemesi veya iç kontrol sırasında tespit edilir.
-2. **Kontrol.** İddia kaynağına geri götürülerek doğrulanır.
-3. **Düzeltme.** Yazı düzeltilir.
-4. **İşaretleme.** Düzeltmenin niteliğine göre yazıda görünür bir not bırakılır.
-
-## Düzeltme türleri
-
-- **Maddi düzeltme.** Rakam, tarih, isim, kurum veya olayın özüne ilişkin bir hata. Yazının içinde düzeltme notu olarak belirtilir ve güncelleme tarihi künyeye eklenir.
-- **Güncelleme.** Olay gelişmiştir, yeni bilgi eklenmiştir. Yazının sonuna güncelleme notu düşülür.
-- **Küçük düzeltme.** Yazım, imla veya bağlantı hatası. Ayrı not düşülmeden düzeltilir.
-
-Bir yazı yayından tamamen kaldırılırsa nedeni belirtilir.
-
 ## Nasıl bildirilir
 
-Bir hata gördüyseniz [İletişim](/iletisim/) sayfasındaki kanallardan yazabilirsiniz. Bildirirken şunlar en çok işe yarar:
+Bir yazıda hata gördüyseniz [İletişim](/iletisim/) sayfasından yazabilirsiniz. Bildirimde yazının bağlantısı, hatalı olduğunu düşündüğünüz ifade ve varsa doğru bilgiye ait kaynak en çok işe yarayan bilgilerdir.
 
-- Yazının bağlantısı
-- Hatalı olduğunu düşündüğünüz ifade
-- Varsa doğru bilgiye dair kaynak
+## Nasıl kontrol edilir
+
+Bildirim geldiğinde ilgili ifade kaynağına geri götürülür. Hata okur bildirimi dışında kaynak güncellemesi veya kendi kontrolümüz sırasında da ortaya çıkabilir. Kontrol sonucunda hata doğrulanırsa yazı düzeltilir.
+
+## Nasıl düzeltilir
+
+Rakam, tarih, isim veya olayın özüne ilişkin bir hata varsa yazı düzeltilir, içine görünür bir düzeltme notu eklenir ve güncelleme tarihi künyede gösterilir. Olay geliştiği için yeni bilgi ekleniyorsa yazının sonuna güncelleme notu düşülür. Yazım ve bağlantı hataları ayrı not düşülmeden düzeltilir.
+
+Bir yazı yayından tamamen kaldırılırsa nedeni belirtilir.
 
 Bildirimlere elden geldiğince yanıt verilmeye çalışılır; bu bir hizmet taahhüdü değil, iyi niyet beyanıdır.

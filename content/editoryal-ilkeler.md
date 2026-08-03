@@ -1,51 +1,28 @@
 ---
 title: "Editoryal İlkeler"
 layout: "page"
-eyebrow: "Editoryal çerçeve"
-description: "İçeriğin nasıl seçildiği, nasıl doğrulandığı ve hangi sınırlar içinde yayımlandığı."
+eyebrow: "Editoryal"
+description: "Yazıların hangi ölçütlere göre hazırlandığı ve yayımlandığı."
 ---
 
-Bu ilkeler HOTMANOGLU'nun çalışma çerçevesini tanımlar. İlk sürümdür ve zaman içinde genişletilecektir.
+## Doğruluk
 
-## Konu seçimi
+Yayın öncesinde tarihler, tutarlar, kurum ve kişi adları ile olayın sırası kontrol edilir. Doğrulanamayan bir rakam kesin bir veri gibi sunulmaz.
 
-Bir olay şu sorulardan en az birine anlamlı bir cevap veriyorsa ele alınır:
+## Kaynak
 
-- Burada hangi kontrol çalışmadı?
-- Düzenleyici neye tepki verdi ve neden şimdi?
-- Bu olay benzer kurumlar için ne anlama geliyor?
+Öncelik birincil kaynaktadır: karar metni, resmi duyuru, denetim raporu, kurum açıklaması. İkincil kaynak kullanıldığında bu belirtilir. Bir bilgi henüz iddia aşamasındaysa metinde iddia olarak yazılır.
 
-Sadece güncel olduğu için, tek başına bir haber değeri üzerinden içerik üretilmez.
+## Değerlendirme
 
-## Kaynak kullanımı
-
-- Öncelik birincil kaynaktadır: karar metni, duyuru, denetim raporu, kurum açıklaması.
-- İkincil kaynak kullanıldığında bu belirtilir.
-- Kaynağın kendisi belirsizse metinde "iddia" olduğu açıkça yazılır.
-- Doğrulanamayan bir rakam, yuvarlanmış ya da kesinmiş gibi sunulmaz.
-
-## Doğrulama
-
-Yayın öncesi kontrol edilen asgari unsurlar: tarihler, tutarlar, kurum ve kişi adları, yaptırım/karar başlıkları ve olayın kronolojisi.
-
-## Ayrım
-
-Aktarım ile yorum ayrı tutulur. Bir değerlendirme yapılıyorsa bunun yazarın çıkarımı olduğu metinden anlaşılır biçimde yazılır.
-
-## Bağımsızlık
-
-- İçerikler herhangi bir kurumun resmi görüşünü temsil etmez.
-- Sponsorlu içerik yayımlanmaz; bu durum değişirse açıkça etiketlenir.
-- Yazılarda geçen kurum ve kişilerle ticari bir ilişki varsa belirtilir.
-
-## Yapay zeka
-
-İçeriklerin bir bölümü yapay zeka desteğiyle hazırlanır. Kullanım kapsamı [AI Kullanım Politikası](/ai-politikasi/) sayfasında ayrıntılı olarak açıklanmıştır. Hiçbir içerik insan onayı olmadan yayımlanmaz.
-
-## Sınırlar
-
-Buradaki içerikler bilgilendirme amaçlıdır; hukuki, mali veya yatırım tavsiyesi değildir. Devam eden soruşturmalarda, aksi bir yargı kararı olmadıkça masumiyet karinesi esas alınır.
+Aktarılan bilgi ile yapılan yorum ayrı tutulur. Bir çıkarımda bulunuluyorsa bunun yazarın değerlendirmesi olduğu metinden anlaşılır. Devam eden soruşturmalarda, aksi bir yargı kararı olmadıkça masumiyet karinesi esas alınır.
 
 ## Düzeltme
 
-Hata yapıldığında düzeltilir ve düzeltme görünür kılınır. Bkz. [Düzeltme Politikası](/duzeltme-politikasi/).
+Hata fark edildiğinde yazı düzeltilir ve düzeltme görünür biçimde belirtilir. Nasıl işlediği [Düzeltme Politikası](/duzeltme-politikasi/) sayfasında anlatılıyor.
+
+## Çıkar çatışması
+
+Yazılar herhangi bir kurumun görüşünü temsil etmez. Sponsorlu içerik yayımlanmaz; bu değişirse açıkça etiketlenir. Yazıda geçen bir kurum veya kişiyle ticari bir ilişki varsa belirtilir.
+
+Buradaki yazılar bilgilendirme amaçlıdır; hukuki, mali veya yatırım tavsiyesi değildir.

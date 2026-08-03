@@ -365,7 +365,6 @@ main>section:first-child{padding-top:var(--s7)}
 .page-hero-desc a{color:var(--blue);text-decoration:underline;text-underline-offset:3px}
 .page-hero-count,.page-hero-meta{margin-top:var(--s4);padding-top:var(--s4);border-top:1px solid var(--line);
   font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
-.page-hero-narrow .page-hero-title,.page-hero-narrow .page-hero-desc{max-width:34ch}
 
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(17rem,1fr));gap:var(--s6) var(--s5);margin-top:var(--s6)}
 .card{position:relative}
@@ -426,11 +425,6 @@ main>section:first-child{padding-top:var(--s7)}
 .about-layout{display:grid;grid-template-columns:minmax(0,1fr) 19rem;gap:var(--s8);align-items:start;margin-top:var(--s7)}
 .about-main{max-width:var(--read)}
 .about-aside{position:sticky;top:8rem;display:grid;gap:var(--s5)}
-.about-links{border-top:2px solid var(--ink);padding-top:var(--s4)}
-.about-links-head{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:var(--s3)}
-.about-links li+li{margin-top:var(--s2)}
-.about-links a{font-size:15px}
-.about-links a:hover{color:var(--blue)}
 .author-card{display:grid;grid-template-columns:auto minmax(0,1fr);gap:var(--s4);padding:var(--s5);
   border:1px solid var(--line);background:var(--surface)}
 .author-card-avatar{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--ink);border-radius:50%;
@@ -1004,4 +998,91 @@ main>section:first-child{padding-top:var(--s7)}
   .nf-grid{grid-template-columns:1fr;gap:var(--s5)}
   .nf-actions{gap:var(--s2)}
   .nf-btn{padding:9px 14px;font-size:14px}
+}
+
+/* ==========================================================================
+   15 STATİK SAYFALAR — Hakkında, İletişim, politika sayfaları
+
+   Bu sayfalar yazı sayfasıyla aynı .prose tabanını kullanıyor; ancak
+   yazı sayfası için ayarlanmış 19px gövde ve çok geniş h2 aralıkları
+   burada boşluklu ve biçimsiz duruyordu. .page-prose bu ritmi statik
+   sayfalar için yeniden kurar. Makale kurallarına (.art-body içindeki
+   iki yana yaslama dahil) dokunulmaz.
+   ========================================================================== */
+
+/* ─── Başlık alanı ─────────────────────────────────────────────────────── */
+/* Sticky masthead 52px. --s9 üst boşluk başlığın menüye yapışmasını
+   ve kırpılmasını önler. */
+.static-page .page-hero{padding-top:var(--s9)}
+.page-hero-static{padding-bottom:var(--s6);border-bottom:1px solid var(--line);margin-bottom:var(--s7)}
+.page-hero-static .page-hero-title{max-width:18ch}
+.page-hero-static .page-hero-desc{margin-top:var(--s5);max-width:56ch;font-size:17.5px;line-height:1.6}
+.page-hero-static .page-hero-meta{margin-top:var(--s5)}
+
+/* ─── Gövde ────────────────────────────────────────────────────────────── */
+/* Metin sütunu okuma genişliğinde sabitlenir; artan yer ızgaranın sağına
+   taşar. Böylece gövde ile kart arasında ölü boşluk kalmaz ve blok,
+   başlık alanıyla aynı sol hizada durur. */
+.static-page .about-layout{
+  margin-top:0;
+  grid-template-columns:minmax(0,var(--read)) 19rem;
+  justify-content:start;
+}
+.page-body{max-width:var(--read)}
+/* Statik sayfalar sola hizalı kalır; yaslama yalnızca makalelerde. */
+.page-prose{font-size:17.5px;line-height:1.72;text-align:left}
+.page-prose>*+*{margin-top:var(--s4)}
+.page-prose h2{
+  margin-top:var(--s7);
+  padding-top:var(--s4);
+  border-top:1px solid var(--line-soft);
+  font-size:clamp(19px,1.6vw,22px);
+  letter-spacing:-.024em;
+}
+.page-prose h2:first-child{margin-top:0;padding-top:0;border-top:0}
+.page-prose h2+p{margin-top:var(--s4)}
+.page-prose h3{margin-top:var(--s5);font-size:18px}
+.page-prose ul,.page-prose ol{padding-left:var(--s4);margin-top:var(--s4)}
+.page-prose ul>li{padding-left:var(--s4)}
+.page-prose li+li{margin-top:var(--s2)}
+
+/* ─── Hakkında: kurucu kartı ───────────────────────────────────────────── */
+.about-aside .author-card-role{font-size:14px}
+.about-aside .author-card-links{margin-top:var(--s4)}
+
+/* ─── İletişim bloğu ───────────────────────────────────────────────────── */
+.contact-block{margin-top:var(--s6);padding-top:var(--s5);border-top:1px solid var(--line-soft)}
+.contact-block .contact-links{margin-top:0}
+.contact-note{margin-top:var(--s5);font-size:16px;line-height:1.6;color:var(--muted);max-width:52ch}
+.contact-topics{margin-top:var(--s5)}
+.contact-topics li{font-size:15.5px;color:var(--muted)}
+
+/* Buton .prose içinde kaldığı için `.prose a` (0,1,1) rengi `.btn-primary`
+   (0,1,0) kuralını eziyordu: mavi zemin üstünde mavi metin. Aşağıdaki
+   kurallar buton görünümünü .prose bağlamında geri verir. */
+.page-prose .btn{line-height:1.2;text-decoration:none}
+.page-prose .btn-primary,.page-prose .btn-primary:hover{color:#fff}
+.page-prose .btn-ghost,.page-prose .btn-ghost:hover{color:var(--ink)}
+
+/* ─── Mobil ────────────────────────────────────────────────────────────── */
+@media(max-width:1180px){
+  /* Tek sütun. Bu kural yukarıdaki .static-page .about-layout tanımıyla
+     aynı özgüllükte olmalı, yoksa iki sütunlu ızgara mobilde de kalır. */
+  .static-page .about-layout{
+    grid-template-columns:minmax(0,1fr);
+    justify-content:stretch;
+    gap:var(--s7);
+  }
+  /* Kart, DOM sırası gereği içeriğin altına geçer. */
+  .static-page .about-aside{max-width:var(--read)}
+}
+
+@media(max-width:620px){
+  .static-page .page-hero{padding-top:var(--s8)}
+  .page-hero-static{padding-bottom:var(--s5);margin-bottom:var(--s6)}
+  .page-hero-static .page-hero-title{max-width:none}
+  .page-hero-static .page-hero-desc{margin-top:var(--s4);font-size:16.5px}
+  .page-prose{font-size:17px}
+  .page-prose h2{margin-top:var(--s6);padding-top:var(--s4)}
+  .contact-links .btn{width:100%;justify-content:center}
 }

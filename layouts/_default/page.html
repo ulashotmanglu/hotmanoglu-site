@@ -1,27 +1,41 @@
 {{ define "main" }}
-<header class="page-hero page-hero-narrow wrap">
-  {{ with .Params.eyebrow }}<p class="page-hero-eyebrow">{{ . }}</p>{{ end }}
-  <h1 class="page-hero-title">{{ .Title }}</h1>
-  {{ with .Params.description }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
-  {{ with .Params.updated }}
-  <p class="page-hero-meta">Son güncelleme: {{ partial "bits/date.html" (dict "date" (time.AsTime .)) }}</p>
-  {{ end }}
-</header>
+<div class="static-page">
+  <header class="page-hero page-hero-static wrap">
+    {{ with .Params.eyebrow }}<p class="page-hero-eyebrow">{{ . }}</p>{{ end }}
+    <h1 class="page-hero-title">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="page-hero-desc">{{ . }}</p>{{ end }}
+    {{ with .Params.updated }}
+    <p class="page-hero-meta">Son güncelleme: {{ partial "bits/date.html" (dict "date" (time.AsTime .)) }}</p>
+    {{ end }}
+  </header>
 
-<div class="wrap">
-  <div class="prose">
-    {{ .Content }}
+  <div class="wrap">
+    <div class="page-body prose page-prose">
+      {{ .Content }}
 
-    {{ if .Params.show_contact }}
-    <div class="contact-links">
-      {{ with site.Params.linkedin }}
-      <a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn'de yaz</a>
-      {{ end }}
-      {{ with site.Params.email }}
-      <a class="btn btn-ghost" href="mailto:{{ . }}">{{ . }}</a>
+      {{/* İletişim bloğu: buton, kısa not ve konu satırları. Metinler
+           front matter'dan gelir, layout'ta sabit kopya tutulmaz. */}}
+      {{ if .Params.show_contact }}
+      <div class="contact-block">
+        <div class="contact-links">
+          {{ with site.Params.linkedin }}
+          <a class="btn btn-primary" href="{{ . }}" target="_blank" rel="noopener">LinkedIn'de yaz</a>
+          {{ end }}
+          {{ with site.Params.email }}
+          <a class="btn btn-ghost" href="mailto:{{ . }}">{{ . }}</a>
+          {{ end }}
+        </div>
+
+        {{ with .Params.contact_note }}<p class="contact-note">{{ . }}</p>{{ end }}
+
+        {{ with .Params.contact_topics }}
+        <ul class="contact-topics">
+          {{ range . }}<li>{{ . }}</li>{{ end }}
+        </ul>
+        {{ end }}
+      </div>
       {{ end }}
     </div>
-    {{ end }}
   </div>
 </div>
 {{ end }}
