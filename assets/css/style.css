@@ -748,12 +748,6 @@ main>section:first-child{padding-top:var(--s7)}
 }
 
 /* ─── YAZI: KISACA ────────────────────────────────────────────────────── */
-.brief{margin-top:var(--s5);padding:var(--s4) var(--s5);background:var(--surface);border-left:3px solid var(--blue)}
-.brief-lbl{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.brief ul{margin-top:var(--s3)}
-.brief li{position:relative;padding-left:var(--s4);font-size:15.5px;line-height:1.5}
-.brief li+li{margin-top:var(--s2)}
-.brief li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:1.5px;background:var(--blue)}
 
 /* ─── YAZI: METİN RİTMİ ───────────────────────────────────────────────── */
 .prose h2{margin-top:calc(var(--s8) + var(--s4));padding-top:var(--s5);border-top:1px solid var(--line-soft);scroll-margin-top:120px}
@@ -866,6 +860,9 @@ main>section:first-child{padding-top:var(--s7)}
 @media(min-width:1100px){
   .art-toc .art-head{max-width:calc(var(--read) + 240px + var(--s8));margin-inline:auto}
   .art-toc .art-head>*{max-width:var(--read)}
+  /* Başlık künye kutusunun tamamını kullanır; deck ve künye okuma
+     genişliğinde kalmaya devam eder. */
+  .art-toc .art-h{max-width:none}
   /* İçindekiler rayı olan yazılarda da kapak metin sütununa yakın kalır:
      künye kutusu geniş olsa bile İÇERİĞİ 760px'te hizalanıyor, kapak da
      onunla aynı optik sütunu takip etmeli. */
