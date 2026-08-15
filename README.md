@@ -38,7 +38,7 @@ değildir; yoksa ilgili arayüz parçası hiç basılmaz.
 | `author` | string | Künyedeki yazar adı. Yoksa `content_origin`'e göre belirlenir. |
 | `content_origin` | `ulas` \| `ai` \| `hybrid` | Üretim notu metni; `ulas` ise yazı Blog bölümünde listelenir ve yazar kutusu büyür. Alan yoksa geriye dönük sınıflandırma yapılmaz. |
 | `updated` | tarih | Künyede "Güncellendi" ve `article:modified_time`. |
-| `key_points` | string listesi | Künyenin altında "Kısaca" bloğu. Otomatik özet üretilmez; alan yoksa blok görünmez. |
+| `key_points` | string listesi | Veri olarak saklanır, yazı sayfasında gösterilmez. |
 | `sources` | liste | Yazı sonunda "Kaynaklar" bölümü (aşağıya bakınız). |
 | `image_alt` | string | Görsel alt metni. Yoksa görsel dekoratif sayılır (`alt=""`). |
 | `image_caption` | string | Kapak görselinin altındaki açıklama. |

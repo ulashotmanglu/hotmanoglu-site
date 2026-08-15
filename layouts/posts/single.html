@@ -27,13 +27,10 @@
     <h1 class="art-h">{{ .Title }}</h1>
     {{ with partial "bits/deck.html" (dict "page" . "max" 260) }}<p class="art-d">{{ . }}</p>{{ end }}
 
-    {{/* Kısaca — yalnızca front matter'da key_points varsa. Otomatik özet üretilmez. */}}
-    {{ with .Params.key_points }}
-    <div class="brief">
-      <span class="brief-lbl">Kısaca</span>
-      <ul>{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
-    </div>
-    {{ end }}
+    {{/* key_points front matter'da tutulmaya devam ediyor ancak yazı sayfasında
+         "Kısaca" bloğu olarak GÖSTERİLMİYOR. Alan publisher tarafından yazılabilir;
+         meta description, Open Graph ve JSON-LD ise description alanından
+         (bits/deck.html) beslenir, bu kaldırmadan etkilenmez. */}}
 
     <div class="art-meta">
       <span class="art-by">{{ $author }}</span>
