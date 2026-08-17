@@ -1,0 +1,10 @@
+V6 station cutouts prepared from the generated 1536x1024 RGBA composite.
+PNG RGBA, transparency preserved. No flattening.
+
+researcher-station.png: 373x489, alpha=(0, 254), bytes=275424
+writer-station.png: 384x481, alpha=(0, 253), bytes=264550
+factcheck-station.png: 384x459, alpha=(0, 254), bytes=277680
+image-station.png: 384x461, alpha=(0, 254), bytes=284975
+publisher-station.png: 438x504, alpha=(0, 254), bytes=326013
+social-station.png: 479x496, alpha=(0, 254), bytes=330122
+accountant-station.png: 419x503, alpha=(0, 254), bytes=311279
