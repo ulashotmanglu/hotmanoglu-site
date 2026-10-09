@@ -1,0 +1,22 @@
+{{ if and site.Params.analytics.enabled (ne .Kind "404") }}
+<section class="analytics-consent" id="analyticsConsent" aria-labelledby="analyticsConsentTitle" hidden>
+  <div>
+    <h2 id="analyticsConsentTitle">Ziyaret ölçümüne izin verir misiniz?</h2>
+    <p>İzin verirseniz ziyaret, trafik kaynağı ve okuma etkileşimleri Google Analytics ile ölçülür. Reddederseniz analitik çalışmaz. Tercihinizi her zaman değiştirebilirsiniz. <a href="/gizlilik/">Gizlilik ve Çerezler</a></p>
+    <p id="analyticsConsentStatus" role="status"></p>
+  </div>
+  <div class="analytics-consent-actions">
+    <button type="button" data-analytics-choice="denied">Reddet</button>
+    <button type="button" data-analytics-choice="granted">Analitiğe izin ver</button>
+    <button type="button" data-analytics-close hidden>Tercihleri kapat</button>
+  </div>
+</section>
+{{ with resources.Get "js/analytics.js" }}
+  {{ $js := . | minify | fingerprint "sha256" }}
+  <script id="analyticsSettings" src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer
+    data-measurement-id="{{ site.Params.analytics.measurementID }}"
+    data-page-location="{{ $.Permalink }}"
+    data-page-title="{{ $.Title }}"
+    data-page-type="{{ if and $.IsPage (eq $.Section "posts") }}article{{ else }}website{{ end }}"></script>
+{{ end }}
+{{ end }}

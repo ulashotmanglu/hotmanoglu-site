@@ -47,6 +47,12 @@ enableRobotsTXT = true
   category = "categories"
   tag = "tags"
 
+# Tek mevcut GA4 akışı. İzin verilmeden Google etiketi yüklenmez.
+[params.analytics]
+  # GA4 enhanced measurement kapatılıp saklama açıklaması doğrulanınca açılır.
+  enabled = false
+  measurementID = "G-KKHBRTL8LJ"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

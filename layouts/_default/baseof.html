@@ -146,11 +146,12 @@
   {{ end }}
 
   <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   {{/* İki metin ailesi: Instrument Sans (başlık/arayüz) + Inter (gövde).
        Metadata için sistem mono yığını kullanılır, ek webfont yüklenmez. */}}
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  {{ with resources.Get "css/fonts.css" }}
+    {{ $fonts := . | minify | fingerprint "sha256" }}
+    <link rel="stylesheet" href="{{ $fonts.RelPermalink }}" integrity="{{ $fonts.Data.Integrity }}">
+  {{ end }}
 
   {{/* Asset pipeline: içerik hash'i URL'ye gömülür, deploy sonrası eski
        cache kalmaz. integrity + SRI birlikte üretilir. */}}
@@ -168,6 +169,7 @@
   </main>
   {{ partial "footer.html" . }}
   {{ partial "search-overlay.html" . }}
+  {{ partial "analytics.html" . }}
   {{ with resources.Get "js/main.js" }}
     {{ $js := . | minify | fingerprint "sha256" }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>

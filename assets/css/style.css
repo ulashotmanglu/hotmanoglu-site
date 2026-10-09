@@ -54,6 +54,20 @@ input{font:inherit;color:inherit}
 ::selection{background:rgba(23,92,255,.16)}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 
+/* Çerez seçimi içerik okumayı engellemez; iki seçim aynı ağırlıktadır. */
+.analytics-consent[hidden]{display:none}
+.analytics-consent{position:fixed;z-index:150;left:1rem;right:1rem;bottom:1rem;max-width:880px;margin:auto;
+  padding:1.25rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;
+  box-shadow:0 8px 36px rgba(0,0,0,.15);font-size:14px;line-height:1.55;max-height:70vh;overflow:auto}
+.analytics-consent h2{font-size:20px;margin-bottom:.5rem}
+.analytics-consent a{text-decoration:underline;text-underline-offset:3px}
+.analytics-consent-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1rem}
+.analytics-consent-actions button{padding:.65rem .9rem;border:1px solid var(--blue);border-radius:4px;color:var(--blue);font-weight:600}
+.analytics-consent-actions button:hover{background:var(--paper)}
+.analytics-consent-actions button[hidden]{display:none}
+#analyticsConsentStatus:empty{display:none}
+#analyticsConsentStatus{margin-top:.5rem;color:var(--muted)}
+
 .skip-link{position:absolute;left:var(--s4);top:-4rem;z-index:200;padding:var(--s3) var(--s5);
   background:var(--ink);color:var(--ink-inv);font-family:var(--f-sans);font-weight:600;font-size:14px}
 .skip-link:focus{top:var(--s4)}
