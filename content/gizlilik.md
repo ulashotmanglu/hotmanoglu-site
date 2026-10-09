@@ -13,6 +13,8 @@ HOTMANOGLU, ziyaret ölçümünü yalnızca analitik tercihinize izin verdiğini
 
 Her sayfanın altındaki **Çerez tercihleri** düğmesiyle kararınızı değiştirebilirsiniz. İzni geri çekerseniz ölçüm durur, bu kurulumun public site alanındaki analitik çerezleri silinir ve sayfa yenilenir. Önceden gönderilmiş veriler bu işlemle Google'dan otomatik olarak silinmez.
 
+Tercih yazılamazsa sayfa otomatik yenilenmez ve analitik kapalı kalır; bir durum mesajı gösterilir. Ret kararı sekme oturumunda ve yalnız bu public siteye ait `hm-analytics-denied` tercih çerezinde de tutulur. Bu zorunlu tercih çerezi takip için kullanılmaz, değeri yalnız ret bilgisidir ve en fazla 180 gün geçerlidir. Diğer açık sekmelere ret bildirimi gönderilir. Tarayıcı tüm saklama yollarını engelliyorsa kalıcı ret için tarayıcı ayarlarından site verilerini temizleyebilirsiniz.
+
 ## İzin verirseniz hangi veriler ölçülür?
 
 Google Analytics 4, ziyaret ve oturum sayısı, yayınlanan sayfanın başlığı ve temiz adresi, bilinen trafik kaynakları, etkileşim süresi, yazı sayfasında yüzde 90 kaydırma ve belirli bağlantı etkileşimlerini ölçmek için kullanılır. Bağlantı etkileşimleri LinkedIn/X/diğer dış bağlantı türü, paylaşma, bağlantı kopyalama, RSS veya iletişim gibi sabit etiketlerle gönderilir; tıklanan bağlantının tam adresi veya metni gönderilmez.

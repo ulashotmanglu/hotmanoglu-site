@@ -119,6 +119,56 @@ async function run() {
  assert.equal((await returning.context.cookies()).filter(c=>c.name.startsWith('_ga')).length,0);
  await finish(returning,'Returning grant / unknown referrer omitted / cross-tab revocation stops measurement');
 
+ // Regression: an old grant remains readable, but denial cannot replace it.
+ // Both throwing writes and silently ignored writes must fail closed.
+ for (const mode of ['throw', 'ignore']) {
+  const failed=await fixture({saved:'granted'});
+  const other=await failed.context.newPage();await other.goto(site+'/',{waitUntil:'networkidle'});
+  assert.equal(failed.payloads.filter(e=>e.name==='page_view').length,2);
+  for (const page of [failed.page,other]) await page.evaluate(mode=>{
+   const original=Storage.prototype.setItem;
+   Storage.prototype.setItem=function(k,v) {
+    if (this === window.localStorage) {if (mode === 'throw') throw new Error('Read-only storage');return;}
+    return original.call(this,k,v);
+   };
+   const remove=Storage.prototype.removeItem;
+   Storage.prototype.removeItem=function(k) {if(this === window.localStorage) throw new Error('Read-only storage');return remove.call(this,k);};
+  },mode);
+  const documentToken=await failed.page.evaluate(()=>{window.testDocumentToken='same-document';return window.testDocumentToken;});
+  await failed.page.locator('[data-analytics-preferences]').click();
+  await failed.page.waitForTimeout(100);
+  const count=failed.payloads.length;
+  await failed.page.locator('[data-analytics-choice="denied"]').click();
+  await other.waitForFunction(()=>window['ga-disable-G-KKHBRTL8LJ'] === true);
+  await failed.page.waitForTimeout(100);
+  assert.equal(await failed.page.evaluate(()=>window.testDocumentToken),documentToken,'failed denial must not reload');
+  assert.equal(await failed.page.evaluate(key=>JSON.parse(localStorage.getItem(key)).choice,key),'granted','fixture must retain the stale grant');
+  assert.equal(await failed.page.locator('script[src*="googletagmanager"]').count(),0);
+  assert.equal(await other.locator('script[src*="googletagmanager"]').count(),0);
+  const fresh=await failed.context.newPage();await fresh.goto(site+'/',{waitUntil:'networkidle'});
+  assert.equal(failed.payloads.length,count,'denial marker must protect newly opened tabs with writable storage');
+  assert.equal(await fresh.locator('script[src*="googletagmanager"]').count(),0);
+  assert.equal((await failed.context.cookies()).filter(c=>c.name.startsWith('_ga')).length,0);
+  assert.match(await failed.page.locator('#analyticsConsentStatus').innerText(),/Tercih kaydedilemedi/);
+  assert.equal(failed.payloads.length,count);
+  // Even after storage becomes writable again, the tab's revocation latch wins.
+  await failed.page.reload({waitUntil:'networkidle'});await other.reload({waitUntil:'networkidle'});
+  assert.equal(failed.payloads.length,count,'stale grant must not restart GA on manual reload');
+  assert.equal(await failed.page.locator('script[src*="googletagmanager"]').count(),0);
+  assert.equal(await other.locator('script[src*="googletagmanager"]').count(),0);
+  await finish(failed,'Old grant + '+mode+' denial/removal failure: no reload/restart, broadcast stops other tab, rejection marker protects reload/new tab');
+ }
+
+ const readOnly=await fixture({saved:'granted'});
+ await readOnly.context.addInitScript(()=>{
+  const original=Storage.prototype.setItem;
+  Storage.prototype.setItem=function(k,v){if(this===window.localStorage) throw new Error('Read-only storage');return original.call(this,k,v);};
+ });
+ const readOnlyCount=readOnly.payloads.length;await readOnly.page.reload({waitUntil:'networkidle'});
+ assert.equal(readOnly.payloads.length,readOnlyCount,'readable but unwritable old grant must not start GA');
+ assert.equal(await readOnly.page.locator('script[src*="googletagmanager"]').count(),0);
+ await finish(readOnly,'Readable old grant with storage write failure on load: no automatic restart');
+
  for (const options of [{expired:true,saved:'granted'},{host:'https://ofis.hotmanoglu.com'},{page404:true,path:'/unknown/'},{noStorage:true}]) {
   const f=await fixture(options);assert.equal(f.requests.length,0);assert.equal(f.payloads.length,0);
   if (options.expired || options.noStorage) assert.equal(await f.page.locator('#analyticsConsent').isVisible(),true);

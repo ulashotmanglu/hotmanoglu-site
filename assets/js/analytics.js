@@ -14,14 +14,17 @@
   if (canonical.origin !== 'https://www.hotmanoglu.com' || canonical.pathname !== location.pathname) return;
   canonical.search = ''; canonical.hash = '';
   var preferenceKey = 'hm-analytics-consent-v1';
+  var revokedKey = 'hm-analytics-revoked-v1';
+  var denialCookie = 'hm-analytics-denied';
   var maxAge = 180 * 24 * 60 * 60 * 1000;
   var active = false, started = false, scrollSent = false;
   var tag = null;
+  var forcedDenied = false, persistenceFailed = false, channel = null;
   var closeButton = banner.querySelector('[data-analytics-close]');
   var status = document.getElementById('analyticsConsentStatus');
   var consent = { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' };
 
-  function preference() {
+  function storedPreference() {
     try {
       var saved = JSON.parse(localStorage.getItem(preferenceKey));
       if (saved && (saved.choice === 'granted' || saved.choice === 'denied') &&
@@ -29,8 +32,50 @@
     } catch (e) {}
     return null;
   }
+  function preference() {
+    if (forcedDenied) return 'denied';
+    if (document.cookie.split(';').some(function (part) { return part.trim() === denialCookie + '=1'; })) return 'denied';
+    try { if (sessionStorage.getItem(revokedKey) === 'denied') return 'denied'; } catch (e) {}
+    return storedPreference();
+  }
   function remember(choice) {
-    try { localStorage.setItem(preferenceKey, JSON.stringify({ choice: choice, at: Date.now() })); } catch (e) {}
+    var value = JSON.stringify({ choice: choice, at: Date.now() });
+    try {
+      localStorage.setItem(preferenceKey, value);
+      return localStorage.getItem(preferenceKey) === value;
+    } catch (e) { return false; }
+  }
+  function writableGrant() {
+    // A readable but unwritable old grant is not sufficient to restart GA.
+    // Preserve its original timestamp rather than extending consent on visits.
+    try {
+      var probe = preferenceKey + '-write-check';
+      var value = String(Date.now()) + ':' + String(Math.random());
+      localStorage.setItem(probe, value);
+      var written = localStorage.getItem(probe) === value;
+      localStorage.removeItem(probe);
+      return written;
+    } catch (e) { return false; }
+  }
+  function latchDenial() {
+    forcedDenied = true;
+    try { sessionStorage.setItem(revokedKey, 'denied'); } catch (e) {}
+    // A strictly necessary host-only rejection marker protects newly opened
+    // tabs too when the old localStorage grant cannot be overwritten/deleted.
+    document.cookie = denialCookie + '=1; Max-Age=15552000; Path=/; SameSite=Lax; Secure';
+  }
+  function withdraw(broadcast) {
+    latchDenial();
+    var persisted = storedPreference() === 'denied' || remember('denied');
+    persistenceFailed = !persisted;
+    if (!persisted) {
+      // Quota failures often still permit deletion. Never retain the old grant
+      // merely because writing a new preference failed.
+      try { localStorage.removeItem(preferenceKey); } catch (e) {}
+    }
+    if (broadcast && channel) channel.postMessage('denied');
+    stop(persisted);
+    if (!persisted) show();
   }
   function clearCookies() {
     ['_ga', '_ga_KKHBRTL8LJ'].forEach(function (name) {
@@ -85,26 +130,39 @@
     tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
     document.head.appendChild(tag);
   }
-  function stop() {
+  function stop(canReload) {
     active = false;
     window['ga-disable-' + id] = true;
     if (tag) tag.remove();
     clearCookies();
     // A fresh document removes the already loaded library and its automatic listeners.
     // Do not send a denied-consent ping; basic consent sends nothing after rejection.
-    if (started) location.reload();
+    // Reload only after the replacement denial was read back successfully.
+    // Otherwise keep the disable flag in this document; reloading could read
+    // an old stored grant. The session latch also protects manual navigation.
+    if (started && canReload) location.reload();
   }
   function show() {
     var saved = preference();
     closeButton.hidden = !saved;
     status.textContent = saved === 'granted' ? 'Mevcut tercih: analitik açık.' : saved === 'denied' ? 'Mevcut tercih: analitik kapalı.' : '';
+    if (persistenceFailed) status.textContent = 'Analitik kapalı. Tercih kaydedilemedi; eski izin kullanılmıyor. Bu sekmede ölçüm durdu. Kalıcı ret için tarayıcınızın site verilerini temizleyebilirsiniz.';
     banner.hidden = false;
   }
   banner.querySelectorAll('[data-analytics-choice]').forEach(function (button) {
     button.addEventListener('click', function () {
       var choice = button.dataset.analyticsChoice;
-      remember(choice); banner.hidden = true;
-      if (choice === 'granted') start(); else stop();
+      if (choice === 'denied') { banner.hidden = true; withdraw(true); return; }
+      // Grant must persist too. Never silently start when storage is blocked.
+      var persisted = remember('granted');
+      if (persisted) {
+        try { sessionStorage.removeItem(revokedKey); persisted = sessionStorage.getItem(revokedKey) !== 'denied'; } catch (e) { persisted = false; }
+        document.cookie = denialCookie + '=; Max-Age=0; Path=/; SameSite=Lax; Secure';
+        if (document.cookie.split(';').some(function (part) { return part.trim() === denialCookie + '=1'; })) persisted = false;
+      }
+      if (!persisted) { latchDenial(); persistenceFailed = true; stop(false); show(); return; }
+      forcedDenied = false; persistenceFailed = false; banner.hidden = true;
+      if (started && !active) location.reload(); else start();
     });
   });
   closeButton.addEventListener('click', function () { banner.hidden = true; });
@@ -113,12 +171,20 @@
   });
   window.addEventListener('storage', function (e) {
     if (e.key !== preferenceKey) return;
-    if (preference() !== 'granted') { stop(); show(); }
+    if (storedPreference() !== 'granted') { latchDenial(); stop(storedPreference() === 'denied'); show(); }
     // Granting permission in another tab does not silently start this tab.
   });
   window.addEventListener('pageshow', function (e) {
-    if (e.persisted && preference() !== 'granted') stop();
+    if (e.persisted && preference() !== 'granted') stop(storedPreference() === 'denied');
   });
+  try {
+    channel = new BroadcastChannel('hm-analytics-consent-v1');
+    channel.onmessage = function (e) {
+      // Rejection is shared even when no localStorage storage event can fire.
+      // No grant message can turn tracking on in another tab.
+      if (e.data === 'denied') withdraw(false);
+    };
+  } catch (e) {}
 
   document.addEventListener('click', function (e) {
     if (!active) return;
@@ -141,6 +207,7 @@
       scrollSent = true; event('scroll', { percent_scrolled: 90 });
     }
   }, { passive: true });
-  if (preference() === 'granted') start();
+  if (preference() === 'granted' && writableGrant()) start();
+  else if (preference() === 'granted') { latchDenial(); persistenceFailed = true; stop(false); show(); }
   else { window['ga-disable-' + id] = true; clearCookies(); if (!preference()) show(); }
 })();

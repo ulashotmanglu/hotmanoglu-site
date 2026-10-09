@@ -34,6 +34,16 @@ Public-host GA çerezleri 180 gün, `cookie_update=false`; tercih de 180 gün.
 siler ve yüklenmiş kütüphaneyi tamamen kaldırmak için sayfayı yeniler. Daha
 önce gönderilen veriler bu işlemle Analytics'ten silinmez.
 
+Tercih yazması read-back ile doğrulanır. Ret yazılamazsa otomatik reload
+yapılmaz; disable bayrağı uygulanır, eski izin silinmeye çalışılır. Oturum
+saklaması ve host-only `hm-analytics-denied=1` zorunlu tercih çerezi eski
+granted kaydının önüne geçer. BroadcastChannel, localStorage storage event'i
+oluşmasa da diğer açık sekmelerde ölçümü durdurur. Yeni sekmeler de ret
+çerezini okuyarak eski grant'i kullanmaz. Ret saklanamıyorsa durum mesajı
+gösterilir. Otomatik başlatmada localStorage yazılabilirliği ayrıca doğrulanır;
+okunabilen ama yazılamayan eski grant yeterli sayılmaz. Tercih çerezinin
+ömrü 180 gündür; açık ve doğrulanmış yeni izin bu ret korumasını kaldırır.
+
 Sayfa adresi Hugo'nun yayınlanan canonical yoludur. Query/fragment izin
 sonrası adres çubuğundan da kaldırılır. Önceki sayfanın query/path bölümü
 gönderilmez; yalnız tanımlı kaynak alanları kabul edilir, bilinmeyen referrer
