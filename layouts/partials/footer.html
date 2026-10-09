@@ -36,7 +36,7 @@
         <li><a href="/ai-politikasi/">AI Kullanım Politikası</a></li>
         <li><a href="/duzeltme-politikasi/">Düzeltme Politikası</a></li>
         <li><a href="/gizlilik/">Gizlilik ve Çerezler</a></li>
-        {{ if site.Params.analytics.enabled }}<li><button type="button" data-analytics-preferences>Çerez tercihleri</button></li>{{ end }}
+        {{ if and site.Params.analytics.enabled (ne .Kind "404") }}<li><button type="button" data-analytics-preferences>Çerez tercihleri</button></li>{{ end }}
       </ul>
     </nav>
   </div>
