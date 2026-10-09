@@ -29,7 +29,7 @@ Analytics, izin sonrasında ziyaretleri ilişkilendirmek için rastgele bir tara
 
 Analitik çerezleri en fazla **180 gün** geçerlidir; süre her ziyarette uzatılmaz. Analitik tercihiniz tarayıcınızın yerel depolamasında en fazla **180 gün** tutulur; süre sonunda yeniden seçim istenir. Tema tercihi de yerel depolamada saklanır ve analitik izninden bağımsızdır.
 
-Google Analytics'teki kullanıcı ve etkinlik düzeyindeki saklama süresi, mülkün mevcut saklama ayarıyla yönetilir. Toplu standart raporlar bu süreyle aynı silme kapsamına sahip değildir. Bu ayarın doğrulanmış süresi yayın öncesi bu açıklamaya eklenecektir.
+Google Analytics mülkündeki mevcut ayara göre **etkinlik verileri 2 ay**, **kullanıcı verileri 14 ay** saklanır. Kullanıcı verileri için **yeni kullanıcı etkinliği olduğunda süreyi sıfırlama açık** olduğundan, yeni etkinlik bu kullanıcı verilerinin saklama süresini yeniden başlatabilir. Bu ayarlar 9 Ekim 2026 tarihinde doğrulandı ve kurulum sırasında genişletilmedi. Toplu standart raporlar bu sürelerle aynı silme kapsamına sahip değildir; [Google'ın saklama açıklamasını](https://support.google.com/analytics/answer/7667196?hl=tr) inceleyebilirsiniz.
 
 ## Diğer hizmetler ve kontrol
 

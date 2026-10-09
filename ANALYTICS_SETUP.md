@@ -4,11 +4,25 @@ Mevcut public akış: property `523555863`, stream `13561452048`, measurement
 `G-KKHBRTL8LJ`. Yeni akış/property veya API secret gerekmez. Hedef yalnız
 `https://www.hotmanoglu.com`; Sanal Ofis ve public admin ölçülmez.
 
-## Yayın öncesi
+## Doğrulanmış GA4 ayarları — 9 Ekim 2026
 
-- Mevcut GA4 saklama süresini ve yeni kullanıcı etkinliğiyle sıfırlama ayarını
-  **okuyup**, `content/gizlilik.md` içindeki geçici saklama paragrafını gerçek
-  değerlerle tamamlayın; süreyi sessizce genişletmeyin.
+Mac Safari'nin ayrı Analytics sekmesinde mevcut mülk/akış kullanıldı.
+Sayfa yeniden yüklenerek gelişmiş ölçümün kapalı, ayrıntılı konum/cihaz
+toplamasının kapalı ve reklam kişiselleştirmenin **0/307 bölgede izinli**
+olduğu doğrulandı. Google Signals ve kullanıcı tarafından sağlanan veri
+toplama kapalı kaldı; yeni hesap/reklam bağlantısı kurulmadı.
+E-posta redaction açık; aşağıdaki 16 URL parametresinin redaction ayarı
+kaydedilip yeniden yüklenen akış özetinde doğrulandı.
+
+Mevcut saklama ayarı etkinlik **2 ay**, kullanıcı **14 ay**, yeni kullanıcı
+etkinliğinde süreyi sıfırlama **açık**. Değiştirilmedi; gizlilik sayfasına
+gerçek değerler eklendi. Kod yapılandırması yayın için etkin; PR merge/deploy
+ve gerçek Google kütüphanesiyle canlı ağ/Realtime doğrulaması henüz bekliyor.
+
+## Yayın kontrol listesi
+
+- Saklama ayarları değişirse `content/gizlilik.md` açıklamasını güncelleyin;
+  süreyi sessizce genişletmeyin.
 - Stream'in enhanced measurement anahtarını **kapalı** doğrulayın. Kod tek
   manuel `page_view`, yazıda bir kez yüzde 90 `scroll`, sabit etiketli
   `outbound_click` ve `site_cta` gönderir. Otomatik arama, form, video, dosya,

@@ -49,8 +49,8 @@ enableRobotsTXT = true
 
 # Tek mevcut GA4 akışı. İzin verilmeden Google etiketi yüklenmez.
 [params.analytics]
-  # GA4 enhanced measurement kapatılıp saklama açıklaması doğrulanınca açılır.
-  enabled = false
+  # Mevcut GA4 akışı: consent olmadan etiket yüklenmez.
+  enabled = true
   measurementID = "G-KKHBRTL8LJ"
 
 [markup]
