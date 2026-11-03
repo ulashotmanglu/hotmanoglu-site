@@ -1,0 +1,11 @@
+{{/* Sayfa sonu platform satırı. Hesap yoksa hiç basılmaz. */}}
+{{ with partial "bits/platforms.html" . }}
+<section class="vplat" aria-labelledby="h-plat">
+  <div class="shell">
+    <h2 class="vh" id="h-plat">Bizi nerede izlersin</h2>
+    <ul class="vplat-grid">
+      {{ range . }}<li><a href="{{ .url }}" target="_blank" rel="noopener"><span class="mono-m">{{ .note }}</span><span class="vplat-n">{{ .name }} →</span></a></li>{{ end }}
+    </ul>
+  </div>
+</section>
+{{ end }}

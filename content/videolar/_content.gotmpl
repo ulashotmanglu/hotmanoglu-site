@@ -1,0 +1,19 @@
+{{/* Her YouTube videosu için /videolar/<id>/ sayfası üretir.
+     Kaynak data/videos.json; gizlenenler (data/video_edits.yaml) atlanır.
+     Görünüm layouts/videolar/single.html'de, veriler partial video/list'ten. */}}
+{{ $edits := site.Data.video_edits | default dict }}
+{{ $hidden := $edits.hidden | default slice }}
+{{ $titles := $edits.titles | default dict }}
+{{ range site.Data.videos | default slice }}
+  {{ if not (in $hidden .id) }}
+    {{ $.AddPage (dict
+        "path" (lower .id)
+        "kind" "page"
+        "title" (index $titles .id | default .headline)
+        "dates" (dict "date" (time.AsTime .published))
+        "params" (dict
+          "video_id" .id
+          "image" (printf "/img/videos/%s.jpg" .id)
+          "description" (.description | replaceRE `#\S+` "" | replaceRE `\s+` " " | strings.TrimSpace | truncate 160 | htmlUnescape))) }}
+  {{ end }}
+{{ end }}

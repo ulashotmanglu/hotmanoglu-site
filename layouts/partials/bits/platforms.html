@@ -1,0 +1,12 @@
+{{/* Dolu olan platform hesapları, sırayla. hugo.toml [params.social].
+     Her öğe dict: name, note, url. Boş hesap listeye girmez. */}}
+{{ $s := site.Params.social | default dict }}
+{{ $out := slice }}
+{{ range slice
+    (dict "name" "YouTube" "note" "Shorts" "url" $s.youtube)
+    (dict "name" "Instagram" "note" "Reels" "url" $s.instagram)
+    (dict "name" "X" "note" "Notlar ve kaynaklar" "url" $s.x)
+    (dict "name" "Threads" "note" "Sohbet" "url" $s.threads) }}
+  {{ if .url }}{{ $out = $out | append . }}{{ end }}
+{{ end }}
+{{ return $out }}

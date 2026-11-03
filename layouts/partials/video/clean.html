@@ -1,0 +1,10 @@
+{{/* Video açıklamasını sitede okunur hale getirir: #etiket, emoji ve
+     "kanal profilindeki bağlantı" çağrıları atılır (sitedeyiz zaten).
+     Satır yapısı korunur. Girdi: açıklama metni. */}}
+{{ $t := . }}
+{{ $t = replaceRE `(?im)^.*kanal profili.*$` "" $t }}
+{{ $t = replaceRE `#[\p{L}\p{N}_]+` "" $t }}
+{{ $t = replaceRE `[\x{1F000}-\x{1FAFF}\x{2600}-\x{27BF}\x{FE0F}]` "" $t }}
+{{ $t = replaceRE `[ \t]+` " " $t }}
+{{ $t = replaceRE `(?m)^ +| +$` "" $t }}
+{{ return strings.TrimSpace $t }}

@@ -12,6 +12,33 @@ hugo --gc --minify                # production build
 
 ---
 
+## Videolar
+
+Site video önceliklidir. Videolar YouTube kanalından otomatik gelir:
+
+- `.github/workflows/videos.yml` her saat `scripts/sync_videos.py`'yi çalıştırır.
+  Betik kanalın RSS akışını okur, `data/videos.json`'a yazar, kapakları
+  `static/img/videos/<id>.jpg` olarak indirir ve değişiklik varsa siteyi yayınlar.
+- RSS yalnızca son 15 videoyu verir; dosyadaki eski kayıtlar silinmez.
+  Akışta olmayan eski bir videoyu eklemek için:
+  `python3 scripts/sync_videos.py --ids <video_id> ...`
+- Her video `/videolar/<id>/` sayfasını alır (`content/videolar/_content.gotmpl`).
+  Oynatıcı yalnızca tıklanınca `youtube-nocookie.com`'dan yüklenir.
+- Açıklamada `hotmanoglu.com/posts/...` bağlantısı varsa video sayfası o yazıya bağlanır.
+
+Elle düzenlenen dosyalar:
+
+| Dosya | Ne için |
+|---|---|
+| `data/video_edits.yaml` | Kısa başlık düzeltmeleri, sitede gösterilmeyecek videolar |
+| `data/series.yaml` | Seriler ve hangi videoların hangi seride olduğu |
+| `data/homepage.yaml` | `video_lead` (kapak videosu), `ticker` (üstteki rakam şeridi) |
+| `hugo.toml` `[params.social]` | YouTube, X, Instagram, Threads adresleri; boşsa gösterilmez |
+
+Test: `python3 -m unittest discover -s tests -p 'test_*.py'`
+
+---
+
 ## Yazı front matter
 
 ### Zorunlu alanlar (sanal-ofis publisher bu yedi alanı yazar)

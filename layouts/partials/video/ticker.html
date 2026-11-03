@@ -1,0 +1,23 @@
+{{/* Üstteki siyah şerit: data/homepage.yaml ticker satırları; yoksa son
+     videoların başlıkları. Kayan kopya ekran okuyuculardan gizlidir. */}}
+{{ $videos := partialCached "video/list.html" site "all" }}
+{{ $byID := dict }}{{ range $videos }}{{ $byID = merge $byID (dict .id .) }}{{ end }}
+{{ $items := slice }}
+{{ range $t := (site.Data.homepage | default dict).ticker }}
+  {{ with index $byID $t.video }}{{ $items = $items | append (dict "label" $t.label "value" $t.value "url" .url) }}{{ end }}
+{{ end }}
+{{ if not $items }}
+  {{ range first 6 $videos }}{{ $items = $items | append (dict "label" (partial "bits/date-short.html" .date) "value" .headline "url" .url) }}{{ end }}
+{{ end }}
+{{ with $items }}
+<div class="tk" role="region" aria-label="Videolardan rakamlar">
+  <div class="tk-track">
+    <ul class="tk-list">
+      {{ range . }}<li><a href="{{ .url }}"><b>{{ .label }}</b>{{ .value }}</a></li>{{ end }}
+    </ul>
+    <ul class="tk-list" aria-hidden="true">
+      {{ range . }}<li><a href="{{ .url }}" tabindex="-1"><b>{{ .label }}</b>{{ .value }}</a></li>{{ end }}
+    </ul>
+  </div>
+</div>
+{{ end }}

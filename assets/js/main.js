@@ -134,7 +134,7 @@
     results.innerHTML = '<ul class="search-list">' + hits.map(function (h) {
       var it = h.it;
       return '<li><a href="' + esc(it.u) + '">' +
-        '<span class="search-item-meta">' + (it.c ? esc(it.c) + ' · ' : '') + esc(it.y) + ' · ' + esc(it.r) + ' dk</span>' +
+        '<span class="search-item-meta">' + (it.c ? esc(it.c) + ' · ' : '') + esc(it.y) + (it.r ? ' · ' + esc(it.r) + ' dk' : '') + '</span>' +
         '<span class="search-item-title">' + esc(it.t) + '</span>' +
         (it.d ? '<span class="search-item-desc">' + esc(it.d) + '</span>' : '') +
         '</a></li>';
@@ -258,6 +258,25 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
+
+  /* ── VİDEO OYNATICI ─────────────────────────────────────────────────
+     Oynatıcı yalnızca tıklanınca yüklenir; o ana kadar YouTube'a istek
+     gitmez. youtube-nocookie kullanılır. JS yoksa bağlantı YouTube'u açar. */
+  document.querySelectorAll('[data-yt-play]').forEach(function (a) {
+    var id = a.getAttribute('data-yt-play');
+    if (!/^[A-Za-z0-9_-]{11}$/.test(id)) return;
+    a.addEventListener('click', function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1';
+      f.title = a.getAttribute('data-yt-title') || 'YouTube videosu';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.className = 'player-frame';
+      a.replaceWith(f);
+      f.focus();
+    });
+  });
 
   /* ── REVEAL ─────────────────────────────────────────────────────────── */
   var revealables = document.querySelectorAll('.reveal');

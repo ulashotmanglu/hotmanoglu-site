@@ -1,317 +1,112 @@
 {{ define "main" }}
-
-{{ $posts := where site.RegularPages "Section" "posts" }}
+{{/* Video öncelikli ana sayfa. Sıra: son videolar · kapak + kısaca ·
+     seriler · yazılar · platformlar. Veri: partial video/list. */}}
+{{ $videos := partialCached "video/list.html" site "all" }}
 {{ $hp := site.Data.homepage | default dict }}
-{{ $seen := slice }}
+{{ $posts := where site.RegularPages "Section" "posts" }}
 
-{{/* ── HERO ────────────────────────────────────────────────── */}}
-{{ $hero := false }}
-{{ with $hp.hero }}{{ with .lead }}{{ with site.GetPage . }}{{ $hero = . }}{{ end }}{{ end }}{{ end }}
-{{ if not $hero }}{{ with first 1 $posts }}{{ $hero = index . 0 }}{{ end }}{{ end }}
-{{ if $hero }}{{ $seen = $seen | append $hero }}{{ end }}
+{{ $lead := false }}
+{{ with $hp.video_lead }}{{ $id := . }}{{ range $videos }}{{ if eq .id $id }}{{ $lead = . }}{{ end }}{{ end }}{{ end }}
+{{ if and (not $lead) $videos }}{{ $lead = index $videos 0 }}{{ end }}
+{{ $rest := slice }}
+{{ range $videos }}{{ if ne .id $lead.id }}{{ $rest = $rest | append . }}{{ end }}{{ end }}
 
-{{ if $hero }}
-<section class="hero" aria-label="Kapak">
-  <div class="shell hero-in">
-    <div class="hero-fig">
-      {{/* LCP görseli: lazy değil, fetchpriority yüksek.
-           .hero-fig masaüstünde shell'in 55fr'i, 820px altında tam genişlik. */}}
-      {{ with $hero.Params.image }}
-      {{ partial "bits/img.html" (dict
-           "src" .
-           "alt" ($hero.Params.image_alt | default "")
-           "eager" true
-           "sizes" "(max-width: 820px) 100vw, (max-width: 1424px) 52vw, 715px") }}
-      {{ end }}
+{{ with first 6 $rest }}
+<section class="vrail" aria-labelledby="h-son">
+  <div class="shell">
+    <div class="tbar">
+      <h2 id="h-son">Son videolar</h2>
+      <a class="tbar-a" href="/videolar/">Tüm videolar →</a>
     </div>
-    <div class="hero-txt">
-      {{ partial "bits/kicker.html" (dict "page" $hero) }}
-      <h1 class="hero-h"><a href="{{ $hero.RelPermalink }}">{{ $hero.Title }}</a></h1>
-      {{ with partial "bits/deck.html" (dict "page" $hero "max" 190) }}<p class="hero-d">{{ . }}</p>{{ end }}
-
-      {{/* Bu dosyada — yazının kendi etiketlerinden ilk üçü */}}
-      {{ with $hero.Params.tags }}
-      <div class="hero-in-this">
-        <span class="hit-lbl">Bu dosyada</span>
-        <span class="hit-items">
-          {{ range $i, $t := first 3 . }}{{ if $i }}<i class="hit-sep" aria-hidden="true"></i>{{ end }}{{ $t }}{{ end }}
-        </span>
-      </div>
-      {{ end }}
-
-      <p class="hero-m">
-        <time datetime="{{ $hero.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $hero.Date) }}</time>
-        <span aria-hidden="true">·</span>{{ $hero.ReadingTime }} dk okuma
-      </p>
-      <a class="hero-cta" href="{{ $hero.RelPermalink }}">Yazıyı oku<i aria-hidden="true">→</i></a>
+    <div class="vgrid vgrid-rule">
+      {{ range $i, $v := . }}{{ partial "video/card.html" (dict "v" $v "n" (add $i 1) "eager" (lt $i 2)) }}{{ end }}
     </div>
   </div>
 </section>
 {{ end }}
 
-
-{{/* ── A) SON GELİŞMELER ───────────────────────────────────── */}}
-{{ $latest := slice }}
-{{ range $posts }}{{ if and (lt (len $latest) 4) (not (in $seen .)) }}{{ $latest = $latest | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}
-{{ if $latest }}
-<section class="latest" aria-labelledby="h-latest">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Son gelişmeler" "id" "h-latest"
-        "links" (slice (dict "label" "Tüm akış" "url" "/gundem/"))) }}
-    <ol class="lt-list">
-      {{ range $i, $p := $latest }}
-      <li class="lt-item">
-        <span class="lt-n">{{ printf "%02d" (add $i 1) }}</span>
-        <div>
-          <span class="lt-k">{{ partial "bits/kicker.html" (dict "page" $p) }}</span>
-          <h3 class="lt-h"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
-          <p class="lt-m"><time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time></p>
-        </div>
-      </li>
-      {{ end }}
-    </ol>
-    <a class="lt-more" href="/gundem/">Tüm akış<i aria-hidden="true">→</i></a>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── B) ÖNE ÇIKANLAR — 1 büyük + 3 satır (biri küçük görselli) ── */}}
-{{ $feat := slice }}
-{{ with $hp.hero }}{{ range partial "query/resolve-pages.html" (dict "paths" .secondary) }}{{ if not (in $seen .) }}{{ $feat = $feat | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}{{ end }}
-{{ range $posts }}{{ if and (lt (len $feat) 4) (not (in $seen .)) }}{{ $feat = $feat | append . }}{{ $seen = $seen | append . }}{{ end }}{{ end }}
-{{ if ge (len $feat) 2 }}
-<section class="feat" aria-labelledby="h-feat">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Öne çıkanlar" "id" "h-feat") }}
-    <div class="feat-grid">
-      <div class="feat-lead">
-        {{ partial "mag/story.html" (dict "page" (index $feat 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
-      </div>
-      <ul class="feat-side">
-        {{ range $i, $p := after 1 $feat }}
-        {{/* İkinci satır küçük yatay görsel taşır; üç satır aynı görünmesin */}}
-        <li class="{{ if eq $i 1 }}fs-media{{ end }}">
-          {{ if eq $i 1 }}
-            {{ with $p.Params.image }}<span class="fs-thumb">{{ partial "bits/img.html" (dict "src" . "sizes" "(max-width: 700px) 100vw, 300px") }}</span>{{ end }}
-          {{ end }}
-          <div>
-            {{ partial "bits/kicker.html" (dict "page" $p) }}
-            <h3 class="fs-h"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
-            {{ if ne $i 1 }}{{ with partial "bits/deck.html" (dict "page" $p "max" 120) }}<p class="fs-d">{{ . }}</p>{{ end }}{{ end }}
-            <p class="lt-m"><time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" $p.Date) }}</time><span class="m-sep" aria-hidden="true">·</span><span class="m-rt">{{ $p.ReadingTime }} dk</span></p>
-          </div>
-        </li>
-        {{ end }}
-      </ul>
-    </div>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── C) VAKA DOSYALARI — yumuşak koyu lacivert, 1 büyük + 1 kompakt ── */}}
-{{ $case := slice }}
-{{ range partial "query/section-pages.html" (dict "key" "vaka-dosyalari") }}
-  {{ if and (lt (len $case) 2) (not (in $seen .)) (.Params.image) }}{{ $case = $case | append . }}{{ $seen = $seen | append . }}{{ end }}
-{{ end }}
-{{ if $case }}
-<section class="cases" aria-labelledby="h-case">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Vaka dosyaları" "id" "h-case" "inv" true
-        "note" "Finansal suçların, sistem açıklarının ve insan kararlarının gerçek hikayeleri."
-        "links" (slice (dict "label" "Tümü" "url" "/vaka-dosyalari/"))) }}
-    <div class="case-grid">
-      {{ range $i, $p := $case }}
-      <article class="case {{ if eq $i 0 }}case-lead{{ else }}case-sub{{ end }}">
-        <a class="case-link" href="{{ $p.RelPermalink }}">
-          <div class="case-img">{{ partial "bits/img.html" (dict
-               "src" $p.Params.image
-               "alt" ($p.Params.image_alt | default "")
-               "sizes" (cond (eq $i 0) "(max-width: 980px) 100vw, 62vw" "(max-width: 980px) 100vw, 32vw")) }}</div>
-          <div class="case-body">
-            <span class="case-k">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
-            <h3 class="case-h">{{ $p.Title }}</h3>
-            {{ if eq $i 0 }}{{ with partial "bits/deck.html" (dict "page" $p "max" 160) }}<p class="case-d">{{ . }}</p>{{ end }}{{ end }}
-            <span class="case-m">{{ partial "bits/date.html" (dict "date" $p.Date) }} · {{ $p.ReadingTime }} dk</span>
-          </div>
-        </a>
-      </article>
-      {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── D) YAPAY ZEKA VE TEKNOLOJİ — sol büyük, sağ 2 kompakt, altta 2 tipografik ── */}}
-{{ $tech := slice }}
-{{ range partial "query/section-pages.html" (dict "key" "yapay-zeka") }}
-  {{ if and (lt (len $tech) 3) (not (in $seen .)) }}{{ $tech = $tech | append . }}{{ $seen = $seen | append . }}{{ end }}
-{{ end }}
-{{ range partial "query/section-pages.html" (dict "key" "teknoloji") }}
-  {{ if and (lt (len $tech) 5) (not (in $seen .)) }}{{ $tech = $tech | append . }}{{ $seen = $seen | append . }}{{ end }}
-{{ end }}
-{{ if ge (len $tech) 3 }}
-<section class="tech" aria-labelledby="h-tech">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Yapay zeka ve teknoloji" "id" "h-tech"
-        "links" (slice (dict "label" "Yapay Zeka" "url" "/yapay-zeka/") (dict "label" "Teknoloji" "url" "/teknoloji/"))) }}
-    <div class="tech-grid">
-      <div class="tech-lead">
-        {{ partial "mag/story.html" (dict "page" (index $tech 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
-      </div>
-      <div class="tech-side">
-        {{ range first 2 (after 1 $tech) }}
-        {{ partial "mag/story.html" (dict "page" . "size" "sm" "img" true "ratio" "16x9" "dek" false) }}
-        {{ end }}
+{{ with $lead }}
+<section class="vlead" aria-labelledby="h-kapak">
+  <div class="shell"><div class="vlead-in">
+    <div class="vlead-txt">
+      <span class="tag">Kapak{{ range first 1 .series }} · {{ .title }}{{ end }}</span>
+      <h1 class="vlead-h" id="h-kapak"><a href="{{ .url }}">{{ .headline }}</a></h1>
+      {{ with partial "video/dek.html" (dict "v" . "max" 200) }}<p class="vlead-d">{{ . }}</p>{{ end }}
+      <p class="mono-m"><time datetime="{{ .date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .date) }}</time> · Shorts</p>
+      <div class="btns">
+        <a class="btn btn-solid" href="{{ .url }}">▶ Burada izle</a>
+        {{ with .post }}<a class="btn btn-line" href="{{ .RelPermalink }}">Yazıyı oku</a>{{ end }}
       </div>
     </div>
-    {{ with after 3 $tech }}
-    <ul class="tech-links">
-      {{ range . }}
-      <li><a href="{{ .RelPermalink }}">
-        <span class="txl-c">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</span>
-        <span class="txl-h">{{ .Title }}</span>
-        <i aria-hidden="true">→</i>
-      </a></li>
-      {{ end }}
-    </ul>
-    {{ end }}
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── E) EKONOMİ VE FRAUD — asimetrik ─────────────────────── */}}
-{{ $eko := slice }}
-{{ range partial "query/section-pages.html" (dict "key" "ekonomi-finans") }}
-  {{ if and (lt (len $eko) 4) (not (in $seen .)) }}{{ $eko = $eko | append . }}{{ $seen = $seen | append . }}{{ end }}
-{{ end }}
-{{ $fra := slice }}
-{{ range partial "query/section-pages.html" (dict "key" "fraud-regulasyon") }}
-  {{ if and (lt (len $fra) 3) (not (in $seen .)) (.Params.image) }}{{ $fra = $fra | append . }}{{ $seen = $seen | append . }}{{ end }}
-{{ end }}
-{{ if and $eko $fra }}
-<section class="duo" aria-labelledby="h-duo">
-  <div class="shell duo-in">
-    <h2 class="vh" id="h-duo">Ekonomi ve Fraud</h2>
-
-    {{/* Ekonomi — görselsiz, başlık odaklı kompakt kolon */}}
-    <div class="duo-eko">
-      {{ partial "mag/secbar.html" (dict "title" "Ekonomi" "id" "h-eko"
-          "links" (slice (dict "label" "Tümü" "url" "/ekonomi-finans/"))) }}
-      <ol class="eko-list">
-        {{ range $i, $p := $eko }}
-        <li>
-          <a href="{{ $p.RelPermalink }}">
-            <span class="ek-n">{{ printf "%02d" (add $i 1) }}</span>
-            <span class="ek-b">
-              <span class="ek-h">{{ $p.Title }}</span>
-              <span class="ek-m">{{ partial "bits/date.html" (dict "date" $p.Date) }}<span class="m-rt"> · {{ $p.ReadingTime }} dk</span></span>
-            </span>
-          </a>
-        </li>
+    <a class="vlead-fig" href="{{ .url }}" aria-label="İzle: {{ .headline }}">
+      {{ partial "bits/img.html" (dict "src" .thumb "eager" true "sizes" "(max-width: 820px) 80vw, 360px") }}
+      <i class="vc-play vc-play-lg" aria-hidden="true"></i>
+    </a>
+    {{ with first 4 (after 6 $rest) }}
+    <div class="vlead-side">
+      <h2 class="tside-h">Kısaca</h2>
+      <ol class="brief">
+        {{ range $i, $v := . }}
+        <li><a href="{{ $v.url }}">
+          <span class="brief-n">{{ add $i 1 }}</span>
+          <span class="brief-img">{{ partial "bits/img.html" (dict "src" $v.thumb "sizes" "48px") }}</span>
+          <span><span class="brief-h">{{ $v.headline }}</span><time class="mono-m" datetime="{{ $v.date.Format "2006-01-02" }}">{{ partial "bits/date-short.html" $v.date }}</time></span>
+        </a></li>
         {{ end }}
       </ol>
     </div>
-
-    {{/* Fraud — büyük vaka görseli + iki başlık */}}
-    <div class="duo-fra">
-      {{ partial "mag/secbar.html" (dict "title" "Fraud & Regülasyon" "id" "h-fra"
-          "links" (slice (dict "label" "Tümü" "url" "/fraud-regulasyon/"))) }}
-      {{ partial "mag/story.html" (dict "page" (index $fra 0) "size" "lg" "img" true "ratio" "16x9" "dek" true) }}
-      {{ with after 1 $fra }}
-      <ul class="fra-list">
-        {{ range . }}
-        <li><a href="{{ .RelPermalink }}">
-          <span class="fr-h">{{ .Title }}</span>
-          <span class="fr-m">{{ partial "bits/date.html" (dict "date" .Date) }}<span class="m-rt"> · {{ .ReadingTime }} dk</span></span>
-        </a></li>
-        {{ end }}
-      </ul>
-      {{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── KEŞFET — konu girişleri (yazı kartı değil) ──────────── */}}
-{{ with $hp.discover }}
-{{ $secs := slice }}
-{{ with site.Data.sections }}{{ with .sections }}{{ $secs = . }}{{ end }}{{ end }}
-<section class="discover" aria-labelledby="h-disc">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Keşfet" "id" "h-disc") }}
-    <ul class="disc-grid">
-      {{ range . }}
-      {{ $m := where $secs "key" .section_key }}
-      {{ if $m }}
-        {{ $sec := index $m 0 }}
-        {{ $n := len (partial "query/section-pages.html" (dict "key" .section_key)) }}
-        <li class="disc">
-          <a href="{{ $sec.url }}">
-            <span class="disc-h">{{ .title }}</span>
-            <span class="disc-d">{{ .description }}</span>
-            <span class="disc-f"><span class="disc-n">{{ $n }} içerik</span><i aria-hidden="true">→</i></span>
-          </a>
-        </li>
-      {{ end }}
-      {{ end }}
-    </ul>
-    <a class="sec-more" href="/arsiv/">Tümünü gör<i aria-hidden="true">→</i></a>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── F) BLOG — içerik yoksa bölüm hiç basılmaz ───────────── */}}
-{{ $blog := where $posts "Params.content_origin" "ulas" }}
-{{ if $blog }}
-<section class="blog" aria-labelledby="h-blog">
-  <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Blog" "id" "h-blog"
-        "note" "Ulaş Hotmanoğlu'nun kişisel yazıları ve değerlendirmeleri."
-        "links" (slice (dict "label" "Tümü" "url" "/blog/"))) }}
-    <div class="blog-grid">
-      {{ range first 3 $blog }}{{ partial "mag/story.html" (dict "page" . "size" "md" "img" true "ratio" "4x3" "dek" true) }}{{ end }}
-    </div>
-  </div>
-</section>
-{{ end }}
-
-
-{{/* ── G) ARŞİVDEN — 4 satır, masaüstünde iki kolon ────────── */}}
-{{ $arch := slice }}
-{{ with $hp.collections }}
-  {{ range . }}
-    {{ range partial "query/resolve-pages.html" (dict "paths" .items) }}
-      {{ if and (lt (len $arch) 4) (not (in $seen .)) (not (in $arch .)) }}{{ $arch = $arch | append . }}{{ end }}
     {{ end }}
-  {{ end }}
+  </div></div>
+</section>
 {{ end }}
-{{ range $posts }}{{ if and (lt (len $arch) 4) (not (in $seen .)) (not (in $arch .)) }}{{ $arch = $arch | append . }}{{ end }}{{ end }}
-{{ if $arch }}
-<section class="arch" aria-labelledby="h-arch">
+
+{{ with partialCached "video/series.html" site "all" }}
+<section class="vseries" aria-labelledby="h-seriler">
   <div class="shell">
-    {{ partial "mag/secbar.html" (dict "title" "Arşivden" "id" "h-arch"
-        "links" (slice (dict "label" "Tüm arşiv" "url" "/arsiv/"))) }}
-    <ol class="arch-list">
-      {{ range $i, $p := $arch }}
-      <li>
-        <a href="{{ $p.RelPermalink }}">
-          <span class="ar-n">{{ printf "%02d" (add $i 1) }}</span>
-          <span class="ar-h">{{ $p.Title }}</span>
-          <span class="ar-c">{{ with $p.Params.categories }}{{ index . 0 }}{{ end }}</span>
-          <span class="ar-m">{{ $p.Date.Format "2006" }}</span>
-        </a>
-      </li>
+    <div class="tbar tbar-inv">
+      <h2 id="h-seriler">Seriler</h2>
+      <a class="tbar-a" href="/seriler/">Tüm seriler →</a>
+    </div>
+    <div class="sgrid">
+      {{ range . }}
+      <div class="scard">
+        <a class="scard-img" href="{{ .url }}" tabindex="-1" aria-hidden="true">{{ range first 3 .videos }}{{ partial "bits/img.html" (dict "src" .thumb "sizes" "(max-width: 720px) 30vw, 110px") }}{{ end }}</a>
+        <h3 class="scard-h"><a href="{{ .url }}">{{ .title }}</a></h3>
+        <p class="scard-d">{{ .description }}</p>
+        <ul class="eps">
+          {{ range first 2 .videos }}<li><a href="{{ .url }}"><time datetime="{{ .date.Format "2006-01-02" }}">{{ partial "bits/date-short.html" .date }}</time>{{ .headline }}</a></li>{{ end }}
+        </ul>
+        <a class="scard-a" href="{{ .url }}">{{ len .videos }} video →</a>
+      </div>
       {{ end }}
-    </ol>
-    <a class="sec-more" href="/arsiv/">Tüm arşiv<i aria-hidden="true">→</i></a>
+    </div>
   </div>
 </section>
 {{ end }}
+
+{{ with first 4 $posts }}
+<section class="vposts" aria-labelledby="h-yazilar">
+  <div class="shell vposts-in">
+    <div>
+      <div class="tbar">
+        <h2 id="h-yazilar">Yazılar</h2>
+        <a class="tbar-a" href="/gundem/">Tüm yazılar →</a>
+      </div>
+      <ul class="plist">
+        {{ range . }}<li><a href="{{ .RelPermalink }}"><span class="plist-h">{{ .Title }}</span><span class="mono-m"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .Date) }}</time> · {{ .ReadingTime }} dk okuma</span></a></li>{{ end }}
+      </ul>
+    </div>
+    {{ with site.Params.social.youtube }}
+    <div class="subbox">
+      <span class="tag tag-inv">Takip et</span>
+      <p class="subbox-h">Yeni videolar önce YouTube'a düşer. Kaçırmamak için kanala abone ol.</p>
+      <a class="btn btn-amber" href="{{ . }}?sub_confirmation=1" target="_blank" rel="noopener">YouTube'da abone ol</a>
+    </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ partial "video/platforms-row.html" . }}
 
 {{ end }}

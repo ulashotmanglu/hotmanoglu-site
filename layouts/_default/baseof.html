@@ -21,6 +21,7 @@
        Yalnızca content/posts altındaki gerçek yazılar "article";
        ana sayfa, hub, Hakkında, İletişim ve politika sayfaları "website". */}}
   {{ $isArticle := and .IsPage (eq .Section "posts") }}
+  {{ $isVideo := and .IsPage (eq .Section "videolar") }}
 
   {{ $title := "" }}
   {{ if .IsHome }}
@@ -40,8 +41,7 @@
   <meta name="author" content="{{ site.Params.author }}">
   <link rel="canonical" href="{{ .Permalink }}">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <meta name="theme-color" content="#F5F4F0" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#111318" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#000000">
 
   {{/* Paylaşım görseli: yalnızca sayfanın kendi görseli varsa verilir.
        Site geneli için uygun bir raster paylaşım görseli repository'de
@@ -68,7 +68,7 @@
   <!-- Open Graph -->
   <meta property="og:title" content="{{ if .IsHome }}{{ site.Title }} | Bağımsız dijital yayın{{ else }}{{ .Title }}{{ end }}">
   <meta property="og:description" content="{{ $desc }}">
-  <meta property="og:type" content="{{ if $isArticle }}article{{ else }}website{{ end }}">
+  <meta property="og:type" content="{{ if $isArticle }}article{{ else if $isVideo }}video.other{{ else }}website{{ end }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ site.Title }}">
   <meta property="og:locale" content="tr_TR">
@@ -133,6 +133,20 @@
         (dict "@type" "ListItem" "position" 2 "name" "Yazılar" "item" (absURL "/posts/"))
         (dict "@type" "ListItem" "position" 3 "name" .Title "item" .Permalink) }}
     <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs | jsonify | safeJS }}</script>
+  {{ else if $isVideo }}
+    {{ $id := .Params.video_id }}
+    {{ $vid := dict
+        "@context" "https://schema.org"
+        "@type" "VideoObject"
+        "name" .Title
+        "description" $desc
+        "uploadDate" (.Date.Format "2006-01-02T15:04:05Z07:00")
+        "embedUrl" (printf "https://www.youtube-nocookie.com/embed/%s" $id)
+        "url" .Permalink
+        "inLanguage" "tr-TR"
+        "publisher" (dict "@type" "Organization" "name" site.Title "url" site.BaseURL) }}
+    {{ with $img }}{{ $vid = merge $vid (dict "thumbnailUrl" (slice .)) }}{{ end }}
+    <script type="application/ld+json">{{ $vid | jsonify | safeJS }}</script>
   {{ else }}
     {{ $wp := dict
         "@context" "https://schema.org"
@@ -146,8 +160,7 @@
   {{ end }}
 
   <!-- Fonts -->
-  {{/* İki metin ailesi: Instrument Sans (başlık/arayüz) + Inter (gövde).
-       Metadata için sistem mono yığını kullanılır, ek webfont yüklenmez. */}}
+  {{/* Archivo (başlık, arayüz, gövde) + IBM Plex Mono (metadata), yerelde. */}}
   {{ with resources.Get "css/fonts.css" }}
     {{ $fonts := . | minify | fingerprint "sha256" }}
     <link rel="stylesheet" href="{{ $fonts.RelPermalink }}" integrity="{{ $fonts.Data.Integrity }}">

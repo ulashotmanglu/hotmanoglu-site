@@ -1,0 +1,21 @@
+{{ define "main" }}
+{{ $key := .Params.series_key }}
+{{ $s := false }}
+{{ range partialCached "video/series.html" site "all" }}{{ if eq .key $key }}{{ $s = . }}{{ end }}{{ end }}
+<section class="vhead">
+  <div class="shell"><div class="vhead-in">
+    <a class="tag" href="/seriler/">Seriler</a>
+    <h1 class="vhead-h">{{ .Title }}</h1>
+    {{ with .Params.description }}<p class="vhead-d">{{ . }}</p>{{ end }}
+    {{ with $s }}<p class="mono-m">{{ len .videos }} video · en yeni önce</p>{{ end }}
+  </div></div>
+</section>
+{{ with $s }}
+<section class="vrail">
+  <div class="shell">
+    <div class="vgrid">{{ range $i, $v := .videos }}{{ partial "video/card.html" (dict "v" $v "eager" (lt $i 6)) }}{{ end }}</div>
+  </div>
+</section>
+{{ end }}
+{{ partial "video/platforms-row.html" . }}
+{{ end }}

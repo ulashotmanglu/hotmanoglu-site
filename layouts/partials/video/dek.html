@@ -1,0 +1,9 @@
+{{/* Kart/kapak altı kısa metin: açıklamanın ilk cümlesinden sonrası
+     (ilk cümle genelde başlıkla aynı), bağlantısız, tek paragraf.
+     dict: v, max */}}
+{{ $t := partial "video/clean.html" .v.description }}
+{{ $t = replaceRE `(?im)^(source|kaynak|kaynaklar|tam analiz|analizin tamamı|daha fazlası)\b.*$` "" $t }}
+{{ $t = replaceRE `https?://\S+` "" $t }}
+{{ $t = replaceRE `\s+` " " $t | strings.TrimSpace }}
+{{ $t = replaceRE `^.+?[.!?](\s|$)` "" $t 1 }}
+{{ return truncate (.max | default 200) (strings.TrimSpace $t) }}

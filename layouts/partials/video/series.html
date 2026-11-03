@@ -1,0 +1,15 @@
+{{/* data/series.yaml serileri, videoları çözülmüş halde (en yeni önce).
+     Kanalda videosu kalmayan seri listeye girmez.
+     Her öğe dict: key, title, description, url, videos.
+     Kullanım: partialCached "video/series.html" site "all" */}}
+{{ $videos := partialCached "video/list.html" site "all" }}
+{{ $out := slice }}
+{{ range site.Data.series.series | default slice }}
+  {{ $key := .key }}
+  {{ $mine := slice }}
+  {{ range $v := $videos }}{{ range $v.series }}{{ if eq .key $key }}{{ $mine = $mine | append $v }}{{ end }}{{ end }}{{ end }}
+  {{ if $mine }}
+    {{ $out = $out | append (dict "key" .key "title" .title "description" .description "url" (printf "/seriler/%s/" .key) "videos" $mine) }}
+  {{ end }}
+{{ end }}
+{{ return $out }}

@@ -43,6 +43,13 @@ enableRobotsTXT = true
   twitter = ""
   email = ""
 
+# Platform hesapları. Boş bırakılan hesap sitenin hiçbir yerinde görünmez.
+[params.social]
+  youtube = "https://www.youtube.com/@hotmanoglucom"
+  x = "https://x.com/hotmanoglucom"
+  instagram = "https://www.instagram.com/hotmanoglu.com_/"
+  threads = "https://www.threads.com/@hotmanoglu.com_"
+
 [taxonomies]
   category = "categories"
   tag = "tags"

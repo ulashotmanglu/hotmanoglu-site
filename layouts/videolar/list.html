@@ -1,0 +1,19 @@
+{{ define "main" }}
+{{ $all := partialCached "video/list.html" site "all" }}
+<section class="vhead">
+  <div class="shell"><div class="vhead-in">
+    <h1 class="vhead-h">{{ .Title }}</h1>
+    {{ with .Description }}<p class="vhead-d">{{ . }}</p>{{ end }}
+    <p class="mono-m">{{ len $all }} video{{ with site.Params.social.youtube }} · <a href="{{ . }}" target="_blank" rel="noopener">YouTube kanalı ↗</a>{{ end }}</p>
+    {{ with partialCached "video/series.html" site "all" }}
+    <ul class="chips" aria-label="Seriler">{{ range . }}<li><a href="{{ .url }}">{{ .title }} <span>{{ len .videos }}</span></a></li>{{ end }}</ul>
+    {{ end }}
+  </div></div>
+</section>
+<section class="vrail">
+  <div class="shell">
+    <div class="vgrid">{{ range $i, $v := $all }}{{ partial "video/card.html" (dict "v" $v "eager" (lt $i 6)) }}{{ end }}</div>
+  </div>
+</section>
+{{ partial "video/platforms-row.html" . }}
+{{ end }}

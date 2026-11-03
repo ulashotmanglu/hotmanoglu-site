@@ -1,0 +1,46 @@
+name: YouTube videolarını eşitle
+
+# Her saat kanalın RSS akışını okur; yeni video ya da başlık/açıklama
+# değişikliği varsa data/videos.json ve kapak görselini main'e yazar ve
+# siteyi yeniden yayınlar. Değişiklik yoksa hiçbir şey yapmaz.
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: videos-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Testler
+        run: python3 -m unittest discover -s tests -p 'test_*.py'
+
+      - name: Eşitle
+        run: python3 scripts/sync_videos.py
+
+      - name: Değişiklik varsa yaz ve yayınla
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain static/img/videos)" ]; then
+            echo "Değişiklik yok."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add data/videos.json static/img/videos
+          git commit -m "Videolar: YouTube eşitlemesi"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          # GITHUB_TOKEN ile yapılan push başka workflow tetiklemez; yayını elle başlat.
+          gh workflow run hugo.yml --ref main

@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section class="vhead">
+  <div class="shell"><div class="vhead-in">
+    <h1 class="vhead-h">{{ .Title }}</h1>
+    {{ with .Description }}<p class="vhead-d">{{ . }}</p>{{ end }}
+  </div></div>
+</section>
+<section class="srows-wrap">
+  <div class="shell">
+    <ul class="srows">
+      {{ range partialCached "video/series.html" site "all" }}
+      <li><a class="srow" href="{{ .url }}">
+        <span><span class="mono-m">{{ len .videos }} video · son: {{ partial "bits/date-short.html" (index .videos 0).date }}</span><span class="srow-h">{{ .title }}</span></span>
+        <span class="srow-d">{{ .description }}</span>
+        <span class="srow-th">{{ range first 3 .videos }}{{ partial "bits/img.html" (dict "src" .thumb "sizes" "84px") }}{{ end }}</span>
+      </a></li>
+      {{ end }}
+    </ul>
+  </div>
+</section>
+{{ partial "video/platforms-row.html" . }}
+{{ end }}
