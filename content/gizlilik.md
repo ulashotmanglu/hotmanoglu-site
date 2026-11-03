@@ -33,6 +33,6 @@ Google Analytics mülkündeki mevcut ayara göre **etkinlik verileri 2 ay**, **k
 
 ## Diğer hizmetler ve kontrol
 
-Site GitHub Pages üzerinden sunulur. Hosting sağlayıcısı sayfaları sunarken ağ ve teknik istek bilgilerini işleyebilir. Yazı tipleri site üzerinden sunulur; Google Fonts'a istek yapılmaz. Dış bağlantılara gittiğinizde ilgili hizmetin gizlilik kuralları geçerli olur. Analitik kurulum, dış sosyal platformlarda reklam hesabı veya kullanıcı hesabı bağlantısı oluşturmaz.
+Site GitHub Pages üzerinden sunulur. Hosting sağlayıcısı sayfaları sunarken ağ ve teknik istek bilgilerini işleyebilir. Yazı tipleri site üzerinden sunulur; Google Fonts'a istek yapılmaz. Video kapak görselleri de site üzerinden sunulur. YouTube oynatıcısı sayfa açılışında yüklenmez; yalnızca bir videoda oynat düğmesine bastığınızda YouTube'un çerezsiz alan adından (youtube-nocookie.com) yüklenir ve o andan sonra YouTube'un gizlilik kuralları geçerli olur. Dış bağlantılara gittiğinizde ilgili hizmetin gizlilik kuralları geçerli olur. Analitik kurulum, dış sosyal platformlarda reklam hesabı veya kullanıcı hesabı bağlantısı oluşturmaz.
 
 Tarayıcı ayarlarınızdan site çerezlerini ve yerel depolamayı silebilirsiniz. Bu işlem analitik tercihinizi de sıfırlar. Bu açıklama veya verilerle ilgili talepleriniz için [İletişim](/iletisim/) sayfasını kullanabilirsiniz.

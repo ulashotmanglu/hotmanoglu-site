@@ -1,0 +1,3 @@
+{{/* Kısa Türkçe tarih: "1 KAS". Kullanım: partial "bits/date-short.html" .date */}}
+{{ $m := slice "OCA" "ŞUB" "MAR" "NİS" "MAY" "HAZ" "TEM" "AĞU" "EYL" "EKİ" "KAS" "ARA" }}
+{{ return printf "%d %s" .Day (index $m (sub (int .Month) 1)) }}

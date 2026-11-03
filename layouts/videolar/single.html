@@ -1,0 +1,59 @@
+{{ define "main" }}
+{{ $id := .Params.video_id }}
+{{ $all := partialCached "video/list.html" site "all" }}
+{{ $v := false }}
+{{ range $all }}{{ if eq .id $id }}{{ $v = . }}{{ end }}{{ end }}
+{{ with $v }}
+<article class="vpage">
+  <div class="shell vpage-in">
+    <div class="player">
+      {{/* Oynatıcı tıklanınca yüklenir (main.js): sayfa açılışında
+           YouTube'a istek gitmez. JS yoksa bağlantı YouTube'da açar. */}}
+      <a class="player-btn" href="{{ .watch }}" data-yt-play="{{ .id }}" data-yt-title="{{ .headline }}" aria-label="Videoyu oynat: {{ .headline }}">
+        {{ partial "bits/img.html" (dict "src" .thumb "eager" true "sizes" "(max-width: 820px) 92vw, 420px") }}
+        <i class="vc-play vc-play-lg" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="vpage-txt">
+      {{ with .series }}<div class="tags">{{ range . }}<a class="tag" href="/seriler/{{ .key }}/">{{ .title }}</a>{{ end }}</div>{{ end }}
+      <h1 class="vpage-h">{{ .headline }}</h1>
+      <p class="mono-m"><time datetime="{{ .date.Format "2006-01-02" }}">{{ partial "bits/date.html" (dict "date" .date) }}</time> · Shorts</p>
+      <div class="vbody">{{ partial "video/body.html" .description }}</div>
+      {{ with .post }}
+      <a class="vpost" href="{{ .RelPermalink }}">
+        <span class="tag">Yazının tamamı</span>
+        <span class="vpost-h">{{ .Title }}</span>
+        <span class="mono-m">{{ .ReadingTime }} dk okuma →</span>
+      </a>
+      {{ end }}
+      <div class="btns">
+        <a class="btn btn-line" href="{{ .watch }}" target="_blank" rel="noopener">YouTube'da aç ↗</a>
+        {{ with site.Params.social.youtube }}<a class="btn btn-line" href="{{ . }}?sub_confirmation=1" target="_blank" rel="noopener">Abone ol</a>{{ end }}
+      </div>
+    </div>
+  </div>
+</article>
+
+{{/* Önce aynı seriden, sonra en yeniler. */}}
+{{ $first := "" }}{{ range first 1 .series }}{{ $first = .key }}{{ end }}
+{{ $same := slice }}{{ $other := slice }}
+{{ range $all }}
+  {{ if ne .id $id }}
+    {{ $in := false }}{{ range .series }}{{ if eq .key $first }}{{ $in = true }}{{ end }}{{ end }}
+    {{ if $in }}{{ $same = $same | append . }}{{ else }}{{ $other = $other | append . }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ $rel := $same }}{{ range $other }}{{ $rel = $rel | append . }}{{ end }}
+{{ with first 6 $rel }}
+<section class="vrail" aria-labelledby="h-rel">
+  <div class="shell">
+    <div class="tbar">
+      <h2 id="h-rel">{{ if $same }}Bu seriden ve son videolar{{ else }}Son videolar{{ end }}</h2>
+      <a class="tbar-a" href="/videolar/">Tüm videolar →</a>
+    </div>
+    <div class="vgrid vgrid-rule">{{ range . }}{{ partial "video/card.html" (dict "v" .) }}{{ end }}</div>
+  </div>
+</section>
+{{ end }}
+{{ end }}
+{{ end }}

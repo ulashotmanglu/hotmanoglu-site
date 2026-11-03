@@ -1,4 +1,23 @@
 # ─────────────────────────────────────────────────────────────
+# VİDEO ANA SAYFASI
+#
+# video_lead: kapaktaki video (YouTube id). Boşsa en yeni video.
+# ticker: en üstteki siyah şerit. Her satır bir videoya bağlanır;
+#   rakamlar videonun açıklamasındaki rakamlarla aynı olmalı.
+#   Liste boşsa şerit son videoların başlıklarını gösterir.
+#   Kanaldan kalkan ya da gizlenen videonun satırı atlanır.
+# ─────────────────────────────────────────────────────────────
+video_lead: ""
+ticker:
+  - { label: "Binance", value: "6,3 mlr $ · yaklaşık 20 dk", video: "LeySei7I0aM" }
+  - { label: "Alphabet", value: "−500 mlr $ piyasa değeri · 1 gün", video: "457olecElGg" }
+  - { label: "VAPOR PANDA", value: "200+ kurum · 14 ülke · 11 gün", video: "QIwrVVCfhRA" }
+  - { label: "Medicare", value: "227 mn $ sahte talep", video: "FlnnvajgNso" }
+  - { label: "Deepfake ilişki", value: "130+ kişi · 9 mn $", video: "hWEb569edYU" }
+  - { label: "Intel", value: "hisse ~%30 düştü · 1 gün", video: "yfojvpV6duw" }
+  - { label: "Merrill Lynch", value: "7,5 mn $ ceza", video: "uoKy2xoys6U" }
+
+# ─────────────────────────────────────────────────────────────
 # ANA SAYFA EDİTORYAL SEÇİMİ
 #
 # Buradaki tüm alanlar OPSİYONELDİR.

@@ -1,0 +1,29 @@
+# ─────────────────────────────────────────────────────────────
+# SERİLER
+#
+# Her seri /seriler/<key>/ adresinde kendi sayfasını alır ve ana
+# sayfadaki "Seriler" bandında görünür. videos: YouTube video id
+# listesi, sıra önemsiz (sayfada en yeniden eskiye dizilir).
+# Bir video birden fazla seride olabilir. Listede olup kanalda
+# (data/videos.json) bulunmayan id sessizce atlanır.
+# ─────────────────────────────────────────────────────────────
+series:
+  - key: yapay-zeka-caginda-soygun
+    title: "Yapay zekâ çağında soygun"
+    description: "Yapay zekânın dolandırıcılığı ve saldırıları nasıl değiştirdiği, vaka vaka."
+    videos: [QIwrVVCfhRA, kcVuXqVhJHg, hWEb569edYU, afNOy8Oo_lY, ZSvIh33CipM, 6kP8CZ86SUE]
+
+  - key: kripto-soygunlari
+    title: "Kripto soygunları"
+    description: "Borsalardan ve cüzdanlardan çıkan paranın izi."
+    videos: [LeySei7I0aM, HVu5SQ0Zdyo]
+
+  - key: vaka-dosyalari
+    title: "Vaka dosyaları"
+    description: "Belgelere dayanan vaka analizleri. Her videonun tam yazısı sitede."
+    videos: [uoKy2xoys6U, N9gy4JBQhCY, 81bLc1hZyyk, ksgq-Wee2s4, exI9o1J4qQk, j3DGButivSI, 91jJUEi8f4o, gCv-lF9rfPU, rFw7xy9tBWI]
+
+  - key: piyasa-ve-teknoloji
+    title: "Piyasa ve teknoloji"
+    description: "Büyük teknoloji şirketleri, bilançolar ve yapay zekâ yatırımları."
+    videos: [457olecElGg, yfojvpV6duw, 7sYIRsQaIcc, dktnB3D8Gno]

@@ -12,4 +12,14 @@
       "r" .ReadingTime
   ) -}}
 {{- end -}}
+{{- range partialCached "video/list.html" site "all" -}}
+  {{- $items = $items | append (dict
+      "t" .headline
+      "u" .url
+      "d" (partial "video/dek.html" (dict "v" . "max" 160) | htmlUnescape)
+      "c" "Video"
+      "g" (delimit (apply .series "index" "." "title") " ")
+      "y" (.date.Format "2006")
+  ) -}}
+{{- end -}}
 {{- $items | jsonify -}}

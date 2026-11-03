@@ -1,0 +1,9 @@
+{{/* Dikey video kartı. dict: v (video/list öğesi), n (ops. sıra no),
+     sizes (ops.), eager (ops.) */}}
+{{ $v := .v }}
+<a class="vc" href="{{ $v.url }}">
+  {{ with .n }}<span class="vc-n">{{ printf "%02d" . }}</span>{{ end }}
+  <span class="vc-img">{{ partial "bits/img.html" (dict "src" $v.thumb "sizes" (.sizes | default "(max-width: 720px) 46vw, (max-width: 1100px) 30vw, 210px") "eager" .eager) }}<i class="vc-play" aria-hidden="true"></i></span>
+  <span class="vc-k"><time datetime="{{ $v.date.Format "2006-01-02" }}">{{ partial "bits/date-short.html" $v.date }}</time> · {{ $v.kicker }}</span>
+  <span class="vc-h">{{ $v.headline }}</span>
+</a>

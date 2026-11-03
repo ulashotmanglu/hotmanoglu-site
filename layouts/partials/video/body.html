@@ -1,0 +1,15 @@
+{{/* Video açıklaması, paragraflı HTML olarak. Metin önce kaçışlanır,
+     sonra yalnızca http(s) adresleri bağlantıya çevrilir. */}}
+{{ $t := partial "video/clean.html" . }}
+{{ $t = replaceRE `(?m)^Source:\s*` "Kaynak: " $t }}
+{{ $out := slice }}
+{{ range split $t "\n\n" }}
+  {{ $p := strings.TrimSpace . }}
+  {{ if $p }}
+    {{ $p = htmlEscape $p }}
+    {{ $p = replaceRE `(https?://[^\s<]+[^\s<.,;:!?)])` `<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>` $p }}
+    {{ $p = replaceRE `\n+` "<br>" $p }}
+    {{ $out = $out | append (printf "<p>%s</p>" $p) }}
+  {{ end }}
+{{ end }}
+{{ return (delimit $out "" | safeHTML) }}

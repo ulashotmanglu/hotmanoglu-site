@@ -1,0 +1,8 @@
+{{/* data/series.yaml'daki her seri için /seriler/<key>/ sayfası üretir. */}}
+{{ range site.Data.series.series | default slice }}
+  {{ $.AddPage (dict
+      "path" .key
+      "kind" "page"
+      "title" .title
+      "params" (dict "series_key" .key "description" .description)) }}
+{{ end }}

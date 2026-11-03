@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────────────────────
+# VİDEO BAŞLIK DÜZELTMELERİ
+#
+# data/videos.json her saat YouTube'dan otomatik yazılır; elle
+# düzenlenmez. Kartlardaki kısa başlık açıklamanın ilk cümlesinden
+# üretilir. Uzun ya da anlamsız kalanlar burada düzeltilir.
+#
+# titles: <video id>: "Kısa başlık"
+#   Burada olmayan videolar otomatik başlıkla görünür.
+# hidden: sitede hiç gösterilmeyecek videolar (ör. aynı videonun
+#   ikinci yüklemesi). Kanalda kalır, sitede sayfası oluşmaz.
+# ─────────────────────────────────────────────────────────────
+hidden:
+  - x_yDFpeilp4   # LeySei7I0aM'nin aynısı (aynı başlık ve açıklama)
+
+titles:
+  QIwrVVCfhRA: "Dokuz kurumda saldırganlar içerideydi"
+  afNOy8Oo_lY: "Hiç gitmedikleri okullara kayıtlı öğrenciler"
+  yfojvpV6duw: "Intel: iyi çeyrek, zayıf tahmin"
+  FlnnvajgNso: "Hasta verisi yaklaşık 11 milyon dolara satıldı"
+  457olecElGg: "Alphabet tek günde yaklaşık 500 milyar dolar kaybetti"
+  hWEb569edYU: "Görüntülü konuştuğu sevgili gerçek değildi"
+  HVu5SQ0Zdyo: "Binance'te 6,3 milyar dolarlık saldırı"
+  dktnB3D8Gno: "Elizabeth Holmes belgeseli gişede rekor kırdı"
+  j3DGButivSI: "Kayıt var, insan yok"
+  LnoO7QMXUwo: "Verinin arkasındaki hikâye"

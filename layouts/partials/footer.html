@@ -4,9 +4,18 @@
 <footer class="ft">
   <div class="shell ft-in">
     <div class="ft-brand">
-      <span class="ft-word">HOTMANOGLU</span>
-      <p>Teknoloji, ekonomi ve finansal suçlar üzerine bağımsız Türkçe yayın.</p>
+      <span class="ft-word">hotmanoglu</span>
+      <p>Para, suç ve teknoloji üzerine kısa, kaynaklı videolar. Uzun hikâyeler sitede yazı olarak.</p>
     </div>
+
+    <nav class="ft-col" aria-label="Takip et">
+      <h2>Takip et</h2>
+      <ul>
+        {{ range partial "bits/platforms.html" . }}<li><a href="{{ .url }}" target="_blank" rel="noopener">{{ .name }}</a></li>{{ end }}
+        <li><a href="/videolar/">Tüm videolar</a></li>
+        <li><a href="/seriler/">Seriler</a></li>
+      </ul>
+    </nav>
 
     <nav class="ft-col" aria-label="Bölümler">
       <h2>Bölümler</h2>
@@ -42,7 +51,7 @@
   </div>
 
   <div class="shell ft-bottom">
-    <span>&copy; {{ now.Year }} HOTMANOGLU</span>
+    <span>&copy; {{ now.Year }} hotmanoglu · bağımsız yayın</span>
     <span>İstanbul</span>
   </div>
 </footer>

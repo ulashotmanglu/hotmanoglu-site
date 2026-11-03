@@ -1,0 +1,46 @@
+{{/*
+  Sitedeki bütün videolar, en yeniden eskiye. Tek kaynak budur:
+  ana sayfa, /videolar/, seri sayfaları ve arama bunu kullanır.
+
+  data/videos.json  — YouTube'dan otomatik (scripts/sync_videos.py)
+  data/video_edits  — elle: kısa başlık düzeltmeleri, gizlenen videolar
+  data/series       — elle: seriler
+
+  Her öğe dict: id, title, headline, description, date, thumb, url,
+  watch (YouTube adresi), series (seri dict listesi), kicker, post
+  (açıklamadaki hotmanoglu.com/posts/ bağlantısının yazısı ya da false).
+
+  Kullanım: partialCached "video/list.html" site "all"
+*/}}
+{{ $edits := site.Data.video_edits | default dict }}
+{{ $hidden := $edits.hidden | default slice }}
+{{ $titles := $edits.titles | default dict }}
+{{ $series := site.Data.series.series | default slice }}
+{{ $posts := dict }}
+{{ range where site.RegularPages "Section" "posts" }}{{ $posts = merge $posts (dict .RelPermalink .) }}{{ end }}
+
+{{ $out := slice }}
+{{ range site.Data.videos | default slice }}
+  {{ $id := .id }}
+  {{ if not (in $hidden $id) }}
+    {{ $mine := slice }}
+    {{ range $series }}{{ if in .videos $id }}{{ $mine = $mine | append . }}{{ end }}{{ end }}
+    {{ $post := false }}
+    {{ range findRESubmatch `hotmanoglu\.com(/posts/[a-z0-9-]+)/?` .description 1 }}
+      {{ with index $posts (printf "%s/" (index . 1)) }}{{ $post = . }}{{ end }}
+    {{ end }}
+    {{ $out = $out | append (dict
+        "id" $id
+        "title" .title
+        "headline" (index $titles $id | default .headline)
+        "description" .description
+        "date" (time.AsTime .published)
+        "thumb" (printf "/img/videos/%s.jpg" $id)
+        "url" (printf "/videolar/%s/" (lower $id))
+        "watch" (printf "https://www.youtube.com/shorts/%s" $id)
+        "series" $mine
+        "kicker" (cond (gt (len $mine) 0) (index $mine 0).title "Video")
+        "post" $post) }}
+  {{ end }}
+{{ end }}
+{{ return $out }}
