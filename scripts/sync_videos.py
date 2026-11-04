@@ -14,6 +14,8 @@ import argparse
 import json
 import re
 import sys
+import time
+import urllib.error
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -44,6 +46,30 @@ def fetch(url, binary=False):
     with urllib.request.urlopen(req, timeout=30) as r:
         body = r.read()
     return body if binary else body.decode("utf-8")
+
+
+RETRY_WAITS = (5, 10, 20)
+
+
+def fetch_feed():
+    """RSS akışı zaman zaman geçici 404/429/5xx döndürür; birkaç kez dener.
+
+    Önbellek kırıcı parametre aynı (hatalı) yanıtın tekrar gelmesini önler.
+    Hepsi başarısızsa None döner.
+    """
+    for attempt, wait in enumerate((0,) + RETRY_WAITS, 1):
+        if wait:
+            time.sleep(wait)
+        try:
+            return fetch(f"{FEED}&_={int(time.time())}")
+        except urllib.error.HTTPError as e:
+            if e.code not in (404, 429) and e.code < 500:
+                raise
+            err = f"HTTP {e.code}"
+        except (urllib.error.URLError, TimeoutError) as e:
+            err = str(e)
+        print(f"uyarı: RSS denemesi {attempt} başarısız ({err})", file=sys.stderr)
+    return None
 
 
 def clean_title(raw):
@@ -135,7 +161,11 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     existing = json.loads(DATA.read_text()) if DATA.exists() else []
-    fresh = parse_feed(fetch(FEED))
+    feed = fetch_feed()
+    if feed is None:
+        print("uyarı: RSS akışı alınamadı; dosyalar değiştirilmedi.")
+        return
+    fresh = parse_feed(feed)
     for vid in args.ids:
         if not ID_RE.match(vid):
             sys.exit(f"geçersiz video id: {vid}")
