@@ -1,5 +1,26 @@
 [
  {
+  "id": "987sZcWHPFA",
+  "title": "Deepmind Unveils Alphagenome 2 For Genetic Analysis",
+  "headline": "Deepmind Unveils Alphagenome 2 For Genetic Analysis",
+  "description": "Deepmind Unveils Alphagenome 2 For Genetic Analysis\n\nGoogle DeepMind has introduced AlphaGenome 2, a new AI model designed to predict how specific DNA mutations impact individual cell types and states, potentially uncovering disease causes.\n\nTrained on over 100 million individual cell profiles across 68 tissues, the model can identify nearly twice as many gene expression-changing variants as its predecessor.\n\nGoogle DeepMind is making the model available for non-commercial research via an API, though its high computational cost makes it more expensive to run than earlier models.\n\nSource: The Verge",
+  "published": "2026-11-12T15:21:45Z"
+ },
+ {
+  "id": "-zSNP6nkUmg",
+  "title": "Google Introduces Tabletop AI Experiment",
+  "headline": "Google Introduces Tabletop AI Experiment",
+  "description": "Google Introduces Tabletop AI Experiment\n\nGoogle has launched Tabletop, an experimental AI tool designed to build customized collaborative hubs for coordinating activities with friends and family.\n\nUsers can create interactive tools like savings trackers, chore charts, and event plans by describing them or using starter templates, according to Google Labs.\n\nAccess to the Tabletop beta is currently being rolled out via a waitlist and is limited to people over the age of 18 in the US.\n\nSource: The Verge",
+  "published": "2026-11-12T13:14:52Z"
+ },
+ {
+  "id": "S22OFxy-onU",
+  "title": "Linux güvenlik yazılımı cPGuard'ın üreticisi OPSSHIELD'e göre, 1-2 Kasım 2026'da bir sal",
+  "headline": "Linux güvenlik yazılımı cPGuard'ın üreticisi OPSSHIELD'e göre, 1-2 Kasım 2026'da bir sal",
+  "description": "Linux güvenlik yazılımı cPGuard'ın üreticisi OPSSHIELD'e göre, 1-2 Kasım 2026'da bir saldırgan sahte kimlikle müşteri hesabı açıp ücretsiz deneme aldı, fatura ve lisans sunucusuna girdi ve güncelleme yayınlama anahtarını kullanarak sahte bir güncelleme yükledi. Sahte güncelleme 2 Kasım'da yaklaşık 70 dakika yayındaydı. Yaklaşık 2.950 müşteri sunucusu bu güncellemeyi 02:08-03:20 UTC arasında root yetkisiyle çalıştırdı. Güncelleme şifre özetlerini, root SSH anahtarlarını, MySQL root şifresini ve komut geçmişini saldırgana gönderdi; geride gizli bir root kabuğu bıraktı. Fatura portalındaki yaklaşık 7.900 hesabın adı, şirketi, adresi, e-postası ve bcrypt ile saklanan şifre özeti kopyalandı. OPSSHIELD çalınan anahtarı iptal etti, temizleyen 5.88.26 sürümünü yayınladı ve saldırının güncellemelerden sonraki 12 saat içinde fark edildiğini söylüyor. Saldırganın kimliği bilinmiyor; şirketin kayıtları ilk erişimi sağlayan isteği göstermiyor. Rakamlar şirketin kendi beyanıdır. Görseller canlandırmadır. Kaynaklar: OPSSHIELD olay açıklaması (3 Kasım 2026), The Hacker News (3-4 Kasım 2026).\n\n#SiberGüvenlik #cPGuard #Teknoloji #Linux\n\nSource: OPSSHIELD",
+  "published": "2026-11-12T11:03:02Z"
+ },
+ {
   "id": "d9pzR7IoWEs",
   "title": "Openai Introduces Verified Business Agents For Chatgpt",
   "headline": "Openai Introduces Verified Business Agents For Chatgpt",
