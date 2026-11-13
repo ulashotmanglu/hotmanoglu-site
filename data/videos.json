@@ -1,5 +1,19 @@
 [
  {
+  "id": "Hge1NuuoC00",
+  "title": "Introducing LLMON For Granite 4.1",
+  "headline": "Introducing LLMON For Granite 4.1",
+  "description": "Introducing LLMON For Granite 4.1\n\nHugging Face released LLMON, an LLM-native markup language designed to improve structural and semantic communication with models. It is now available in experimental preview Granite 4.1 3B and 8B models.\n\nUnlike JSON, which is designed for parsers, LLMON uses XML-like reserved special tokens. This allows models to distinguish between structure and content, improving context handling and reducing brittleness.\n\nLLMON separates instructions from data, addressing indirect prompt injection. According to benchmarks, LLMON models avoid 47% more attacks than the best frontier model tested and 95% more than the best open-source model.\n\nSource: Hugging Face",
+  "published": "2026-11-13T13:28:25Z"
+ },
+ {
+  "id": "ubGhYDIaXCk",
+  "title": "ABD Adalet Bakanlığı 12 Kasım 2026'da, Kuzey Koreli korsanların \"FaceStealer\" adlı sosya",
+  "headline": "ABD Adalet Bakanlığı 12 Kasım 2026'da, Kuzey Koreli korsanların \"FaceStealer\" adlı sosya",
+  "description": "ABD Adalet Bakanlığı 12 Kasım 2026'da, Kuzey Koreli korsanların \"FaceStealer\" adlı sosyal mühendislik düzeninde kullandığı bulut altyapısına el konduğunu açıkladı. FBI'a göre bu düzenle son 18 ayda 400 milyon dolardan fazla kripto çalındı. Korsanlar önceki kurbanlardan ele geçirdikleri Telegram, LinkedIn, Slack ve Discord hesaplarından hedefin tanıdıklarına yazıyor, gerçeğinden ayırt edilemeyen sahte Zoom ya da Teams sayfalarına toplantı daveti gönderiyor. Toplantıda önceki kurbanların gizlice kaydedilmiş videolarını, bazen de ünlü kripto isimlerinin yapay zekâyla üretilmiş sahte videolarını oynatıyorlar. Ardından \"sesin gelmiyor\" gibi sahte bir teknik sorun çıkarıp bir bağlantı ya da komut veriyorlar; bu \"düzeltme\" gizlice zararlı yazılım kuruyor. Kripto çalınıyor, hesaplar ele geçiriliyor; bazı vakalarda bu ilk girişten aylar, hatta bir yıldan uzun süre sonra oldu. Hedefin kamera görüntüsü de kaydedilip sıradaki saldırıda yem olarak kullanılıyor. FBI'ın uyarısına göre her kurbanla hedef havuzu katlanarak büyüyor. Hedefte açık kaynak yazılım geliştiricileri de var; FBI bunun yazılım tedarik zinciri saldırılarına yönelik olduğunu değerlendiriyor. FBI, mahkeme izniyle kurbanlara ait 900'den fazla kamera videosuna el koydu. Aynı açıklamada, FBI'ın \"TraderTraitor\" dediği Kuzey Kore askeri ekibine bağlanan ve 29 Ekim civarında Binance'ten 6 milyar dolardan fazla varlık çalınan soygunda 2,7 milyar doları aşan kısmın dondurulduğu, Bakanlığın bunun 1,2 milyar doları aşan kısmı için mahkemeden el koyma izni aldığı duyuruldu. Bunlar ABD makamlarının açıklama ve suçlamalarıdır, mahkemede kanıtlanmış hüküm değildir. Görseller canlandırmadır. Kaynaklar: ABD Adalet Bakanlığı basın açıklaması (12 Kasım 2026), CyberScoop (13 Kasım 2026), The Record (13 Kasım 2026).\n\n\n#SiberGüvenlik #Kripto #FaceStealer #Deepfake #Dolandırıcılık\n\nSource: ABD Adalet Bakanlığı",
+  "published": "2026-11-13T10:33:45Z"
+ },
+ {
   "id": "987sZcWHPFA",
   "title": "Deepmind Unveils Alphagenome 2 For Genetic Analysis",
   "headline": "Deepmind Unveils Alphagenome 2 For Genetic Analysis",
