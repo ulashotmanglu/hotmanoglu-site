@@ -1,5 +1,26 @@
 [
  {
+  "id": "ysynMReFjCg",
+  "title": "Silicon Valley Leaders And The Trump Administration",
+  "headline": "Silicon Valley Leaders And The Trump Administration",
+  "description": "Silicon Valley Leaders And The Trump Administration\n\nMany Silicon Valley tech leaders recently gathered at the White House to endorse President Trump’s “Super Intelligence” agenda, a move that has raised questions about their political judgment.\n\nNvidia representatives told representative Bill Foster that implementing anti-smuggling measures for AI chips, as proposed in the Chip Security Act, is technically possible, contrary to industry claims.\n\nFollowing the resignation of CEO Jensen Huang, Nvidia faces internal leadership changes and increased scrutiny regarding its chip links to China and the security of its supply chain.\n\nSource: MIT Technology Review",
+  "published": "2026-11-14T15:22:24Z"
+ },
+ {
+  "id": "C_X-lf_e94s",
+  "title": "Building A Robot Pick And Place Task With Simready",
+  "headline": "Building A Robot Pick And Place Task With Simready",
+  "description": "Building A Robot Pick And Place Task With Simready\n\nThis workflow uses the UR17G arm, Robotiq 2F-140 gripper, and a beverage can in Isaac Sim to execute a pick-and-place task with agent-generated controls.\n\nSimReady Central on Hugging Face provides assets with pre-authored simulation properties like collisions, mass, and joints, validated against specific profile requirements for robotics workflows.\n\nAfter assembling the robot and can in Isaac Sim, developers can use AI agents to generate Python-based controls to perform the grasp, move, and release sequence.\n\nSource: Hugging Face",
+  "published": "2026-11-14T13:33:52Z"
+ },
+ {
+  "id": "4jmrMH6CNG8",
+  "title": "Openai Introduces Chatgpt Wallet For AI Agents",
+  "headline": "Openai Introduces Chatgpt Wallet For AI Agents",
+  "description": "Openai Introduces Chatgpt Wallet For AI Agents\n\nOpenAI is launching ChatGPT Wallet, allowing its Dots AI agents to make purchases. The service is now rolling out to ChatGPT Pro subscribers in the US.\n\nPurchases through ChatGPT Wallet require biometric verification, such as Face ID or fingerprint scans, for every transaction before the agent completes the checkout process.\n\nThe system uses payment tokens to protect credit card information. OpenAI plans to eventually allow users to delegate purchases to agents under set spending limits.\n\nSource: The Verge",
+  "published": "2026-11-14T11:19:54Z"
+ },
+ {
   "id": "ZjAqI93fOow",
   "title": "Taoyuan Uses AI For City Management",
   "headline": "Taoyuan Uses AI For City Management",
