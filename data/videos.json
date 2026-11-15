@@ -1,5 +1,12 @@
 [
  {
+  "id": "G577tZ0xKjY",
+  "title": "Eski OpenAI araştırmacısı Will DePue, 12 Kasım 2026'da yayımladığı raporda Çin'in 4 yapa",
+  "headline": "Eski OpenAI araştırmacısı Will DePue, 12 Kasım 2026'da yayımladığı raporda Çin'in 4 yapa",
+  "description": "Eski OpenAI araştırmacısı Will DePue, 12 Kasım 2026'da yayımladığı raporda Çin'in 4 yapay zeka laboratuvarına ait 6 açık ağırlıklı modelin, Çin'e ihracatı lisansa bağlı Nvidia Blackwell çiplerinde başlatıldığını öne sürdü. Listede DeepSeek-V4-Flash ve DeepSeek-V4-Pro, Moonshot AI'ın Kimi K3 ve Kimi K3.1-Pro modelleri, MiniMax-M3 ve Ant Group'un Ling-3.1-flash modeli var.\n\nYöntem şöyle işliyor. PyTorch eğitim öncesinde ağırlıkları tek bir başlangıç sayısından (seed) türeyen rastgele sayılarla dolduruyor ve bu işi çipin işlemci (SM) sayısına göre bölüştürüyor. Hopper'da 132, Blackwell B200/B300'de 148, GB200/GB300'de 152 işlemci olduğu için aynı sayılar her çipte farklı bir desenle diziliyor. Eğitimde hiç güncellenmeyen bazı ağırlıklar bu deseni olduğu gibi taşıyor. DePue'ye göre bir B300, DeepSeek-V4-Flash'ın bu başlangıç değerlerini birebir üretti, kiralık bir GB200 de Kimi K3'ünkileri 0,999995 korelasyonla yeniden üretti. Yöntem, donanımı açıklanmış 24 modelin hepsinde doğru çipi buldu. Bağımsız yayın sysnote da DeepSeek-V4-Flash ve Kimi K3 için aynı dizilimi kendi koduyla doğruladı.\n\nSınırlar da net. Rapora göre iz, yalnız ağırlıkları başlatan donanımı gösteriyor ve Blackwell'de eğitim yapıldığını \"kanıtlamadan destekliyor\". DeepSeek-V4-Pro için kanıt daha zayıf, AMD MI300X ihtimali yalnız V4-Flash için dışlandı. Çiplerin nerede olduğu ve kime ait olduğu bilinmiyor. Blackwell kapasitesi Çin dışındaki veri merkezlerinden kiralanabiliyor ve rapor kendi bulgusunun bir yasa ihlali tespiti olmadığını yazıyor. Yani kaçakçılık kanıtlanmış değil. 14 Kasım itibarıyla DeepSeek, Moonshot AI, MiniMax, Ant Group, Nvidia ve ABD Ticaret Bakanlığı kamuya açık bir yanıt vermedi. DeepSeek'in eylülde yayımlanan V4.1-Flash modelinde ise iz görünmüyor.\n\nGörseller canlandırmadır. Kaynaklar: Will DePue / Unemployment Labs raporu ve X paylaşımı (12 Kasım 2026), The Decoder (13 Kasım), The Register (13 Kasım), sysnote (13 Kasım), Tom's Hardware (14 Kasım).\n\n\n#Nvidia #DeepSeek #YapayZeka #Blackwell #Çip #Teknoloji\n\nSource: The Decoder, Tom's Hardware, sysnote",
+  "published": "2026-11-15T09:15:51Z"
+ },
+ {
   "id": "ysynMReFjCg",
   "title": "Silicon Valley Leaders And The Trump Administration",
   "headline": "Silicon Valley Leaders And The Trump Administration",
