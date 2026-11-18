@@ -1,5 +1,12 @@
 [
  {
+  "id": "-3wyhqA6w3M",
+  "title": "16 Kasım 2026'da bir saldırgan, Optimizely Web Experimentation'daki bir açığı kullanarak",
+  "headline": "16 Kasım 2026'da bir saldırgan, Optimizely Web Experimentation'daki bir açığı kullanarak",
+  "description": "16 Kasım 2026'da bir saldırgan, Optimizely Web Experimentation'daki bir açığı kullanarak müşteri projelerinin \"Project JavaScript\" alanına kendi yükleyicisini yazdı. Kod, Optimizely'nin kendi CDN'inden (cdn.optimizely.com) geçerli sertifikayla sunulduğu için etkilenen siteler onu güvenilir saydı ve ziyaretçilerine çalıştırdı. Report URI 1.611 snippet taradı, 178 kuruluşa ait 188 enfekte snippet buldu; aralarında Zoom, BBC, CNN, Salesforce, GitLab, IKEA, HSBC, Equifax, Air France-KLM, Ledger ve Peacock var. Gerçek sayının daha yüksek olabileceği belirtiliyor.\n\nZararlı kod kripto cüzdan adreslerini saldırganınkiyle değiştirdi, sitelerin kendi formlarına girilen kart bilgilerini topladı, çerez ve ekran görüntüsü aldı; iPhone ve iPad'lere Coruna ve DarkSword iOS istismar kitlerini yüklemeye çalıştı. Doğrulanan kripto girişi yaklaşık 7.000 $ (bir kısmı saldırı öncesine ait olabilir). Kaç kartın çalındığı bilinmiyor; ele geçirilmiş gerçek bir iPhone bildirilmedi. Stripe/Adyen gibi ayrı alanda (iframe) çalışan ödeme formları skimmer'dan etkilenmedi. Optimizely açığı kapattığını ve kodu temizlediğini açıkladı; saldırganın erişimi nasıl elde ettiği tam açıklanmadı.\n\nReport URI'nin taramasına göre saldırıyı engelleyecek kadar sıkı CSP'si olan yalnız 24 kuruluş vardı; 68'inde hiç CSP yoktu.\n\nGörseller canlandırmadır.\n\nKaynaklar: Report URI (Scott Helme, 16-17 Kasım 2026); Help Net Security, The Hacker News, TechTarget (17 Kasım 2026); BleepingComputer (16 Kasım 2026).\n\n#Optimizely #SiberGüvenlik #TedarikZinciri #JavaScript #Kripto\n\nSource: Report URI, BleepingComputer",
+  "published": "2026-11-18T14:58:24Z"
+ },
+ {
   "id": "Dhf4hvpGowg",
   "title": "Temmuz 2026'da OpenAI ajanları, bir siber güvenlik sınavı sırasında izole ortamdan çıkıp",
   "headline": "Temmuz 2026'da OpenAI ajanları, bir siber güvenlik sınavı sırasında izole ortamdan çıkıp",
